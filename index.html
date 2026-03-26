@@ -49,8 +49,8 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#1a202c;fo
 .kpi .v25{font-size:11px;font-weight:600;color:#94a3b8;margin-bottom:2px}
 .kpi .v26{font-size:20px;font-weight:700;color:#0f172a;line-height:1}
 .kpi .ev{font-size:10px;font-weight:700;padding:2px 6px;border-radius:20px;align-self:center}
-.ev.up{background:#dcfce7;color:#166534}.ev.up::before{content:'&#9650; '}
-.ev.dn{background:#fee2e2;color:#991b1b}.ev.dn::before{content:'&#9660; '}
+.ev.up{background:#dcfce7;color:#166534}.ev.up::before{content:'‚ñ≤ '}
+.ev.dn{background:#fee2e2;color:#991b1b}.ev.dn::before{content:'‚ñº '}
 .ev.fl{background:#f1f5f9;color:#64748b}
 .kpi .ks{font-size:10px;color:#94a3b8}
 /* GRIDS */
@@ -1055,7 +1055,7 @@ function applyData(data){
   const ev=(id,v26,v25,inv=false)=>{
     const el=document.getElementById(id);if(!el||!v25)return;
     const p=(v26-v25)/v25*100;const up=inv?p<0:p>0;
-    el.textContent=(p>0?'&#9650; +':'&#9660; ')+Math.abs(p).toFixed(1)+'%';
+    el.textContent=(p>0?'‚ñ≤ +':'‚ñº ')+Math.abs(p).toFixed(1)+'%';
     el.className='ev '+(Math.abs(p)<0.5?'fl':up?'up':'dn');
   };
   if(data.nb) ev('ev-nb',data.nb,31);
