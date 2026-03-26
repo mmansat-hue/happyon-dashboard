@@ -579,12 +579,12 @@ document.addEventListener('DOMContentLoaded',function(){
 <footer>Dashboard Happy-ON &#183; Groupe CAREXO &#183; Belle-&Icirc;le-en-Mer &#183; dashboard.groupe-carexo.fr<br>2025 : saison compl&egrave;te 4 478 resa &#183; 449 980 &#8364; CA TTC &#183; 2026 : pipeline &agrave; date &#183; Mis &agrave; jour automatiquement via Google Sheets</footer>
 
 <script>
-// &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; DONN&Eacute;ES &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 DONN\u00C9ES \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 const D25 = {
   monthly: [
     {m:'Mar',ca:3910,nb:31,p:126},{m:'Avr',ca:24643,nb:285,p:86},
     {m:'Mai',ca:54126,nb:589,p:92},{m:'Juin',ca:43815,nb:531,p:83},
-    {m:'Juil',ca:92432,nb:836,p:111},{m:'Ao&ucirc;t',ca:163729,nb:1406,p:116},
+    {m:'Juil',ca:92432,nb:836,p:111},{m:'Ao\u00FBt',ca:163729,nb:1406,p:116},
     {m:'Sep',ca:42085,nb:521,p:81},{m:'Oct',ca:24056,nb:273,p:88}
   ],
   wday: [{d:'Dim',ca:59294,p:118},{d:'Lun',ca:61348,p:111},{d:'Mar',ca:60900,p:90},
@@ -593,19 +593,19 @@ const D25 = {
              {h:'12h',nb:599},{h:'13h',nb:275},{h:'14h',nb:340},{h:'15h',nb:167},
              {h:'16h',nb:94},{h:'17h',nb:75},{h:'18h',nb:98}],
   cats: [
-    {n:'V&eacute;los &Eacute;lec.',ca:224753,nb:2107,p:107,nb26:40,ca26:9617,p26:240,col:'#2563eb'},
+    {n:'V\u00E9los \u00C9lec.',ca:224753,nb:2107,p:107,nb26:40,ca26:9617,p26:240,col:'#2563eb'},
     {n:'Voitures',ca:129333,nb:1221,p:106,nb26:27,ca26:3309,p26:123,col:'#059669'},
-    {n:'V&eacute;los Musc.',ca:54158,nb:754,p:72,nb26:12,ca26:1868,p26:156,col:'#b45309'},
+    {n:'V\u00E9los Musc.',ca:54158,nb:754,p:72,nb26:12,ca26:1868,p26:156,col:'#b45309'},
     {n:'Scoot.125',ca:4639,nb:53,p:88,nb26:2,ca26:300,p26:150,col:'#7c3aed'},
     {n:'Scoot.50',ca:18016,nb:190,p:95,nb26:0,ca26:0,p26:0,col:'#d97706'},
-    {n:'V&eacute;los Enf.',ca:6207,nb:49,p:127,nb26:1,ca26:80,p26:80,col:'#dc2626'},
+    {n:'V\u00E9los Enf.',ca:6207,nb:49,p:127,nb26:1,ca26:80,p26:80,col:'#dc2626'},
     {n:'Accessoires',ca:8648,nb:70,p:124,nb26:0,ca26:0,p26:0,col:'#94a3b8'}
   ],
   lead25:[2261,1189,398,419,211],
   lead26:[6,4,1,8,63],
   dur25:[2104,897,636,622,219],
   dur26:[19,10,15,30,8],
-  paie26:{CB:65,'Apple/G.Pay':8,'Ch&egrave;q.Vac/ANCV':2,Esp&egrave;ces:0,'Non renseign&eacute;':7}
+  paie26:{CB:65,'Apple/G.Pay':8,'Ch\u00E8q.Vac/ANCV':2,Esp\u00E8ces:0,'Non renseign\u00E9':7}
 };
 const D26_TOTAL = {nb:82,ca:15174,p:185,h:54.3,solde:91.5};
 const CHARTS = {};
@@ -613,7 +613,7 @@ const CHARTS = {};
 function fmt(n){return Math.round(n).toLocaleString('fr-FR');}
 function fmtE(n){return fmt(n)+' \u20AC';}
 
-// &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TABS &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 TABS \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 let initedTabs = new Set([0]);
 function showTab(i) {
   document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
@@ -627,7 +627,7 @@ function initChartsForTab(i){
   else if(i===4){initTab4();computeProj();}
 }
 
-// &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; CHART DEFAULTS &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 CHART DEFAULTS \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 Chart.defaults.font.family="'Segoe UI',Arial,sans-serif";
 Chart.defaults.font.size=11;
 function mkChart(id,type,data,opts){
@@ -640,7 +640,7 @@ function mkChart(id,type,data,opts){
 const gridColor='#f0f4f8';
 const ttStyle={contentStyle:{fontSize:10,padding:'5px 8px'},titleStyle:{fontSize:11}};
 
-// &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TAB 0 CHARTS &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 TAB 0 CHARTS \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 window.addEventListener('load',()=>{
   // CA overview
   const ca26Arr = D25.monthly.map((d,i)=>[870,2556,4896,1875,1441,2048,null,1488][i]);
@@ -663,7 +663,7 @@ window.addEventListener('load',()=>{
   },{scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{display:false}}}});
 
   // Lead time
-  const lLabels=['M&ecirc;me jour','J+1-3','J+4-7','1-2 sem.','1 mois+'];
+  const lLabels=['M\u00EAme jour','J+1-3','J+4-7','1-2 sem.','1 mois+'];
   mkChart('c-lead-overview','bar',{
     labels:lLabels,
     datasets:[
@@ -673,7 +673,7 @@ window.addEventListener('load',()=>{
   },{scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
 
   // Paiement 2026 donut
-  const pKeys=Object.keys(D26_TOTAL.paie||D25.paie26||{CB:65,'Apple/G.Pay':8,'Ch&egrave;q.Vac/ANCV':2,'Non renseign&eacute;':7});
+  const pKeys=Object.keys(D26_TOTAL.paie||D25.paie26||{CB:65,'Apple/G.Pay':8,'Ch\u00E8q.Vac/ANCV':2,'Non renseign\u00E9':7});
   mkChart('c-paie-overview','doughnut',{
     labels:Object.keys(D25.paie26),
     datasets:[{data:Object.values(D25.paie26),backgroundColor:['#2563eb','#059669','#7c3aed','#94a3b8','#dc2626'],borderWidth:2,borderColor:'#fff'}]
@@ -685,7 +685,7 @@ window.addEventListener('load',()=>{
 </script>
 
 <script>
-// &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TAB 1 &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 TAB 1 \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 function initTab1(){
   const mL=D25.monthly.map(d=>d.m);
   // Full monthly triple
@@ -696,7 +696,7 @@ function initTab1(){
       {label:'Nb resa',data:D25.monthly.map(d=>d.nb),type:'line',borderColor:'#d97706',backgroundColor:'transparent',yAxisID:'y2',tension:.4,pointRadius:4,borderWidth:2,fill:false},
       {label:'Panier',data:D25.monthly.map(d=>d.p),type:'line',borderColor:'#7c3aed',backgroundColor:'transparent',yAxisID:'y3',tension:.4,pointRadius:4,borderWidth:2,borderDash:[4,3],fill:false}
     ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false}},
-      scales:{y:{beginAtZero:true,position:'left',ticks:{callback:v=>(v/1000).toFixed(0)+'k&#8364;'},grid:{color:gridColor}},
+      scales:{y:{beginAtZero:true,position:'left',ticks:{callback:v=>(v/1000).toFixed(0)+'k\u20AC'},grid:{color:gridColor}},
               y2:{beginAtZero:true,position:'right',grid:{display:false}},
               y3:{display:false,beginAtZero:false}}}});
   }
@@ -707,9 +707,9 @@ function initTab1(){
     const ct=document.getElementById('c-pareto');
     if(ct) CHARTS['c-pareto']=new Chart(ct,{type:'bar',data:{labels:mL,datasets:[
       {label:'CA',data:D25.monthly.map(d=>d.ca),backgroundColor:D25.monthly.map((_,i)=>i>=4&&i<=5?'rgba(37,99,235,.9)':'rgba(37,99,235,.45)'),borderRadius:4,yAxisID:'y'},
-      {label:'Cumul&eacute; %',data:cumPct,type:'line',borderColor:'#dc2626',backgroundColor:'transparent',yAxisID:'y2',pointRadius:4,borderWidth:2.5,tension:.3}
+      {label:'Cumul\u00E9 %',data:cumPct,type:'line',borderColor:'#dc2626',backgroundColor:'transparent',yAxisID:'y2',pointRadius:4,borderWidth:2.5,tension:.3}
     ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(0)+'k&#8364;'},grid:{color:gridColor}},
+      scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(0)+'k\u20AC'},grid:{color:gridColor}},
               y2:{max:100,position:'right',ticks:{callback:v=>v+'%'},grid:{display:false}}}}});
   }
   // Wday
@@ -719,14 +719,14 @@ function initTab1(){
       {label:'CA',data:D25.wday.map(d=>d.ca),backgroundColor:D25.wday.map((_,i)=>i===6||i===0?'rgba(37,99,235,.9)':'rgba(37,99,235,.5)'),borderRadius:4,yAxisID:'y'},
       {label:'Panier',data:D25.wday.map(d=>d.p),type:'line',borderColor:'#7c3aed',yAxisID:'y2',tension:.3,pointRadius:4,borderWidth:2.5,backgroundColor:'transparent'}
     ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(0)+'k&#8364;'},grid:{color:gridColor}},
-              y2:{position:'right',min:80,max:130,ticks:{callback:v=>v+'&#8364;'},grid:{display:false}}}}});
+      scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(0)+'k\u20AC'},grid:{color:gridColor}},
+              y2:{position:'right',min:80,max:130,ticks:{callback:v=>v+'\u20AC'},grid:{display:false}}}}});
   }
   // Horaire
   if(!CHARTS['c-horaire']){
     const ct=document.getElementById('c-horaire');
     if(ct) CHARTS['c-horaire']=new Chart(ct,{type:'bar',data:{labels:D25.horaires.map(d=>d.h),datasets:[
-      {label:'D&eacute;parts',data:D25.horaires.map(d=>d.nb),backgroundColor:D25.horaires.map(d=>d.nb>=1000?'rgba(220,38,38,.8)':d.nb>=500?'rgba(217,119,6,.8)':'rgba(37,99,235,.6)'),borderRadius:3}
+      {label:'D\u00E9parts',data:D25.horaires.map(d=>d.nb),backgroundColor:D25.horaires.map(d=>d.nb>=1000?'rgba(220,38,38,.8)':d.nb>=500?'rgba(217,119,6,.8)':'rgba(37,99,235,.6)'),borderRadius:3}
     ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
       scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{display:false}}}}});
   }
@@ -742,7 +742,7 @@ function initTab1(){
   }
 }
 
-// &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; HEATMAP &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 HEATMAP \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 function buildHeatmap(){
   const HM={'3_0':1,'3_1':8,'3_2':8,'3_3':8,'3_4':2,'3_5':2,'3_6':2,
     '4_0':32,'4_1':23,'4_2':55,'4_3':57,'4_4':20,'4_5':35,'4_6':51,
@@ -753,7 +753,7 @@ function buildHeatmap(){
     '9_0':39,'9_1':52,'9_2':82,'9_3':72,'9_4':83,'9_5':85,'9_6':108,
     '10_0':32,'10_1':23,'10_2':55,'10_3':57,'10_4':20,'10_5':35,'10_6':51};
   const maxV=Math.max(...Object.values(HM));
-  const moisN=['Mar','Avr','Mai','Juin','Juil','Ao&ucirc;t','Sep','Oct'],moisI=[3,4,5,6,7,8,9,10];
+  const moisN=['Mar','Avr','Mai','Juin','Juil','Ao\u00FBt','Sep','Oct'],moisI=[3,4,5,6,7,8,9,10];
   const jN=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
   const gc=v=>{if(!v)return'#f8fafc';const p=v/maxV;
     if(p>.85)return'#1e3a8a';if(p>.7)return'#1d4ed8';if(p>.5)return'#3b82f6';
@@ -772,7 +772,7 @@ function buildHeatmap(){
 </script>
 
 <script>
-// &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TAB 2 &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 TAB 2 \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 function initTab2(){
   if(!CHARTS['c-cat-donut']){
     const ct=document.getElementById('c-cat-donut');
@@ -794,7 +794,7 @@ function initTab2(){
       ]
     },options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},
-      scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'&#8364;'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}}}); 
+      scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'\u20AC'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}}}); 
   }
   buildCaParVehBars('ca-par-veh-bars');
 }
@@ -823,17 +823,17 @@ function getFlotteData(){
 function buildCaParVehBars(elId){
   const g=(id,def)=>parseFloat(document.getElementById(id)?.value)||def||0;
   const items=[
-    {label:'V&eacute;los &Eacute;lec.',  val:g('fl25-velec',30)?Math.round(224753/g('fl25-velec',30)):0,  color:'#2563eb'},
+    {label:'V\u00E9los \u00C9lec.',  val:g('fl25-velec',30)?Math.round(224753/g('fl25-velec',30)):0,  color:'#2563eb'},
     {label:'Voitures',     val:g('fl25-voiture',18)?Math.round(129333/g('fl25-voiture',18)):0,color:'#059669'},
-    {label:'V&eacute;los Musc.',  val:g('fl25-vmusc',20)?Math.round(54158/g('fl25-vmusc',20)):0,   color:'#b45309'},
+    {label:'V\u00E9los Musc.',  val:g('fl25-vmusc',20)?Math.round(54158/g('fl25-vmusc',20)):0,   color:'#b45309'},
     {label:'Scoot. 50',    val:g('fl25-sc50',6)?Math.round(18016/g('fl25-sc50',6)):0,        color:'#d97706'},
-    {label:'V&eacute;los Enf.',   val:g('fl25-venf',10)?Math.round(6207/g('fl25-venf',10)):0,       color:'#dc2626'},
+    {label:'V\u00E9los Enf.',   val:g('fl25-venf',10)?Math.round(6207/g('fl25-venf',10)):0,       color:'#dc2626'},
     {label:'Scoot. 125',   val:g('fl25-sc125',3)?Math.round(4639/g('fl25-sc125',3)):0,       color:'#7c3aed'},
   ].sort((a,b)=>b.val-a.val);
   buildHbarSection(elId,items,items[0]?.val||1);
 }
 
-// &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TAB 3 - FLOTTE (stocks uniquement, pas de co&ucirc;ts) &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 TAB 3 - FLOTTE (stocks uniquement, pas de co\u00FBts) \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 function computeFlotte(){
   const g=(id,def)=>parseFloat(document.getElementById(id)?.value)||def||0;
 
@@ -857,31 +857,31 @@ function computeFlotte(){
   };
 
   const CATS=[
-    {id:'velec',  n:'V&eacute;los &Eacute;lec.',  col:'#2563eb'},
+    {id:'velec',  n:'V\u00E9los \u00C9lec.',  col:'#2563eb'},
     {id:'voiture',n:'Voitures',     col:'#059669'},
-    {id:'vmusc',  n:'V&eacute;los Musc.', col:'#b45309'},
+    {id:'vmusc',  n:'V\u00E9los Musc.', col:'#b45309'},
     {id:'sc125',  n:'Scoot. 125',   col:'#7c3aed'},
     {id:'sc50',   n:'Scoot. 50',    col:'#d97706'},
-    {id:'venf',   n:'V&eacute;los Enf.',   col:'#dc2626'}
+    {id:'venf',   n:'V\u00E9los Enf.',   col:'#dc2626'}
   ];
 
-  // Mise &agrave; jour cards header
+  // Mise \u00E0 jour cards header
   const se=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
   const velec=fl25.velec;
   se('s25-velec-ca',fmtE(velec.ca));
-  se('s25-velec-sub',`${velec.nb} v&eacute;los &#183; ${fmtE(velec.nb?Math.round(velec.ca/velec.nb):0)}/v&eacute;lo`);
+  se('s25-velec-sub',`${velec.nb} v\u00E9los \u00B7 ${fmtE(velec.nb?Math.round(velec.ca/velec.nb):0)}/v\u00E9lo`);
   const voit=fl25.voiture;
   se('s25-voiture-ca',fmtE(voit.ca));
-  se('s25-voiture-sub',`${voit.nb} v&eacute;hicules &#183; ${fmtE(voit.nb?Math.round(voit.ca/voit.nb):0)}/v&eacute;h.`);
+  se('s25-voiture-sub',`${voit.nb} v\u00E9hicules \u00B7 ${fmtE(voit.nb?Math.round(voit.ca/voit.nb):0)}/v\u00E9h.`);
   const vm=fl25.vmusc;
   se('s25-vmusc-ca',fmtE(vm.ca));
-  se('s25-vmusc-sub',`${vm.nb} v&eacute;los &#183; ${fmtE(vm.nb?Math.round(vm.ca/vm.nb):0)}/v&eacute;lo`);
+  se('s25-vmusc-sub',`${vm.nb} v\u00E9los \u00B7 ${fmtE(vm.nb?Math.round(vm.ca/vm.nb):0)}/v\u00E9lo`);
   const sc=fl25.sc125; const sc50=fl25.sc50;
   const scTotNb=sc.nb+sc50.nb; const scTotCA=sc.ca+sc50.ca;
   se('s25-sc-ca',fmtE(scTotCA));
-  se('s25-sc-sub',`${scTotNb} v&eacute;hicules &#183; ${fmtE(scTotNb?Math.round(scTotCA/scTotNb):0)}/v&eacute;h.`);
+  se('s25-sc-sub',`${scTotNb} v\u00E9hicules \u00B7 ${fmtE(scTotNb?Math.round(scTotCA/scTotNb):0)}/v\u00E9h.`);
 
-  // Calcul co&ucirc;ts + marge 2026
+  // Calcul co\u00FBts + marge 2026
   const SAISON=7;
   const hasCouts26=Object.values(fl26).some(c=>c.nb>0&&c.cout>0);
   if(hasCouts26){
@@ -894,7 +894,7 @@ function computeFlotte(){
     if(m26El){m26El.textContent=fmtE(marge26)+' ('+((ca26Total?marge26/ca26Total*100:0)).toFixed(1)+' % sur CA pipeline)';m26El.style.color=marge26>=0?'#059669':'#dc2626';}
   } else {
     const se26=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
-    se26('fl26-total-cout','Renseigner stocks + co&ucirc;ts 2026 pour calculer');
+    se26('fl26-total-cout','Renseigner stocks + co\u00FBts 2026 pour calculer');
     se26('fl26-marge','-');
   }
 
@@ -910,7 +910,7 @@ function computeFlotte(){
       const delta=caveh26!==null?caveh26-caveh25:null;
       const dcls=delta===null?'tgr':delta>=0?'tg':'tr';
       const dval=delta===null?'-':(delta>=0?'+':'')+fmtE(delta);
-      // Co&ucirc;t et marge 2026
+      // Co\u00FBt et marge 2026
       const cout26cat=has26&&s26.cout>0?s26.nb*s26.cout*SAISON:null;
       const marge26cat=cout26cat!==null?s26.ca26-cout26cat:null;
       const mrgCls=marge26cat===null?'tgr':marge26cat>=0?'tg':'tr';
@@ -928,11 +928,11 @@ function computeFlotte(){
     }).join('');
   }
 
-  // Info rotations v&eacute;los &eacute;lec
+  // Info rotations v\u00E9los \u00E9lec
   const rotVelec=fl25.velec.nb?Math.round(fl25.velec.nb25/fl25.velec.nb*10)/10:0;
   se('velec-rot-info',rotVelec+' fois');
 
-  // Barres CA / v&eacute;hicule
+  // Barres CA / v\u00E9hicule
   const items=CATS.map(c=>{
     const s25=fl25[c.id];
     return {label:c.n,val:s25.nb?Math.round(s25.ca/s25.nb):0,color:c.col};
@@ -947,7 +947,7 @@ function computeFlotte(){
     CHARTS[id]=new Chart(ct,{type,data,options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},...opts}});
   };
   mkOrUpdate('c-fl-ca25','bar',{labels,datasets:[{data:CATS.map(c=>fl25[c.id].ca),backgroundColor:CATS.map(c=>c.col.replace(')',',0.8)').replace('#','rgba(').replace(/^rgba\(([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2}),/i,(m,r,g,b)=>`rgba(${parseInt(r,16)},${parseInt(g,16)},${parseInt(b,16)},`)||c.col),borderRadius:5}]},
-    {scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(0)+'k&#8364;'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
+    {scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(0)+'k\u20AC'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
   const rotData=CATS.map(c=>{const s=fl25[c.id];return s.nb?Math.round(s.nb25/s.nb*10)/10:0;});
   mkOrUpdate('c-fl-rotations','bar',{labels,datasets:[{data:rotData,backgroundColor:CATS.map(c=>c.col.replace(')',',0.8)').replace('#','rgba(').replace(/^rgba\(([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2}),/i,(m,r,g,b)=>`rgba(${parseInt(r,16)},${parseInt(g,16)},${parseInt(b,16)},`)||c.col),borderRadius:5}]},
     {scales:{y:{beginAtZero:true,ticks:{callback:v=>v+' rot.'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
@@ -955,7 +955,7 @@ function computeFlotte(){
 </script>
 
 <script>
-// &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TAB 4 - PROJECTION &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 TAB 4 - PROJECTION \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 function initTab4(){
   if(!CHARTS['c-proj']){
     const ct=document.getElementById('c-proj');
@@ -964,13 +964,13 @@ function initTab4(){
     const ca26=[870,2556,4896,1875,1441,2048,null,1488];
     CHARTS['c-proj']=new Chart(ct,{type:'bar',data:{labels:mL,datasets:[
       {label:'2025',data:D25.monthly.map(d=>d.ca),backgroundColor:'rgba(148,163,184,.5)',borderRadius:3,order:5},
-      {label:'Prudent &#8722;10%',data:D25.monthly.map(d=>Math.round(d.ca*.9)),type:'line',borderColor:'#ef4444',backgroundColor:'transparent',borderDash:[5,3],pointRadius:3,borderWidth:1.5,tension:.3,order:1},
+      {label:'Prudent \u221210%',data:D25.monthly.map(d=>Math.round(d.ca*.9)),type:'line',borderColor:'#ef4444',backgroundColor:'transparent',borderDash:[5,3],pointRadius:3,borderWidth:1.5,tension:.3,order:1},
       {label:'Central =2025',data:D25.monthly.map(d=>d.ca),type:'line',borderColor:'#2563eb',backgroundColor:'transparent',pointRadius:3,borderWidth:2,tension:.3,order:2},
       {label:'Optimiste +10%',data:D25.monthly.map(d=>Math.round(d.ca*1.1)),type:'line',borderColor:'#22c55e',backgroundColor:'transparent',borderDash:[3,2],pointRadius:3,borderWidth:1.5,tension:.3,order:3},
-      {label:'2026 s&eacute;curis&eacute;',data:ca26,backgroundColor:'rgba(245,158,11,.7)',borderRadius:3,order:4}
+      {label:'2026 s\u00E9curis\u00E9',data:ca26,backgroundColor:'rgba(245,158,11,.7)',borderRadius:3,order:4}
     ]},options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10,padding:8}}},
-      scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(0)+'k&#8364;'},grid:{color:gridColor}},x:{grid:{display:false}}}}});
+      scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(0)+'k\u20AC'},grid:{color:gridColor}},x:{grid:{display:false}}}}});
   }
 }
 
@@ -988,15 +988,15 @@ function computeProj(){
   const projCa=Math.round(projNb*projP);
   const ecart=projCa-baseCa;
   el('pr-resa',fmt(projNb)+' resa');
-  el('pr-panier',projP.toFixed(0)+' &#8364;');
+  el('pr-panier',projP.toFixed(0)+' \u20AC');
   el('pr-ca',fmtE(projCa));
   el('pr-ecart',(ecart>0?'+':'')+fmtE(ecart));
   const prEl=document.getElementById('pr-ecart');
   if(prEl)prEl.style.color=ecart>=0?'#86efac':'#fca5a5';
 }
 
-// &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; SYNC / DATA UPDATE &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
-// URL Apps Script - &agrave; renseigner une fois, m&eacute;moris&eacute;e dans le navigateur
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 SYNC / DATA UPDATE \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
+// URL Apps Script - \u00E0 renseigner une fois, m\u00E9moris\u00E9e dans le navigateur
 const SCRIPT_URL_KEY = 'happyon_script_url';
 function getSavedUrl(){ return localStorage.getItem(SCRIPT_URL_KEY)||''; }
 function saveUrl(url){ localStorage.setItem(SCRIPT_URL_KEY, url); }
@@ -1018,7 +1018,7 @@ async function syncData(silent=false){
     status.style.color='#f59e0b';
     return;
   }
-  saveUrl(url); // m&eacute;moriser pour les prochaines ouvertures
+  saveUrl(url); // m\u00E9moriser pour les prochaines ouvertures
   if(!silent){
     btn.disabled=true;
     btn.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" style="animation:spin .8s linear infinite"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Synchronisation...';
@@ -1028,17 +1028,17 @@ async function syncData(silent=false){
     const data=await res.json();
     applyData(data);
     const now=new Date();
-    status.textContent=`Donn&eacute;es au ${now.toLocaleDateString('fr-FR')} ${now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})} &#183; ${data.nb||'-'} r&eacute;servations 2026`;
+    status.textContent=`Donn\u00E9es au ${now.toLocaleDateString('fr-FR')} ${now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})} \u00B7 ${data.nb||'-'} r\u00E9servations 2026`;
     status.style.color='#86efac';
     document.getElementById('dateLabel').textContent=now.toLocaleDateString('fr-FR');
-    document.getElementById('srcLabel').textContent='Donn&eacute;es live Google Sheets';
+    document.getElementById('srcLabel').textContent='Donn\u00E9es live Google Sheets';
   } catch(e) {
     if(!silent) status.textContent='Erreur - verifiez l\'URL Apps Script ou les droits de partage';
     if(!silent) status.style.color='#fca5a5';
   }
   if(!silent){
     btn.disabled=false;
-    btn.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Synchroniser les donn&eacute;es 2026';
+    btn.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Synchroniser les donn\u00E9es 2026';
   }
 }
 
@@ -1048,10 +1048,10 @@ function applyData(data){
   // KPIs header
   if(data.nb!==undefined){ set('hdr-resa26',fmt(data.nb)); set('kpi-nb',fmt(data.nb)); }
   if(data.ca!==undefined){ set('hdr-ca26',fmtE(data.ca)); set('kpi-ca',fmtE(data.ca)); }
-  if(data.panier!==undefined){ set('kpi-panier',data.panier.toFixed(0)+' &#8364;'); }
+  if(data.panier!==undefined){ set('kpi-panier',data.panier.toFixed(0)+' \u20AC'); }
   if(data.duree!==undefined){ set('kpi-duree',data.duree.toFixed(1)+' h'); }
   if(data.tauxSolde!==undefined){ set('kpi-solde',data.tauxSolde.toFixed(1)+' %'); }
-  // &Eacute;volutions dynamiques
+  // \u00C9volutions dynamiques
   const ev=(id,v26,v25,inv=false)=>{
     const el=document.getElementById(id);if(!el||!v25)return;
     const p=(v26-v25)/v25*100;const up=inv?p<0:p>0;
@@ -1062,7 +1062,7 @@ function applyData(data){
   if(data.panier) ev('ev-panier',data.panier,98.9);
   if(data.duree) ev('ev-duree',data.duree,26.5);
   if(data.tauxSolde) ev('ev-solde',data.tauxSolde,99.1,true);
-  // Mise &agrave; jour graphique CA mensuel si donn&eacute;es monthly
+  // Mise \u00E0 jour graphique CA mensuel si donn\u00E9es monthly
   if(data.monthly && CHARTS['c-ca-overview']){
     const moisMap={3:0,4:1,5:2,6:3,7:4,8:5,9:6,10:7};
     const ca26Arr=[null,null,null,null,null,null,null,null];
@@ -1079,7 +1079,7 @@ function applyData(data){
   }
   // Lead time
   if(data.lead && CHARTS['c-lead-overview']){
-    const lKeys=['M&ecirc;me jour','J+1-3','J+4-7','1-2sem','1mois+'];
+    const lKeys=['M\u00EAme jour','J+1-3','J+4-7','1-2sem','1mois+'];
     CHARTS['c-lead-overview'].data.datasets[1].data=lKeys.map(k=>data.lead[k]||0);
     CHARTS['c-lead-overview'].update();
   }
@@ -1089,10 +1089,10 @@ function applyData(data){
     CHARTS['c-paie-overview'].data.datasets[0].data=pKeys.map(k=>data.paiement[k]||0);
     CHARTS['c-paie-overview'].update();
   }
-  // Alerte non sold&eacute;s
+  // Alerte non sold\u00E9s
   if(data.nonSoldes!==undefined){
     const alertBoxes=document.querySelectorAll('.abox .at');
-    alertBoxes.forEach(el=>{if(el.textContent.includes('non sold&eacute;s'))el.textContent=`${data.nonSoldes} dossiers non sold&eacute;s`;});
+    alertBoxes.forEach(el=>{if(el.textContent.includes('non sold\u00E9s'))el.textContent=`${data.nonSoldes} dossiers non sold\u00E9s`;});
   }
 }
 </script>
