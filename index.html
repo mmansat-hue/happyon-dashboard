@@ -49,8 +49,8 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#1a202c;fo
 .kpi .v25{font-size:11px;font-weight:600;color:#94a3b8;margin-bottom:2px}
 .kpi .v26{font-size:20px;font-weight:700;color:#0f172a;line-height:1}
 .kpi .ev{font-size:10px;font-weight:700;padding:2px 6px;border-radius:20px;align-self:center}
-.ev.up{background:#dcfce7;color:#166534}.ev.up::before{content:'‚ñ≤ '}
-.ev.dn{background:#fee2e2;color:#991b1b}.ev.dn::before{content:'‚ñº '}
+.ev.up{background:#dcfce7;color:#166534}.ev.up::before{content:'&#9650; '}
+.ev.dn{background:#fee2e2;color:#991b1b}.ev.dn::before{content:'&#9660; '}
 .ev.fl{background:#f1f5f9;color:#64748b}
 .kpi .ks{font-size:10px;color:#94a3b8}
 /* GRIDS */
@@ -139,62 +139,50 @@ footer{text-align:center;padding:18px;font-size:10px;color:#94a3b8;border-top:1p
 </style>
 </head>
 <body>
-
-<!-- ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê &Eacute;CRAN DE CONNEXION ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê -->
-<div id="login-screen" style="position:fixed;inset:0;background:#0f2a4a;display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:24px">
-  <svg xmlns="http://www.w3.org/2000/svg" width="534.1" height="138.875" viewBox="0 0 534.1 138.875" style="height:52px;width:auto;margin-bottom:8px">
-    <g transform="translate(-309.293 521.654)">
-      <path d="M16.405-15.284h1.343v4.028H19.09v-2.685h5.371q2.685,0,2.685,8.056l4.028,1.343q0-4.028,2.685-4.028L35.2-7.228v1.343L28.489,30.367l20.14-1.343H62.056L63.4,22.311l-1.343-1.343h2.685L63.4,11.57V10.227h2.685L64.741,8.885V6.2h2.685V3.514H64.741V2.171h2.685L66.084.828v-9.4l1.343,1.343h1.343V-12.6l-1.343-1.343v-1.343h4.028L64.741,30.367q2.685,0,8.056-44.308l5.371-1.343Q79.511-4.542,82.2-4.542h1.343q0-4.028,2.685-4.028h1.343Q80.853,37.87,67.427,100.186H66.084l-1.343-1.343L66.084,97.5V86.76H64.741l-4.028,13.427H56.685Q54,100.186,54,92.13H52.657V97.5H51.315q-2.685,0-2.685-4.028,0-9.715,8.056-45.651H55.343L37.888,49.165,25.8,47.822q-4.028,32.224-8.056,42.966H13.72q-2.685,0-2.685-10.741H9.692l-1.343,9.4L5.664,86.76V82.732l1.343-1.343V80.046L5.664,78.7H4.321L2.978,80.046H1.636L.293,74.676Q5.664,29.341,12.377,8.885H13.72L12.377,7.542V3.514l4.028-14.769H15.062Z" transform="translate(309 -501)" fill="#ef7ae7"/>
-      <path d="M20.667,91.646c14.786,0,20.048-9.344,20.048-23.767V14.236c0-14.424-5.261-23.223-20.048-23.223C5.789-8.987.528-.278.528,14.236V67.788C.528,82.393,5.7,91.646,20.667,91.646Zm0-8.074c-8.255,0-9.8-5.352-9.8-13.516V12.149C10.869,3.985,12.412-1,20.667-1c8.164,0,9.706,4.989,9.706,13.154V70.056C30.373,78.221,28.831,83.573,20.667,83.573Zm30.117,8.074h8.709V20.058L80.629,91.646H87.16v-100H78.633V56.78L57.769-8.352H50.784Z" transform="translate(756.233 -507.358)" fill="#56b0f5"/>
-      <path d="M39.741,22.425c-20.264,0-37.6-11.865-38.323-12.37A6.206,6.206,0,0,1,8.49-.144c.371.253,15.075,10.158,31.251,10.158C56.535,10.014,76.034-.4,76.229-.505a6.206,6.206,0,1,1,5.892,10.923C81.213,10.908,59.634,22.425,39.741,22.425Z" transform="translate(758.011 -405.204)" fill="#ef7ae7"/>
-    </g>
-  </svg>
-  <div style="text-align:center;color:rgba(255,255,255,.5);font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">Dashboard Pilotage ¬∑ Groupe CAREXO</div>
-  <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:28px 32px;width:320px;box-shadow:0 20px 60px rgba(0,0,0,.4)">
-    <div style="color:white;font-size:14px;font-weight:600;margin-bottom:6px;text-align:center">Acc&egrave;s restreint</div>
-    <div style="color:rgba(255,255,255,.45);font-size:11px;text-align:center;margin-bottom:18px">Entrez le code d'acc&egrave;s</div>
-    <input id="login-input" type="password" placeholder="‚Ä¢‚Ä¢‚Ä¢‚Ä¢‚Ä¢‚Ä¢‚Ä¢‚Ä¢" maxlength="20"
-      style="width:100%;padding:11px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:white;font-size:16px;text-align:center;letter-spacing:4px;outline:none;box-sizing:border-box;margin-bottom:10px"
-      onkeydown="if(event.key==='Enter')checkLogin()"
-    />
-    <button onclick="checkLogin()"
-      style="width:100%;padding:11px;border-radius:8px;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:white;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:opacity .2s"
-      onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
-      Acc&eacute;der au dashboard
-    </button>
-    <div id="login-error" style="color:#f87171;font-size:11px;text-align:center;margin-top:10px;display:none">Code incorrect - r&eacute;essayez</div>
-  </div>
-  <div style="color:rgba(255,255,255,.2);font-size:10px">Belle-&Icirc;le-en-Mer ¬∑ Happy-ON</div>
+<div id="ls" style="position:fixed;inset:0;background:#0f2a4a;display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:20px">
+<div style="color:#ef7ae7;font-size:32px;font-weight:900;letter-spacing:2px">Happy-ON</div>
+<div style="color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:1px;text-transform:uppercase">Dashboard Pilotage - Groupe CAREXO</div>
+<div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:28px 32px;width:300px">
+<div style="color:white;font-size:14px;font-weight:600;text-align:center;margin-bottom:6px">Acces restreint</div>
+<div style="color:rgba(255,255,255,0.45);font-size:11px;text-align:center;margin-bottom:16px">Code d'acces requis</div>
+<input id="lsi" type="password" placeholder="Code acces" maxlength="20"
+style="width:100%;padding:11px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:white;font-size:15px;text-align:center;outline:none;box-sizing:border-box;margin-bottom:10px"
+onkeydown="if(event.key==='Enter')chkL()"/>
+<button onclick="chkL()" style="width:100%;padding:11px;border-radius:8px;background:#2563eb;color:white;font-size:13px;font-weight:600;border:none;cursor:pointer">Acceder au dashboard</button>
+<div id="lse" style="color:#f87171;font-size:11px;text-align:center;margin-top:8px;display:none">Code incorrect</div>
 </div>
-
+<div style="color:rgba(255,255,255,0.2);font-size:10px">Belle-Ile-en-Mer - Happy-ON</div>
+</div>
 <script>
-const ACCESS_CODE = 'happyon2026';
-function checkLogin(){
-  const val = document.getElementById('login-input').value.trim();
-  if(val === ACCESS_CODE){
-    document.getElementById('login-screen').style.display='none';
-    localStorage.setItem('happyon_auth','1');
+var AC='happyon2026';
+function chkL(){
+  if(document.getElementById('lsi').value.trim()===AC){
+    document.getElementById('ls').style.display='none';
+    localStorage.setItem('hauth','1');
   } else {
-    const err=document.getElementById('login-error');
-    err.style.display='block';
-    document.getElementById('login-input').value='';
-    document.getElementById('login-input').focus();
-    setTimeout(()=>err.style.display='none',3000);
+    var e=document.getElementById('lse');
+    e.style.display='block';
+    document.getElementById('lsi').value='';
+    setTimeout(function(){e.style.display='none';},3000);
   }
 }
-// V&eacute;rifier si d&eacute;j&agrave; connect&eacute;
-if(localStorage.getItem('happyon_auth')==='1'){
-  document.addEventListener('DOMContentLoaded',()=>{
-    document.getElementById('login-screen').style.display='none';
+if(localStorage.getItem('hauth')==='1'){
+  document.addEventListener('DOMContentLoaded',function(){
+    var s=document.getElementById('ls');
+    if(s) s.style.display='none';
   });
 }
-document.addEventListener('DOMContentLoaded',()=>{
-  const inp=document.getElementById('login-input');
-  if(inp) inp.focus();
+document.addEventListener('DOMContentLoaded',function(){
+  var i=document.getElementById('lsi');
+  if(i) i.focus();
 });
 </script>
 
-<!-- ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê HEADER ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê -->
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; &Eacute;CRAN DE CONNEXION &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+
+
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; HEADER &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 <div class="header">
   <svg xmlns="http://www.w3.org/2000/svg" width="534.1" height="138.875" viewBox="0 0 534.1 138.875" style="height:38px;width:auto">
     <g transform="translate(-309.293 521.654)">
@@ -205,15 +193,15 @@ document.addEventListener('DOMContentLoaded',()=>{
   </svg>
   <div class="header-right">
     <div class="hbadge"><span class="bv" id="hdr-resa">4 478</span><span class="bl">Resa 2025</span></div>
-    <div class="hbadge"><span class="bv" id="hdr-ca25">449 980 ‚Ç¨</span><span class="bl">CA 2025</span></div>
+    <div class="hbadge"><span class="bv" id="hdr-ca25">449 980 &#8364;</span><span class="bl">CA 2025</span></div>
     <div class="hbadge" style="border-color:rgba(99,179,237,.5)"><span class="bv" id="hdr-resa26" style="color:#60a5fa">82</span><span class="bl">Resa 2026</span></div>
-    <div class="hbadge" style="border-color:rgba(99,179,237,.5)"><span class="bv" id="hdr-ca26" style="color:#60a5fa">15 174 ‚Ç¨</span><span class="bl">CA 2026</span></div>
+    <div class="hbadge" style="border-color:rgba(99,179,237,.5)"><span class="bv" id="hdr-ca26" style="color:#60a5fa">15 174 &#8364;</span><span class="bl">CA 2026</span></div>
   </div>
 </div>
 
 <!-- DATEBAR -->
 <div class="datebar">
-  <span>Arr&ecirc;t&eacute; au <strong id="dateLabel">25/03/2026</strong> ¬∑ 2025 = saison compl&egrave;te ¬∑ 2026 = pipeline &agrave; date ¬∑ Belle-&Icirc;le-en-Mer ¬∑ Groupe CAREXO</span>
+  <span>Arr&ecirc;t&eacute; au <strong id="dateLabel">25/03/2026</strong> &#183; 2025 = saison compl&egrave;te &#183; 2026 = pipeline &agrave; date &#183; Belle-&Icirc;le-en-Mer &#183; Groupe CAREXO</span>
   <div class="live-badge"><div class="live-dot"></div><span id="srcLabel">Donn&eacute;es en direct</span></div>
 </div>
 
@@ -223,11 +211,11 @@ document.addEventListener('DOMContentLoaded',()=>{
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
     Synchroniser les donn&eacute;es 2026
   </button>
-  <span class="sync-status" id="syncStatus">Derni&egrave;re synchro : aujourd'hui 08:00 ¬∑ Configurez l'URL Google Sheets ci-dessous pour activer la mise &agrave; jour automatique</span>
+  <span class="sync-status" id="syncStatus">Derni&egrave;re synchro : aujourd'hui 08:00 &#183; Configurez l'URL Google Sheets ci-dessous pour activer la mise &agrave; jour automatique</span>
   <input id="sheetsUrl" placeholder="URL Google Sheets 2026 (Apps Script)" style="flex:1;padding:5px 10px;border:1px solid #334155;border-radius:6px;background:#1e293b;color:#94a3b8;font-size:11px;min-width:200px" />
 </div>
 
-<!-- ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê TABS NAV ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê -->
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TABS NAV &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 <div class="tabs-nav">
   <button class="tab-btn active" onclick="showTab(0)">Vue d'ensemble</button>
   <button class="tab-btn" onclick="showTab(1)">Saisonnalit&eacute;</button>
@@ -236,14 +224,14 @@ document.addEventListener('DOMContentLoaded',()=>{
   <button class="tab-btn" onclick="showTab(4)">Projection 2026</button>
 </div>
 
-<!-- ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê TAB 0 : VUE D'ENSEMBLE ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê -->
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TAB 0 : VUE D'ENSEMBLE &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 <div class="tab-content active" id="tab0">
   <div class="s-title">Indicateurs cl&eacute;s - Comparaison p&eacute;riode &eacute;quivalente</div>
   <div class="kpi-row">
     <div class="kpi k1">
       <div class="kl">CA TTC</div>
-      <div class="v25">449 980 ‚Ç¨ (saison 25)</div>
-      <div class="kpi-vals"><span class="v26" id="kpi-ca">15 174 ‚Ç¨</span><span class="ev fl" id="ev-ca">Pipeline</span></div>
+      <div class="v25">449 980 &#8364; (saison 25)</div>
+      <div class="kpi-vals"><span class="v26" id="kpi-ca">15 174 &#8364;</span><span class="ev fl" id="ev-ca">Pipeline</span></div>
       <div class="ks">S&eacute;curis&eacute; &agrave; date</div>
     </div>
     <div class="kpi k2">
@@ -254,8 +242,8 @@ document.addEventListener('DOMContentLoaded',()=>{
     </div>
     <div class="kpi k3">
       <div class="kl">Panier Moyen</div>
-      <div class="v25">98,9 ‚Ç¨</div>
-      <div class="kpi-vals"><span class="v26" id="kpi-panier">185 ‚Ç¨</span><span class="ev up" id="ev-panier">+87 %</span></div>
+      <div class="v25">98,9 &#8364;</div>
+      <div class="kpi-vals"><span class="v26" id="kpi-panier">185 &#8364;</span><span class="ev up" id="ev-panier">+87 %</span></div>
       <div class="ks">Early-bookers budget &eacute;lev&eacute;</div>
     </div>
     <div class="kpi k4">
@@ -275,7 +263,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   <div class="g21">
     <div class="card">
       <h3>CA TTC par mois - 2025 r&eacute;alis&eacute; vs 2026 pipeline</h3>
-      <div class="sub">Barres grises = 2025 ¬∑ Barres bleues = 2026 s&eacute;curis&eacute;</div>
+      <div class="sub">Barres grises = 2025 &#183; Barres bleues = 2026 s&eacute;curis&eacute;</div>
       <div class="leg"><div class="leg-item"><div class="leg-dot" style="background:#94a3b8"></div>2025</div><div class="leg-item"><div class="leg-dot" style="background:#2563eb"></div>2026 pipeline</div></div>
       <div class="ch-wrap h220"><canvas id="c-ca-overview"></canvas></div>
     </div>
@@ -301,19 +289,19 @@ document.addEventListener('DOMContentLoaded',()=>{
     <div class="card">
       <h3>Alertes & signaux</h3>
       <div class="sub">Points d'attention imm&eacute;diats</div>
-      <div class="abox" style="margin-top:8px"><div class="at">7 dossiers non sold&eacute;s</div><p>Risque ‚âà 6 500 ‚Ç¨. Dont 1 resa ao&ucirc;t (1 024 ‚Ç¨) et 1 oct. (1 488 ‚Ç¨) anormalement &eacute;lev&eacute;s.</p></div>
+      <div class="abox" style="margin-top:8px"><div class="at">7 dossiers non sold&eacute;s</div><p>Risque &#8776; 6 500 &#8364;. Dont 1 resa ao&ucirc;t (1 024 &#8364;) et 1 oct. (1 488 &#8364;) anormalement &eacute;lev&eacute;s.</p></div>
       <div class="abox" style="margin-top:6px"><div class="at">Juillet + ao&ucirc;t quasi vides</div><p>Seulement 8 resa sur les 2 mois = 57 % du CA 2025. Calendrier Lokki ouvert ?</p></div>
       <div class="sbox" style="margin-top:6px"><p>+165 % de resa pos&eacute;es vs mars 2025. Panier +87 %. D&eacute;marrage solide.</p></div>
     </div>
   </div>
 </div>
 
-<!-- ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê TAB 1 : SAISONNALIT&Eacute; ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê -->
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TAB 1 : SAISONNALIT&Eacute; &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 <div class="tab-content" id="tab1">
   <div class="s-title">CA mensuel & saisonnalit&eacute;</div>
   <div class="card" style="margin-bottom:14px">
     <h3>Chiffre d'affaires TTC par mois - 2025 r&eacute;alis&eacute; + panier moyen</h3>
-    <div class="sub">Barres = CA ¬∑ Ligne orange = nb r&eacute;servations ¬∑ Ligne violette = panier moyen</div>
+    <div class="sub">Barres = CA &#183; Ligne orange = nb r&eacute;servations &#183; Ligne violette = panier moyen</div>
     <div class="leg">
       <div class="leg-item"><div class="leg-dot" style="background:#2563eb"></div>CA TTC</div>
       <div class="leg-item"><div class="leg-dot" style="background:#d97706"></div>Nb r&eacute;servations</div>
@@ -327,7 +315,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       <h3>Courbe Pareto - concentration de la saison</h3>
       <div class="sub">Juillet + ao&ucirc;t = 57 % du CA annuel sur 2 mois</div>
       <div class="ch-wrap h220"><canvas id="c-pareto"></canvas></div>
-      <div class="ibox"><p>Juillet + Ao&ucirc;t 2025 = <strong>256 161 ‚Ç¨</strong> soit 57 % du CA. La rentabilit&eacute; se joue en 8 semaines.</p></div>
+      <div class="ibox"><p>Juillet + Ao&ucirc;t 2025 = <strong>256 161 &#8364;</strong> soit 57 % du CA. La rentabilit&eacute; se joue en 8 semaines.</p></div>
     </div>
     <div class="card">
       <h3>Top 10 semaines 2025</h3>
@@ -335,16 +323,16 @@ document.addEventListener('DOMContentLoaded',()=>{
       <table class="tbl">
         <thead><tr><th>#</th><th>Semaine</th><th>P&eacute;riode</th><th>Resa</th><th>CA TTC</th></tr></thead>
         <tbody>
-          <tr><td><span class="tag tb">1</span></td><td class="n">S33</td><td>11-17 ao&ucirc;t</td><td>443</td><td class="n">50 563 ‚Ç¨</td></tr>
-          <tr><td><span class="tag tb">2</span></td><td class="n">S34</td><td>18-24 ao&ucirc;t</td><td>358</td><td class="n">41 972 ‚Ç¨</td></tr>
-          <tr><td><span class="tag tb">3</span></td><td class="n">S32</td><td>4-10 ao&ucirc;t</td><td>317</td><td class="n">39 523 ‚Ç¨</td></tr>
-          <tr><td><span class="tag to">4</span></td><td class="n">S31</td><td>28 juil-3 ao&ucirc;t</td><td>254</td><td class="n">28 680 ‚Ç¨</td></tr>
-          <tr><td><span class="tag to">5</span></td><td class="n">S30</td><td>21-27 juil</td><td>201</td><td class="n">26 312 ‚Ç¨</td></tr>
-          <tr><td><span class="tag tg">6</span></td><td class="n">S35</td><td>25-31 ao&ucirc;t</td><td>197</td><td class="n">20 936 ‚Ç¨</td></tr>
-          <tr><td><span class="tag tg">7</span></td><td class="n">S29</td><td>14-20 juil</td><td>183</td><td class="n">19 110 ‚Ç¨</td></tr>
-          <tr><td><span class="tag tg">8</span></td><td class="n">S22</td><td>26 mai-1 juin</td><td>180</td><td class="n">17 919 ‚Ç¨</td></tr>
-          <tr><td>9</td><td class="n">S28</td><td>7-13 juil</td><td>175</td><td class="n">17 824 ‚Ç¨</td></tr>
-          <tr><td>10</td><td class="n">S18</td><td>28 avr-4 mai</td><td>158</td><td class="n">14 990 ‚Ç¨</td></tr>
+          <tr><td><span class="tag tb">1</span></td><td class="n">S33</td><td>11-17 ao&ucirc;t</td><td>443</td><td class="n">50 563 &#8364;</td></tr>
+          <tr><td><span class="tag tb">2</span></td><td class="n">S34</td><td>18-24 ao&ucirc;t</td><td>358</td><td class="n">41 972 &#8364;</td></tr>
+          <tr><td><span class="tag tb">3</span></td><td class="n">S32</td><td>4-10 ao&ucirc;t</td><td>317</td><td class="n">39 523 &#8364;</td></tr>
+          <tr><td><span class="tag to">4</span></td><td class="n">S31</td><td>28 juil-3 ao&ucirc;t</td><td>254</td><td class="n">28 680 &#8364;</td></tr>
+          <tr><td><span class="tag to">5</span></td><td class="n">S30</td><td>21-27 juil</td><td>201</td><td class="n">26 312 &#8364;</td></tr>
+          <tr><td><span class="tag tg">6</span></td><td class="n">S35</td><td>25-31 ao&ucirc;t</td><td>197</td><td class="n">20 936 &#8364;</td></tr>
+          <tr><td><span class="tag tg">7</span></td><td class="n">S29</td><td>14-20 juil</td><td>183</td><td class="n">19 110 &#8364;</td></tr>
+          <tr><td><span class="tag tg">8</span></td><td class="n">S22</td><td>26 mai-1 juin</td><td>180</td><td class="n">17 919 &#8364;</td></tr>
+          <tr><td>9</td><td class="n">S28</td><td>7-13 juil</td><td>175</td><td class="n">17 824 &#8364;</td></tr>
+          <tr><td>10</td><td class="n">S18</td><td>28 avr-4 mai</td><td>158</td><td class="n">14 990 &#8364;</td></tr>
         </tbody>
       </table>
     </div>
@@ -354,15 +342,15 @@ document.addEventListener('DOMContentLoaded',()=>{
   <div class="g2">
     <div class="card">
       <h3>CA TTC par jour de semaine - 2025</h3>
-      <div class="sub">Barres = CA ¬∑ Ligne = panier moyen</div>
+      <div class="sub">Barres = CA &#183; Ligne = panier moyen</div>
       <div class="ch-wrap h200"><canvas id="c-wday"></canvas></div>
-      <div class="ibox"><p>Samedi = CA max (82 251 ‚Ç¨). Dimanche = meilleur panier (118 ‚Ç¨). Lundi: 111 ‚Ç¨/resa - segment week-end long.</p></div>
+      <div class="ibox"><p>Samedi = CA max (82 251 &#8364;). Dimanche = meilleur panier (118 &#8364;). Lundi: 111 &#8364;/resa - segment week-end long.</p></div>
     </div>
     <div class="card">
-      <h3>Heatmap intensit&eacute; - Mois √ó Jour de semaine</h3>
+      <h3>Heatmap intensit&eacute; - Mois &#215; Jour de semaine</h3>
       <div class="sub">Nb r&eacute;servations - plus fonc&eacute; = plus fort volume</div>
       <table class="hmtbl" id="heatmap-tbl"></table>
-      <div class="ibox"><p>Concentration maximale : ao&ucirc;t √ó samedi/dimanche. En dehors juillet/ao&ucirc;t, tous les jours sont &eacute;quivalents.</p></div>
+      <div class="ibox"><p>Concentration maximale : ao&ucirc;t &#215; samedi/dimanche. En dehors juillet/ao&ucirc;t, tous les jours sont &eacute;quivalents.</p></div>
     </div>
   </div>
 
@@ -370,7 +358,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   <div class="g2">
     <div class="card">
       <h3>Activit&eacute; horaire - nb d&eacute;parts & CA</h3>
-      <div class="sub">Pic &agrave; 10h00 = 1 310 d&eacute;parts ¬∑ 121 323 ‚Ç¨ de CA</div>
+      <div class="sub">Pic &agrave; 10h00 = 1 310 d&eacute;parts &#183; 121 323 &#8364; de CA</div>
       <div class="ch-wrap h200"><canvas id="c-horaire"></canvas></div>
     </div>
     <div class="card">
@@ -382,14 +370,14 @@ document.addEventListener('DOMContentLoaded',()=>{
   </div>
 </div>
 
-<!-- ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê TAB 2 : CAT&Eacute;GORIES ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê -->
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TAB 2 : CAT&Eacute;GORIES &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 <div class="tab-content" id="tab2">
   <div class="s-title">Saison 2025 - R&eacute;f&eacute;rence par cat&eacute;gorie</div>
   <div class="g4">
-    <div class="cat-card" style="background:#1d4ed8"><div class="cc-icon">‚ö°</div><div class="cc-name">V&eacute;los &eacute;lectriques</div><div class="cc-val">224 753 ‚Ç¨</div><div class="cc-sub">2 107 resa ¬∑ 107 ‚Ç¨/resa ¬∑ 50 % du CA</div></div>
-    <div class="cat-card" style="background:#059669"><div class="cc-icon">üöó</div><div class="cc-name">Voitures</div><div class="cc-val">129 333 ‚Ç¨</div><div class="cc-sub">1 221 resa ¬∑ 106 ‚Ç¨/resa ¬∑ 28,7 %</div></div>
-    <div class="cat-card" style="background:#b45309"><div class="cc-icon">üö≤</div><div class="cc-name">V&eacute;los musculaires</div><div class="cc-val">54 158 ‚Ç¨</div><div class="cc-sub">754 resa ¬∑ 72 ‚Ç¨/resa ¬∑ 12,0 %</div></div>
-    <div class="cat-card" style="background:#7c3aed"><div class="cc-icon">üõµ</div><div class="cc-name">Scooters 50+125</div><div class="cc-val">22 655 ‚Ç¨</div><div class="cc-sub">243 resa ¬∑ 93 ‚Ç¨/resa ¬∑ 5,0 %</div></div>
+    <div class="cat-card" style="background:#1d4ed8"><div class="cc-icon">&#9889;</div><div class="cc-name">V&eacute;los &eacute;lectriques</div><div class="cc-val">224 753 &#8364;</div><div class="cc-sub">2 107 resa &#183; 107 &#8364;/resa &#183; 50 % du CA</div></div>
+    <div class="cat-card" style="background:#059669"><div class="cc-icon">&#128663;</div><div class="cc-name">Voitures</div><div class="cc-val">129 333 &#8364;</div><div class="cc-sub">1 221 resa &#183; 106 &#8364;/resa &#183; 28,7 %</div></div>
+    <div class="cat-card" style="background:#b45309"><div class="cc-icon">&#128690;</div><div class="cc-name">V&eacute;los musculaires</div><div class="cc-val">54 158 &#8364;</div><div class="cc-sub">754 resa &#183; 72 &#8364;/resa &#183; 12,0 %</div></div>
+    <div class="cat-card" style="background:#7c3aed"><div class="cc-icon">&#128757;</div><div class="cc-name">Scooters 50+125</div><div class="cc-val">22 655 &#8364;</div><div class="cc-sub">243 resa &#183; 93 &#8364;/resa &#183; 5,0 %</div></div>
   </div>
 
   <div class="g2" style="margin-top:14px">
@@ -400,7 +388,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     </div>
     <div class="card">
       <h3>Panier moyen par cat&eacute;gorie - 2025 vs 2026</h3>
-      <div class="sub">Les early-bookers 2026 ont un budget 2√ó plus &eacute;lev&eacute;</div>
+      <div class="sub">Les early-bookers 2026 ont un budget 2&#215; plus &eacute;lev&eacute;</div>
       <div class="leg"><div class="leg-item"><div class="leg-dot" style="background:#94a3b8"></div>2025</div><div class="leg-item"><div class="leg-dot" style="background:#2563eb"></div>2026 pipeline</div></div>
       <div class="ch-wrap h220"><canvas id="c-cat-panier"></canvas></div>
     </div>
@@ -414,33 +402,33 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   <div class="card">
     <h3>Tableau comparatif d&eacute;taill&eacute; - 2025 saison vs 2026 pipeline</h3>
-    <div class="sub">‚ö†Ô∏è Les donn&eacute;es 2026 repr&eacute;sentent des r&eacute;servations futures, pas du CA encaiss&eacute;</div>
+    <div class="sub">&#9888;&#65039; Les donn&eacute;es 2026 repr&eacute;sentent des r&eacute;servations futures, pas du CA encaiss&eacute;</div>
     <table class="tbl">
-      <thead><tr><th>Cat&eacute;gorie</th><th>Resa 25</th><th>CA 25</th><th>Panier 25</th><th>Resa 26</th><th>CA 26</th><th>Panier 26</th><th>Œî Panier</th></tr></thead>
+      <thead><tr><th>Cat&eacute;gorie</th><th>Resa 25</th><th>CA 25</th><th>Panier 25</th><th>Resa 26</th><th>CA 26</th><th>Panier 26</th><th>&#916; Panier</th></tr></thead>
       <tbody>
-        <tr><td>‚ö° V&eacute;los &Eacute;lec.</td><td>2 107</td><td>224 753 ‚Ç¨</td><td>107 ‚Ç¨</td><td class="n">40</td><td class="n">9 617 ‚Ç¨</td><td class="n">240 ‚Ç¨</td><td><span class="tag tg">+124 %</span></td></tr>
-        <tr><td>üöó Voitures</td><td>1 221</td><td>129 333 ‚Ç¨</td><td>106 ‚Ç¨</td><td class="n">27</td><td class="n">3 309 ‚Ç¨</td><td class="n">123 ‚Ç¨</td><td><span class="tag tg">+16 %</span></td></tr>
-        <tr><td>üö≤ V&eacute;los Musc.</td><td>754</td><td>54 158 ‚Ç¨</td><td>72 ‚Ç¨</td><td class="n">12</td><td class="n">1 868 ‚Ç¨</td><td class="n">156 ‚Ç¨</td><td><span class="tag tg">+117 %</span></td></tr>
-        <tr><td>üõµ Scoot. 125</td><td>53</td><td>4 639 ‚Ç¨</td><td>88 ‚Ç¨</td><td class="n">2</td><td class="n">300 ‚Ç¨</td><td class="n">150 ‚Ç¨</td><td><span class="tag tg">+70 %</span></td></tr>
-        <tr><td>üßí V&eacute;los Enf.</td><td>49</td><td>6 207 ‚Ç¨</td><td>127 ‚Ç¨</td><td class="n">1</td><td class="n">80 ‚Ç¨</td><td class="n">80 ‚Ç¨</td><td><span class="tag tr">-37 %</span></td></tr>
-        <tr><td>üõµ Scoot. 50</td><td>190</td><td>18 016 ‚Ç¨</td><td>95 ‚Ç¨</td><td class="n">0</td><td class="n">-</td><td class="n">-</td><td><span class="tag tgr">-</span></td></tr>
-        <tr><td>üîß Accessoires</td><td>70</td><td>8 648 ‚Ç¨</td><td>124 ‚Ç¨</td><td class="n">0</td><td class="n">-</td><td class="n">-</td><td><span class="tag tgr">-</span></td></tr>
+        <tr><td>&#9889; V&eacute;los &Eacute;lec.</td><td>2 107</td><td>224 753 &#8364;</td><td>107 &#8364;</td><td class="n">40</td><td class="n">9 617 &#8364;</td><td class="n">240 &#8364;</td><td><span class="tag tg">+124 %</span></td></tr>
+        <tr><td>&#128663; Voitures</td><td>1 221</td><td>129 333 &#8364;</td><td>106 &#8364;</td><td class="n">27</td><td class="n">3 309 &#8364;</td><td class="n">123 &#8364;</td><td><span class="tag tg">+16 %</span></td></tr>
+        <tr><td>&#128690; V&eacute;los Musc.</td><td>754</td><td>54 158 &#8364;</td><td>72 &#8364;</td><td class="n">12</td><td class="n">1 868 &#8364;</td><td class="n">156 &#8364;</td><td><span class="tag tg">+117 %</span></td></tr>
+        <tr><td>&#128757; Scoot. 125</td><td>53</td><td>4 639 &#8364;</td><td>88 &#8364;</td><td class="n">2</td><td class="n">300 &#8364;</td><td class="n">150 &#8364;</td><td><span class="tag tg">+70 %</span></td></tr>
+        <tr><td>&#129490; V&eacute;los Enf.</td><td>49</td><td>6 207 &#8364;</td><td>127 &#8364;</td><td class="n">1</td><td class="n">80 &#8364;</td><td class="n">80 &#8364;</td><td><span class="tag tr">-37 %</span></td></tr>
+        <tr><td>&#128757; Scoot. 50</td><td>190</td><td>18 016 &#8364;</td><td>95 &#8364;</td><td class="n">0</td><td class="n">-</td><td class="n">-</td><td><span class="tag tgr">-</span></td></tr>
+        <tr><td>&#128295; Accessoires</td><td>70</td><td>8 648 &#8364;</td><td>124 &#8364;</td><td class="n">0</td><td class="n">-</td><td class="n">-</td><td><span class="tag tgr">-</span></td></tr>
       </tbody>
     </table>
-    <div class="abox"><div class="at">Scooter 50 et Accessoires absents du pipeline 2026</div><p>208 resa ¬∑ 26 655 ‚Ç¨ en 2025. Normal en early-bird - &agrave; surveiller &agrave; l'ouverture saison.</p></div>
+    <div class="abox"><div class="at">Scooter 50 et Accessoires absents du pipeline 2026</div><p>208 resa &#183; 26 655 &#8364; en 2025. Normal en early-bird - &agrave; surveiller &agrave; l'ouverture saison.</p></div>
   </div>
 </div>
 
-<!-- ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê TAB 3 : PERFORMANCE FLOTTE ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê -->
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TAB 3 : PERFORMANCE FLOTTE &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 <div class="tab-content" id="tab3">
   <div class="s-title">Flotte 2025 - Stock r&eacute;el (r&eacute;f&eacute;rence)</div>
 
   <!-- STOCKS 2025 en cards visuelles -->
   <div class="g4" style="margin-bottom:14px">
-    <div class="cat-card" style="background:#1d4ed8"><div class="cc-icon">‚ö°</div><div class="cc-name">V&eacute;los &eacute;lectriques</div><div class="cc-val" id="s25-velec-ca">-</div><div class="cc-sub" id="s25-velec-sub">- v&eacute;los ¬∑ - CA/v&eacute;lo</div></div>
-    <div class="cat-card" style="background:#059669"><div class="cc-icon">üöó</div><div class="cc-name">Voitures</div><div class="cc-val" id="s25-voiture-ca">-</div><div class="cc-sub" id="s25-voiture-sub">- v&eacute;hicules ¬∑ - CA/v&eacute;h.</div></div>
-    <div class="cat-card" style="background:#b45309"><div class="cc-icon">üö≤</div><div class="cc-name">V&eacute;los musculaires</div><div class="cc-val" id="s25-vmusc-ca">-</div><div class="cc-sub" id="s25-vmusc-sub">- v&eacute;los ¬∑ - CA/v&eacute;lo</div></div>
-    <div class="cat-card" style="background:#7c3aed"><div class="cc-icon">üõµ</div><div class="cc-name">Scooters</div><div class="cc-val" id="s25-sc-ca">-</div><div class="cc-sub" id="s25-sc-sub">- v&eacute;hicules ¬∑ - CA/v&eacute;h.</div></div>
+    <div class="cat-card" style="background:#1d4ed8"><div class="cc-icon">&#9889;</div><div class="cc-name">V&eacute;los &eacute;lectriques</div><div class="cc-val" id="s25-velec-ca">-</div><div class="cc-sub" id="s25-velec-sub">- v&eacute;los &#183; - CA/v&eacute;lo</div></div>
+    <div class="cat-card" style="background:#059669"><div class="cc-icon">&#128663;</div><div class="cc-name">Voitures</div><div class="cc-val" id="s25-voiture-ca">-</div><div class="cc-sub" id="s25-voiture-sub">- v&eacute;hicules &#183; - CA/v&eacute;h.</div></div>
+    <div class="cat-card" style="background:#b45309"><div class="cc-icon">&#128690;</div><div class="cc-name">V&eacute;los musculaires</div><div class="cc-val" id="s25-vmusc-ca">-</div><div class="cc-sub" id="s25-vmusc-sub">- v&eacute;los &#183; - CA/v&eacute;lo</div></div>
+    <div class="cat-card" style="background:#7c3aed"><div class="cc-icon">&#128757;</div><div class="cc-name">Scooters</div><div class="cc-val" id="s25-sc-ca">-</div><div class="cc-sub" id="s25-sc-sub">- v&eacute;hicules &#183; - CA/v&eacute;h.</div></div>
   </div>
 
   <div class="g2">
@@ -462,19 +450,19 @@ document.addEventListener('DOMContentLoaded',()=>{
       </div>
       <div class="card">
         <h3>Stock &amp; Co&ucirc;ts 2026 - &Agrave; renseigner quand disponible</h3>
-        <div class="sub">Co&ucirc;ts = leasing + entretien + assurance ¬∑ Saison 7 mois ¬∑ Laissez vide si identique &agrave; 2025</div>
+        <div class="sub">Co&ucirc;ts = leasing + entretien + assurance &#183; Saison 7 mois &#183; Laissez vide si identique &agrave; 2025</div>
         <div style="margin-top:10px">
           <div style="display:grid;grid-template-columns:1fr auto auto auto;gap:4px;align-items:center;font-size:9px;font-weight:600;text-transform:uppercase;color:#94a3b8;padding:0 0 4px;border-bottom:1px solid #f1f5f9;margin-bottom:6px">
-            <span>Cat&eacute;gorie</span><span style="text-align:center">Nb 2026</span><span style="text-align:center">‚Ç¨/mois/v&eacute;h.</span><span></span>
+            <span>Cat&eacute;gorie</span><span style="text-align:center">Nb 2026</span><span style="text-align:center">&#8364;/mois/v&eacute;h.</span><span></span>
           </div>
           <div style="font-size:10px;font-weight:600;color:#475569;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">Motoris&eacute;s</div>
-          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#059669"></div>Voitures</div><input class="fr-input" id="fl26-voiture" placeholder="?" oninput="computeFlotte()"><input class="fr-input" id="fl26-cout-voiture" placeholder="‚Ç¨/mois" oninput="computeFlotte()"><span class="fr-unit">‚Ç¨/mois</span></div>
-          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#7c3aed"></div>Scooter 125</div><input class="fr-input" id="fl26-sc125" placeholder="?" oninput="computeFlotte()"><input class="fr-input" id="fl26-cout-sc125" placeholder="‚Ç¨/mois" oninput="computeFlotte()"><span class="fr-unit">‚Ç¨/mois</span></div>
-          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#d97706"></div>Scooter 50</div><input class="fr-input" id="fl26-sc50" placeholder="?" oninput="computeFlotte()"><input class="fr-input" id="fl26-cout-sc50" placeholder="‚Ç¨/mois" oninput="computeFlotte()"><span class="fr-unit">‚Ç¨/mois</span></div>
+          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#059669"></div>Voitures</div><input class="fr-input" id="fl26-voiture" placeholder="?" oninput="computeFlotte()"><input class="fr-input" id="fl26-cout-voiture" placeholder="&#8364;/mois" oninput="computeFlotte()"><span class="fr-unit">&#8364;/mois</span></div>
+          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#7c3aed"></div>Scooter 125</div><input class="fr-input" id="fl26-sc125" placeholder="?" oninput="computeFlotte()"><input class="fr-input" id="fl26-cout-sc125" placeholder="&#8364;/mois" oninput="computeFlotte()"><span class="fr-unit">&#8364;/mois</span></div>
+          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#d97706"></div>Scooter 50</div><input class="fr-input" id="fl26-sc50" placeholder="?" oninput="computeFlotte()"><input class="fr-input" id="fl26-cout-sc50" placeholder="&#8364;/mois" oninput="computeFlotte()"><span class="fr-unit">&#8364;/mois</span></div>
           <div style="font-size:10px;font-weight:600;color:#475569;margin:10px 0 6px;text-transform:uppercase;letter-spacing:.5px">V&eacute;los</div>
-          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#2563eb"></div>V&eacute;los &eacute;lectriques</div><input class="fr-input" id="fl26-velec" placeholder="?" oninput="computeFlotte()"><input class="fr-input" id="fl26-cout-velec" placeholder="‚Ç¨/mois" oninput="computeFlotte()"><span class="fr-unit">‚Ç¨/mois</span></div>
-          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#b45309"></div>V&eacute;los musculaires</div><input class="fr-input" id="fl26-vmusc" placeholder="?" oninput="computeFlotte()"><input class="fr-input" id="fl26-cout-vmusc" placeholder="‚Ç¨/mois" oninput="computeFlotte()"><span class="fr-unit">‚Ç¨/mois</span></div>
-          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#dc2626"></div>V&eacute;los enfants</div><input class="fr-input" id="fl26-venf" placeholder="?" oninput="computeFlotte()"><input class="fr-input" id="fl26-cout-venf" placeholder="‚Ç¨/mois" oninput="computeFlotte()"><span class="fr-unit">‚Ç¨/mois</span></div>
+          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#2563eb"></div>V&eacute;los &eacute;lectriques</div><input class="fr-input" id="fl26-velec" placeholder="?" oninput="computeFlotte()"><input class="fr-input" id="fl26-cout-velec" placeholder="&#8364;/mois" oninput="computeFlotte()"><span class="fr-unit">&#8364;/mois</span></div>
+          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#b45309"></div>V&eacute;los musculaires</div><input class="fr-input" id="fl26-vmusc" placeholder="?" oninput="computeFlotte()"><input class="fr-input" id="fl26-cout-vmusc" placeholder="&#8364;/mois" oninput="computeFlotte()"><span class="fr-unit">&#8364;/mois</span></div>
+          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#dc2626"></div>V&eacute;los enfants</div><input class="fr-input" id="fl26-venf" placeholder="?" oninput="computeFlotte()"><input class="fr-input" id="fl26-cout-venf" placeholder="&#8364;/mois" oninput="computeFlotte()"><span class="fr-unit">&#8364;/mois</span></div>
         </div>
         <div style="background:#eff6ff;border-left:3px solid #2563eb;border-radius:0 6px 6px 0;padding:7px 10px;margin-top:10px;font-size:10px;color:#1e40af">
           <strong>Co&ucirc;t flotte 2026 estim&eacute; :</strong> <span id="fl26-total-cout">- (renseigner les co&ucirc;ts)</span><br>
@@ -494,7 +482,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         <h3>Tableau comparatif flotte 2025 vs 2026</h3>
         <div class="sub">Rotations = nb locations / nb v&eacute;hicules - CA/v&eacute;hicule = CA total / nb v&eacute;hicules</div>
         <table class="tbl" id="fl-cmp-tbl">
-          <thead><tr><th>Cat&eacute;gorie</th><th>Stock 25</th><th>CA/v&eacute;h. 25</th><th>Rot. 25</th><th>Stock 26</th><th>CA/v&eacute;h. 26</th><th>Œî CA/v&eacute;h.</th><th>Co&ucirc;t flotte 26</th><th>Marge brute 26</th></tr></thead>
+          <thead><tr><th>Cat&eacute;gorie</th><th>Stock 25</th><th>CA/v&eacute;h. 25</th><th>Rot. 25</th><th>Stock 26</th><th>CA/v&eacute;h. 26</th><th>&#916; CA/v&eacute;h.</th><th>Co&ucirc;t flotte 26</th><th>Marge brute 26</th></tr></thead>
           <tbody id="fl-cmp-body"></tbody>
         </table>
         <div class="ibox"><p>CA/v&eacute;hicule 2026 = CA pipeline &agrave; date divis&eacute; par le stock 2026. Il augmentera au fur et &agrave; mesure que les r&eacute;servations se remplissent. Renseignez le stock 2026 pour activer la comparaison.</p></div>
@@ -518,7 +506,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   </div>
 </div>
 
-<!-- ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê TAB 4 : PROJECTION 2026 ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê -->
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TAB 4 : PROJECTION 2026 &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 <div class="tab-content" id="tab4">
   <div class="s-title">Sc&eacute;narios de projection saison 2026</div>
   <div class="g12">
@@ -531,7 +519,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         <div class="proj-slider-row"><label>Mois de saison</label><input type="range" id="sl-mois" min="5" max="9" value="7" step="1" oninput="computeProj()"><span class="sv" id="sl-mois-v">7 mois</span></div>
       </div>
       <div class="proj-result" id="proj-result">
-        <div class="pr-row"><span>CA s&eacute;curis&eacute; aujourd'hui</span><span class="pr-val">15 174 ‚Ç¨</span></div>
+        <div class="pr-row"><span>CA s&eacute;curis&eacute; aujourd'hui</span><span class="pr-val">15 174 &#8364;</span></div>
         <div class="pr-row"><span>Resa projet&eacute;es 2026</span><span class="pr-val" id="pr-resa">-</span></div>
         <div class="pr-row"><span>Panier moyen projet&eacute;</span><span class="pr-val" id="pr-panier">-</span></div>
         <div class="pr-row"><span>CA projet&eacute; 2026</span><span class="pr-val" id="pr-ca">-</span></div>
@@ -540,10 +528,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     </div>
     <div class="card">
       <h3>Projection mensuelle 2026 - 3 sc&eacute;narios</h3>
-      <div class="sub">Prudent (‚àí10 %) ¬∑ Central (=2025) ¬∑ Optimiste (+10 %)</div>
+      <div class="sub">Prudent (&#8722;10 %) &#183; Central (=2025) &#183; Optimiste (+10 %)</div>
       <div class="leg">
         <div class="leg-item"><div class="leg-dot" style="background:#94a3b8"></div>2025 r&eacute;alis&eacute;</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#ef4444"></div>Prudent (‚àí10 %)</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#ef4444"></div>Prudent (&#8722;10 %)</div>
         <div class="leg-item"><div class="leg-dot" style="background:#2563eb"></div>Central (=2025)</div>
         <div class="leg-item"><div class="leg-dot" style="background:#22c55e"></div>Optimiste (+10 %)</div>
         <div class="leg-item"><div class="leg-dot" style="background:#f59e0b"></div>2026 s&eacute;curis&eacute;</div>
@@ -554,44 +542,44 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   <div class="g3">
     <div class="card">
-      <h3>Sc&eacute;nario prudent (‚àí10 %)</h3>
-      <div class="sub">Base 2025 √ó 0,90</div>
+      <h3>Sc&eacute;nario prudent (&#8722;10 %)</h3>
+      <div class="sub">Base 2025 &#215; 0,90</div>
       <table class="tbl"><thead><tr><th>Indicateur</th><th>Valeur</th></tr></thead><tbody>
-        <tr><td>CA projet&eacute;</td><td class="n">404 982 ‚Ç¨</td></tr>
+        <tr><td>CA projet&eacute;</td><td class="n">404 982 &#8364;</td></tr>
         <tr><td>Nb resa</td><td class="n">~4 030</td></tr>
-        <tr><td>Panier moyen</td><td class="n">100 ‚Ç¨</td></tr>
-        <tr><td>vs 2025</td><td><span class="tag tr">-44 998 ‚Ç¨</span></td></tr>
+        <tr><td>Panier moyen</td><td class="n">100 &#8364;</td></tr>
+        <tr><td>vs 2025</td><td><span class="tag tr">-44 998 &#8364;</span></td></tr>
       </tbody></table>
     </div>
     <div class="card" style="border:2px solid #2563eb">
       <div style="background:#2563eb;color:white;font-size:10px;font-weight:600;padding:3px 10px;border-radius:6px;display:inline-block;margin-bottom:8px">Sc&eacute;nario central</div>
       <h3>= 2025</h3>
-      <div class="sub">Base 2025 √ó 1,00</div>
+      <div class="sub">Base 2025 &#215; 1,00</div>
       <table class="tbl"><thead><tr><th>Indicateur</th><th>Valeur</th></tr></thead><tbody>
-        <tr><td>CA projet&eacute;</td><td class="n">449 980 ‚Ç¨</td></tr>
+        <tr><td>CA projet&eacute;</td><td class="n">449 980 &#8364;</td></tr>
         <tr><td>Nb resa</td><td class="n">~4 478</td></tr>
-        <tr><td>Panier moyen</td><td class="n">101 ‚Ç¨</td></tr>
+        <tr><td>Panier moyen</td><td class="n">101 &#8364;</td></tr>
         <tr><td>vs 2025</td><td><span class="tag tgr">=</span></td></tr>
       </tbody></table>
     </div>
     <div class="card">
       <h3>Sc&eacute;nario optimiste (+10 %)</h3>
-      <div class="sub">Base 2025 √ó 1,10 + hausse panier</div>
+      <div class="sub">Base 2025 &#215; 1,10 + hausse panier</div>
       <table class="tbl"><thead><tr><th>Indicateur</th><th>Valeur</th></tr></thead><tbody>
-        <tr><td>CA projet&eacute;</td><td class="n">494 978 ‚Ç¨</td></tr>
+        <tr><td>CA projet&eacute;</td><td class="n">494 978 &#8364;</td></tr>
         <tr><td>Nb resa</td><td class="n">~4 926</td></tr>
-        <tr><td>Panier moyen</td><td class="n">101 ‚Ç¨</td></tr>
-        <tr><td>vs 2025</td><td><span class="tag tg">+44 998 ‚Ç¨</span></td></tr>
+        <tr><td>Panier moyen</td><td class="n">101 &#8364;</td></tr>
+        <tr><td>vs 2025</td><td><span class="tag tg">+44 998 &#8364;</span></td></tr>
       </tbody></table>
       <div class="sbox"><p>Si juillet et ao&ucirc;t se remplissent au rythme 2025 avec le panier actuel en hausse (+87 % early-bird), la saison 2026 peut d&eacute;passer 2025.</p></div>
     </div>
   </div>
 </div>
 
-<footer>Dashboard Happy-ON ¬∑ Groupe CAREXO ¬∑ Belle-&Icirc;le-en-Mer ¬∑ dashboard.groupe-carexo.fr<br>2025 : saison compl&egrave;te 4 478 resa ¬∑ 449 980 ‚Ç¨ CA TTC ¬∑ 2026 : pipeline &agrave; date ¬∑ Mis &agrave; jour automatiquement via Google Sheets</footer>
+<footer>Dashboard Happy-ON &#183; Groupe CAREXO &#183; Belle-&Icirc;le-en-Mer &#183; dashboard.groupe-carexo.fr<br>2025 : saison compl&egrave;te 4 478 resa &#183; 449 980 &#8364; CA TTC &#183; 2026 : pipeline &agrave; date &#183; Mis &agrave; jour automatiquement via Google Sheets</footer>
 
 <script>
-// ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê DONN&Eacute;ES ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; DONN&Eacute;ES &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
 const D25 = {
   monthly: [
     {m:'Mar',ca:3910,nb:31,p:126},{m:'Avr',ca:24643,nb:285,p:86},
@@ -623,9 +611,9 @@ const D26_TOTAL = {nb:82,ca:15174,p:185,h:54.3,solde:91.5};
 const CHARTS = {};
 
 function fmt(n){return Math.round(n).toLocaleString('fr-FR');}
-function fmtE(n){return fmt(n)+' ‚Ç¨';}
+function fmtE(n){return fmt(n)+' &#8364;';}
 
-// ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê TABS ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TABS &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
 let initedTabs = new Set([0]);
 function showTab(i) {
   document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
@@ -639,7 +627,7 @@ function initChartsForTab(i){
   else if(i===4){initTab4();computeProj();}
 }
 
-// ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê CHART DEFAULTS ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; CHART DEFAULTS &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
 Chart.defaults.font.family="'Segoe UI',Arial,sans-serif";
 Chart.defaults.font.size=11;
 function mkChart(id,type,data,opts){
@@ -652,7 +640,7 @@ function mkChart(id,type,data,opts){
 const gridColor='#f0f4f8';
 const ttStyle={contentStyle:{fontSize:10,padding:'5px 8px'},titleStyle:{fontSize:11}};
 
-// ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê TAB 0 CHARTS ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TAB 0 CHARTS &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
 window.addEventListener('load',()=>{
   // CA overview
   const ca26Arr = D25.monthly.map((d,i)=>[870,2556,4896,1875,1441,2048,null,1488][i]);
@@ -697,7 +685,7 @@ window.addEventListener('load',()=>{
 </script>
 
 <script>
-// ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê TAB 1 ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TAB 1 &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
 function initTab1(){
   const mL=D25.monthly.map(d=>d.m);
   // Full monthly triple
@@ -708,7 +696,7 @@ function initTab1(){
       {label:'Nb resa',data:D25.monthly.map(d=>d.nb),type:'line',borderColor:'#d97706',backgroundColor:'transparent',yAxisID:'y2',tension:.4,pointRadius:4,borderWidth:2,fill:false},
       {label:'Panier',data:D25.monthly.map(d=>d.p),type:'line',borderColor:'#7c3aed',backgroundColor:'transparent',yAxisID:'y3',tension:.4,pointRadius:4,borderWidth:2,borderDash:[4,3],fill:false}
     ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false}},
-      scales:{y:{beginAtZero:true,position:'left',ticks:{callback:v=>(v/1000).toFixed(0)+'k‚Ç¨'},grid:{color:gridColor}},
+      scales:{y:{beginAtZero:true,position:'left',ticks:{callback:v=>(v/1000).toFixed(0)+'k&#8364;'},grid:{color:gridColor}},
               y2:{beginAtZero:true,position:'right',grid:{display:false}},
               y3:{display:false,beginAtZero:false}}}});
   }
@@ -721,7 +709,7 @@ function initTab1(){
       {label:'CA',data:D25.monthly.map(d=>d.ca),backgroundColor:D25.monthly.map((_,i)=>i>=4&&i<=5?'rgba(37,99,235,.9)':'rgba(37,99,235,.45)'),borderRadius:4,yAxisID:'y'},
       {label:'Cumul&eacute; %',data:cumPct,type:'line',borderColor:'#dc2626',backgroundColor:'transparent',yAxisID:'y2',pointRadius:4,borderWidth:2.5,tension:.3}
     ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(0)+'k‚Ç¨'},grid:{color:gridColor}},
+      scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(0)+'k&#8364;'},grid:{color:gridColor}},
               y2:{max:100,position:'right',ticks:{callback:v=>v+'%'},grid:{display:false}}}}});
   }
   // Wday
@@ -731,8 +719,8 @@ function initTab1(){
       {label:'CA',data:D25.wday.map(d=>d.ca),backgroundColor:D25.wday.map((_,i)=>i===6||i===0?'rgba(37,99,235,.9)':'rgba(37,99,235,.5)'),borderRadius:4,yAxisID:'y'},
       {label:'Panier',data:D25.wday.map(d=>d.p),type:'line',borderColor:'#7c3aed',yAxisID:'y2',tension:.3,pointRadius:4,borderWidth:2.5,backgroundColor:'transparent'}
     ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(0)+'k‚Ç¨'},grid:{color:gridColor}},
-              y2:{position:'right',min:80,max:130,ticks:{callback:v=>v+'‚Ç¨'},grid:{display:false}}}}});
+      scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(0)+'k&#8364;'},grid:{color:gridColor}},
+              y2:{position:'right',min:80,max:130,ticks:{callback:v=>v+'&#8364;'},grid:{display:false}}}}});
   }
   // Horaire
   if(!CHARTS['c-horaire']){
@@ -754,7 +742,7 @@ function initTab1(){
   }
 }
 
-// ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê HEATMAP ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; HEATMAP &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
 function buildHeatmap(){
   const HM={'3_0':1,'3_1':8,'3_2':8,'3_3':8,'3_4':2,'3_5':2,'3_6':2,
     '4_0':32,'4_1':23,'4_2':55,'4_3':57,'4_4':20,'4_5':35,'4_6':51,
@@ -784,7 +772,7 @@ function buildHeatmap(){
 </script>
 
 <script>
-// ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê TAB 2 ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TAB 2 &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
 function initTab2(){
   if(!CHARTS['c-cat-donut']){
     const ct=document.getElementById('c-cat-donut');
@@ -806,7 +794,7 @@ function initTab2(){
       ]
     },options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},
-      scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'‚Ç¨'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}}}); 
+      scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'&#8364;'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}}}); 
   }
   buildCaParVehBars('ca-par-veh-bars');
 }
@@ -845,7 +833,7 @@ function buildCaParVehBars(elId){
   buildHbarSection(elId,items,items[0]?.val||1);
 }
 
-// ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê TAB 3 - FLOTTE (stocks uniquement, pas de co&ucirc;ts) ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TAB 3 - FLOTTE (stocks uniquement, pas de co&ucirc;ts) &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
 function computeFlotte(){
   const g=(id,def)=>parseFloat(document.getElementById(id)?.value)||def||0;
 
@@ -881,17 +869,17 @@ function computeFlotte(){
   const se=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
   const velec=fl25.velec;
   se('s25-velec-ca',fmtE(velec.ca));
-  se('s25-velec-sub',`${velec.nb} v&eacute;los ¬∑ ${fmtE(velec.nb?Math.round(velec.ca/velec.nb):0)}/v&eacute;lo`);
+  se('s25-velec-sub',`${velec.nb} v&eacute;los &#183; ${fmtE(velec.nb?Math.round(velec.ca/velec.nb):0)}/v&eacute;lo`);
   const voit=fl25.voiture;
   se('s25-voiture-ca',fmtE(voit.ca));
-  se('s25-voiture-sub',`${voit.nb} v&eacute;hicules ¬∑ ${fmtE(voit.nb?Math.round(voit.ca/voit.nb):0)}/v&eacute;h.`);
+  se('s25-voiture-sub',`${voit.nb} v&eacute;hicules &#183; ${fmtE(voit.nb?Math.round(voit.ca/voit.nb):0)}/v&eacute;h.`);
   const vm=fl25.vmusc;
   se('s25-vmusc-ca',fmtE(vm.ca));
-  se('s25-vmusc-sub',`${vm.nb} v&eacute;los ¬∑ ${fmtE(vm.nb?Math.round(vm.ca/vm.nb):0)}/v&eacute;lo`);
+  se('s25-vmusc-sub',`${vm.nb} v&eacute;los &#183; ${fmtE(vm.nb?Math.round(vm.ca/vm.nb):0)}/v&eacute;lo`);
   const sc=fl25.sc125; const sc50=fl25.sc50;
   const scTotNb=sc.nb+sc50.nb; const scTotCA=sc.ca+sc50.ca;
   se('s25-sc-ca',fmtE(scTotCA));
-  se('s25-sc-sub',`${scTotNb} v&eacute;hicules ¬∑ ${fmtE(scTotNb?Math.round(scTotCA/scTotNb):0)}/v&eacute;h.`);
+  se('s25-sc-sub',`${scTotNb} v&eacute;hicules &#183; ${fmtE(scTotNb?Math.round(scTotCA/scTotNb):0)}/v&eacute;h.`);
 
   // Calcul co&ucirc;ts + marge 2026
   const SAISON=7;
@@ -959,7 +947,7 @@ function computeFlotte(){
     CHARTS[id]=new Chart(ct,{type,data,options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},...opts}});
   };
   mkOrUpdate('c-fl-ca25','bar',{labels,datasets:[{data:CATS.map(c=>fl25[c.id].ca),backgroundColor:CATS.map(c=>c.col.replace(')',',0.8)').replace('#','rgba(').replace(/^rgba\(([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2}),/i,(m,r,g,b)=>`rgba(${parseInt(r,16)},${parseInt(g,16)},${parseInt(b,16)},`)||c.col),borderRadius:5}]},
-    {scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(0)+'k‚Ç¨'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
+    {scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(0)+'k&#8364;'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
   const rotData=CATS.map(c=>{const s=fl25[c.id];return s.nb?Math.round(s.nb25/s.nb*10)/10:0;});
   mkOrUpdate('c-fl-rotations','bar',{labels,datasets:[{data:rotData,backgroundColor:CATS.map(c=>c.col.replace(')',',0.8)').replace('#','rgba(').replace(/^rgba\(([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2}),/i,(m,r,g,b)=>`rgba(${parseInt(r,16)},${parseInt(g,16)},${parseInt(b,16)},`)||c.col),borderRadius:5}]},
     {scales:{y:{beginAtZero:true,ticks:{callback:v=>v+' rot.'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
@@ -967,7 +955,7 @@ function computeFlotte(){
 </script>
 
 <script>
-// ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê TAB 4 - PROJECTION ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TAB 4 - PROJECTION &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
 function initTab4(){
   if(!CHARTS['c-proj']){
     const ct=document.getElementById('c-proj');
@@ -976,13 +964,13 @@ function initTab4(){
     const ca26=[870,2556,4896,1875,1441,2048,null,1488];
     CHARTS['c-proj']=new Chart(ct,{type:'bar',data:{labels:mL,datasets:[
       {label:'2025',data:D25.monthly.map(d=>d.ca),backgroundColor:'rgba(148,163,184,.5)',borderRadius:3,order:5},
-      {label:'Prudent ‚àí10%',data:D25.monthly.map(d=>Math.round(d.ca*.9)),type:'line',borderColor:'#ef4444',backgroundColor:'transparent',borderDash:[5,3],pointRadius:3,borderWidth:1.5,tension:.3,order:1},
+      {label:'Prudent &#8722;10%',data:D25.monthly.map(d=>Math.round(d.ca*.9)),type:'line',borderColor:'#ef4444',backgroundColor:'transparent',borderDash:[5,3],pointRadius:3,borderWidth:1.5,tension:.3,order:1},
       {label:'Central =2025',data:D25.monthly.map(d=>d.ca),type:'line',borderColor:'#2563eb',backgroundColor:'transparent',pointRadius:3,borderWidth:2,tension:.3,order:2},
       {label:'Optimiste +10%',data:D25.monthly.map(d=>Math.round(d.ca*1.1)),type:'line',borderColor:'#22c55e',backgroundColor:'transparent',borderDash:[3,2],pointRadius:3,borderWidth:1.5,tension:.3,order:3},
       {label:'2026 s&eacute;curis&eacute;',data:ca26,backgroundColor:'rgba(245,158,11,.7)',borderRadius:3,order:4}
     ]},options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10,padding:8}}},
-      scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(0)+'k‚Ç¨'},grid:{color:gridColor}},x:{grid:{display:false}}}}});
+      scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(0)+'k&#8364;'},grid:{color:gridColor}},x:{grid:{display:false}}}}});
   }
 }
 
@@ -1000,14 +988,14 @@ function computeProj(){
   const projCa=Math.round(projNb*projP);
   const ecart=projCa-baseCa;
   el('pr-resa',fmt(projNb)+' resa');
-  el('pr-panier',projP.toFixed(0)+' ‚Ç¨');
+  el('pr-panier',projP.toFixed(0)+' &#8364;');
   el('pr-ca',fmtE(projCa));
   el('pr-ecart',(ecart>0?'+':'')+fmtE(ecart));
   const prEl=document.getElementById('pr-ecart');
   if(prEl)prEl.style.color=ecart>=0?'#86efac':'#fca5a5';
 }
 
-// ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê SYNC / DATA UPDATE ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; SYNC / DATA UPDATE &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
 // URL Apps Script - &agrave; renseigner une fois, m&eacute;moris&eacute;e dans le navigateur
 const SCRIPT_URL_KEY = 'happyon_script_url';
 function getSavedUrl(){ return localStorage.getItem(SCRIPT_URL_KEY)||''; }
@@ -1040,7 +1028,7 @@ async function syncData(silent=false){
     const data=await res.json();
     applyData(data);
     const now=new Date();
-    status.textContent=`Donn&eacute;es au ${now.toLocaleDateString('fr-FR')} ${now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})} ¬∑ ${data.nb||'-'} r&eacute;servations 2026`;
+    status.textContent=`Donn&eacute;es au ${now.toLocaleDateString('fr-FR')} ${now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})} &#183; ${data.nb||'-'} r&eacute;servations 2026`;
     status.style.color='#86efac';
     document.getElementById('dateLabel').textContent=now.toLocaleDateString('fr-FR');
     document.getElementById('srcLabel').textContent='Donn&eacute;es live Google Sheets';
@@ -1060,14 +1048,14 @@ function applyData(data){
   // KPIs header
   if(data.nb!==undefined){ set('hdr-resa26',fmt(data.nb)); set('kpi-nb',fmt(data.nb)); }
   if(data.ca!==undefined){ set('hdr-ca26',fmtE(data.ca)); set('kpi-ca',fmtE(data.ca)); }
-  if(data.panier!==undefined){ set('kpi-panier',data.panier.toFixed(0)+' ‚Ç¨'); }
+  if(data.panier!==undefined){ set('kpi-panier',data.panier.toFixed(0)+' &#8364;'); }
   if(data.duree!==undefined){ set('kpi-duree',data.duree.toFixed(1)+' h'); }
   if(data.tauxSolde!==undefined){ set('kpi-solde',data.tauxSolde.toFixed(1)+' %'); }
   // &Eacute;volutions dynamiques
   const ev=(id,v26,v25,inv=false)=>{
     const el=document.getElementById(id);if(!el||!v25)return;
     const p=(v26-v25)/v25*100;const up=inv?p<0:p>0;
-    el.textContent=(p>0?'‚ñ≤ +':'‚ñº ')+Math.abs(p).toFixed(1)+'%';
+    el.textContent=(p>0?'&#9650; +':'&#9660; ')+Math.abs(p).toFixed(1)+'%';
     el.className='ev '+(Math.abs(p)<0.5?'fl':up?'up':'dn');
   };
   if(data.nb) ev('ev-nb',data.nb,31);
