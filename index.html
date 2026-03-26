@@ -1033,7 +1033,7 @@ async function syncData(silent=false){
     document.getElementById('dateLabel').textContent=now.toLocaleDateString('fr-FR');
     document.getElementById('srcLabel').textContent='Donn&eacute;es live Google Sheets';
   } catch(e) {
-    if(!silent) status.textContent='Erreur - v&eacute;rifiez l\'URL Apps Script ou les droits de partage';
+    if(!silent) status.textContent='Erreur - verifiez l\'URL Apps Script ou les droits de partage';
     if(!silent) status.style.color='#fca5a5';
   }
   if(!silent){
