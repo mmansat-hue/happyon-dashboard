@@ -1444,6 +1444,8 @@ let PROD26 = {nb:0,ca:0,cats:{},mois_debut:{},lead_prod:{},canal:{}};
 let CUR_WEEK = 13;
 const NOMS_MOIS = {3:'Mars',4:'Avril',5:'Mai',6:'Juin',7:'Juillet',8:'Ao\u00FBt',9:'Septembre',10:'Octobre'};
 const COLS = ['#2563eb','#059669','#b45309','#d97706','#dc2626','#7c3aed'];
+const CAT_DECODE = {velec:'V\u00e9los \u00c9lec.',voit:'Voitures',vmusc:'V\u00e9los Musc.',sc125:'Scoot.125',sc50:'Scoot.50',venf:'V\u00e9los Enf.',access:'Access.',autre:'Autre'};
+function decodeCAT(o){if(!o||typeof o!=='object')return o;const r={};Object.entries(o).forEach(([k,v])=>{r[CAT_DECODE[k]||k]=v;});return r;}
 
 function onMoisChange(){
   const mo = parseInt(document.getElementById('m5-sel').value);
@@ -1666,6 +1668,8 @@ function updatePart3(mo){
   ]},{plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{display:false}}}});
 }
 
+function decodeWeekly(d){if(!d)return d;d.cats=decodeCAT(d.cats||{});return d;}
+function decodeProd(d){if(!d)return d;d.cats=decodeCAT(d.cats||{});return d;}
 function initTab5(){
   // Semaine actuelle
   CUR_WEEK = getISOWeek(new Date());
@@ -1674,8 +1678,8 @@ function initTab5(){
   if(window._lastSyncData){
     const d=window._lastSyncData;
     if(d.monthly) Object.entries(d.monthly).forEach(([k,v])=>MONTHLY26[parseInt(k)]=v);
-    if(d.weekly) WEEKLY26=d.weekly;
-    if(d.prod) PROD26=d.prod;
+    if(d.weekly) WEEKLY26=decodeWeekly(d.weekly);
+    if(d.prod) PROD26=decodeProd(d.prod);
     if(d.currentWeek) CUR_WEEK=d.currentWeek;
   }
 
