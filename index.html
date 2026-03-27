@@ -441,12 +441,12 @@ document.addEventListener('DOMContentLoaded',function(){
         <div style="margin-top:10px">
           <div style="font-size:10px;font-weight:600;color:#475569;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">Motoris&eacute;s</div>
           <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#059669"></div>Voitures</div><input class="fr-input" id="fl25-voiture" value="18" oninput="computeFlotte()"><span class="fr-unit">v&eacute;hicules 2025</span></div>
-          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#7c3aed"></div>Scooter 125</div><input class="fr-input" id="fl25-sc125" value="3" oninput="computeFlotte()"><span class="fr-unit">v&eacute;hicules 2025</span></div>
-          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#d97706"></div>Scooter 50</div><input class="fr-input" id="fl25-sc50" value="6" oninput="computeFlotte()"><span class="fr-unit">v&eacute;hicules 2025</span></div>
+          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#7c3aed"></div>Scooter 125</div><input class="fr-input" id="fl25-sc125" value="1" oninput="computeFlotte()"><span class="fr-unit">v&eacute;hicules 2025</span></div>
+          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#d97706"></div>Scooter 50</div><input class="fr-input" id="fl25-sc50" value="5" oninput="computeFlotte()"><span class="fr-unit">v&eacute;hicules 2025</span></div>
           <div style="font-size:10px;font-weight:600;color:#475569;margin:12px 0 8px;text-transform:uppercase;letter-spacing:.5px">V&eacute;los</div>
-          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#2563eb"></div>V&eacute;los &eacute;lectriques</div><input class="fr-input" id="fl25-velec" value="30" oninput="computeFlotte()"><span class="fr-unit">v&eacute;los 2025</span></div>
-          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#b45309"></div>V&eacute;los musculaires</div><input class="fr-input" id="fl25-vmusc" value="20" oninput="computeFlotte()"><span class="fr-unit">v&eacute;los 2025</span></div>
-          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#dc2626"></div>V&eacute;los enfants</div><input class="fr-input" id="fl25-venf" value="10" oninput="computeFlotte()"><span class="fr-unit">v&eacute;los 2025</span></div>
+          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#2563eb"></div>V&eacute;los &eacute;lectriques</div><input class="fr-input" id="fl25-velec" value="171" oninput="computeFlotte()"><span class="fr-unit">v&eacute;los 2025</span></div>
+          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#b45309"></div>V&eacute;los musculaires</div><input class="fr-input" id="fl25-vmusc" value="107" oninput="computeFlotte()"><span class="fr-unit">v&eacute;los 2025</span></div>
+          <div class="flotte-row"><div class="fr-name"><div class="fr-dot" style="background:#dc2626"></div>V&eacute;los enfants</div><input class="fr-input" id="fl25-venf" value="23" oninput="computeFlotte()"><span class="fr-unit">v&eacute;los 2025</span></div>
         </div>
       </div>
       <div class="card">
@@ -699,7 +699,7 @@ document.addEventListener('DOMContentLoaded',function(){
         <table class="tbl">
           <thead><tr><th>Cat&eacute;gorie</th><th>Jours lou&eacute;s</th><th>Flotte</th><th>Dispo</th><th>Taux 25</th></tr></thead>
           <tbody>
-            <tr><td>V&eacute;los &Eacute;lec.</td><td id="m5-ts-velec-j">14,4 j</td><td>30</td><td id="m5-ts-velec-d">930 j</td><td><span class="tag tgr" id="m5-ts-velec-t">1,5 %</span></td></tr>
+            <tr><td>V&eacute;los &Eacute;lec.</td><td id="m5-ts-velec-j">14,4 j</td><td>171</td><td id="m5-ts-velec-d">5 301 j</td><td><span class="tag tgr" id="m5-ts-velec-t">0,27 %</span></td></tr>
             <tr><td>Voitures</td><td id="m5-ts-voit-j">63,2 j</td><td>18</td><td id="m5-ts-voit-d">558 j</td><td><span class="tag tg" id="m5-ts-voit-t">11,3 %</span></td></tr>
             <tr><td>V&eacute;los Musc.</td><td>1,5 j</td><td>20</td><td>620 j</td><td><span class="tag tgr">0,2 %</span></td></tr>
             <tr><td>Scoot. 50</td><td>0,3 j</td><td>6</td><td>186 j</td><td><span class="tag tgr">0,2 %</span></td></tr>
@@ -1020,20 +1020,20 @@ function buildHbarSection(elId,items,maxVal){
 
 function getFlotteData(){
   return {
-    velec:{nb:parseFloat(document.getElementById('fl25-velec')?.value)||30},
+    velec:{nb:parseFloat(document.getElementById('fl25-velec')?.value)||171},
     voiture:{nb:parseFloat(document.getElementById('fl25-voiture')?.value)||18},
-    vmusc:{nb:parseFloat(document.getElementById('fl25-vmusc')?.value)||20},
-    sc125:{nb:parseFloat(document.getElementById('fl25-sc125')?.value)||3},
-    sc50:{nb:parseFloat(document.getElementById('fl25-sc50')?.value)||6},
-    venf:{nb:parseFloat(document.getElementById('fl25-venf')?.value)||10}
+    vmusc:{nb:parseFloat(document.getElementById('fl25-vmusc')?.value)||107},
+    sc125:{nb:parseFloat(document.getElementById('fl25-sc125')?.value)||1},
+    sc50:{nb:parseFloat(document.getElementById('fl25-sc50')?.value)||5},
+    venf:{nb:parseFloat(document.getElementById('fl25-venf')?.value)||23}
   };
 }
 
 function buildCaParVehBars(elId){
   const g=(id,def)=>parseFloat(document.getElementById(id)?.value)||def||0;
   const items=[
-    {label:'V\u00E9los \u00C9lec.',  val:g('fl25-velec',30)?Math.round(224753/g('fl25-velec',30)):0,  color:'#2563eb'},
-    {label:'Voitures',     val:g('fl25-voiture',18)?Math.round(129333/g('fl25-voiture',18)):0,color:'#059669'},
+    {label:'V\u00E9los \u00C9lec.',  val:g('fl25-velec',30)?Math.round(223688/g('fl25-velec',30)):0,  color:'#2563eb'},
+    {label:'Voitures',     val:g('fl25-voiture',18)?Math.round(129214/g('fl25-voiture',18)):0,color:'#059669'},
     {label:'V\u00E9los Musc.',  val:g('fl25-vmusc',20)?Math.round(54158/g('fl25-vmusc',20)):0,   color:'#b45309'},
     {label:'Scoot. 50',    val:g('fl25-sc50',6)?Math.round(18016/g('fl25-sc50',6)):0,        color:'#d97706'},
     {label:'V\u00E9los Enf.',   val:g('fl25-venf',10)?Math.round(6207/g('fl25-venf',10)):0,       color:'#dc2626'},
@@ -1312,36 +1312,130 @@ function applyData(data){
 
 // ======= TAB 5 : VUE MOIS v2 =======
 // Donn\u00E9es 2025 par semaine ISO (date d\u00E9but)
-const W25 = {"2025-W10":{"nb":5,"ca":561.95,"cats":{"V\u00E9los \u00C9lec.":{"nb":3,"ca":296.0},"Voitures":{"nb":2,"ca":265.95}}},"2025-W11":{"nb":3,"ca":310.0,"cats":{"V\u00E9los \u00C9lec.":{"nb":1,"ca":125.0},"Voitures":{"nb":2,"ca":185.0}}},"2025-W12":{"nb":5,"ca":748.2,"cats":{"V\u00E9los Musc.":{"nb":1,"ca":46.95},"V\u00E9los \u00C9lec.":{"nb":3,"ca":336.25},"Voitures":{"nb":1,"ca":365.0}}},"2025-W13":{"nb":18,"ca":1151.15,"cats":{"V\u00E9los Musc.":{"nb":3,"ca":137.95},"V\u00E9los \u00C9lec.":{"nb":12,"ca":788.2},"Voitures":{"nb":2,"ca":170.0},"Scoot.50":{"nb":1,"ca":55.0}}}};
+const W25 = {
+  '2025-W09':{nb:1,ca:1840.0,cats:{'Voitures':{nb:1,ca:1840.0}}},
+  '2025-W12':{nb:11,ca:864.0,cats:{'V\u00E9los \u00C9lec.':{nb:10,ca:799.0},'V\u00E9los Enf.':{nb:1,ca:65.0}}},
+  '2025-W13':{nb:18,ca:1151.15,cats:{'V\u00E9los Musc.':{nb:3,ca:137.95},'V\u00E9los \u00C9lec.':{nb:12,ca:788.2},'Voitures':{nb:2,ca:170.0},'Scoot.50':{nb:1,ca:55.0}}},
+  '2025-W14':{nb:29,ca:2867.0,cats:{'Scoot.50':{nb:5,ca:264.0},'V\u00E9los Musc.':{nb:5,ca:165.2},'V\u00E9los \u00C9lec.':{nb:8,ca:735.2},'Voitures':{nb:7,ca:1364.75},'Scoot.125':{nb:2,ca:138.75}}},
+  '2025-W15':{nb:69,ca:5981.9,cats:{'V\u00E9los Musc.':{nb:8,ca:771.35},'V\u00E9los \u00C9lec.':{nb:35,ca:2749.35},'Voitures':{nb:21,ca:1704.0},'V\u00E9los Enf.':{nb:1,ca:61.2},'Scoot.50':{nb:4,ca:696.0}}},
+  '2025-W16':{nb:79,ca:7368.7,cats:{'Voitures':{nb:25,ca:2458.05},'V\u00E9los \u00C9lec.':{nb:33,ca:3484.25},'Scoot.50':{nb:6,ca:441.0},'V\u00E9los Musc.':{nb:14,ca:922.4},'Scoot.125':{nb:1,ca:63.0}}},
+  '2025-W17':{nb:71,ca:5203.05,cats:{'V\u00E9los Musc.':{nb:13,ca:1040.8},'Scoot.50':{nb:5,ca:508.5},'V\u00E9los \u00C9lec.':{nb:30,ca:1883.6},'Voitures':{nb:19,ca:1314.3},'Scoot.125':{nb:2,ca:135.0}}},
+  '2025-W18':{nb:148,ca:14300.45,cats:{'Voitures':{nb:34,ca:3670.7},'V\u00E9los \u00C9lec.':{nb:78,ca:7925.05},'V\u00E9los Musc.':{nb:23,ca:1602.1},'Scoot.50':{nb:8,ca:816.5},'V\u00E9los Enf.':{nb:2,ca:84.6},'Scoot.125':{nb:2,ca:135.0}}},
+  '2025-W19':{nb:147,ca:12869.35,cats:{'V\u00E9los \u00C9lec.':{nb:77,ca:7346.25},'Scoot.50':{nb:7,ca:404.0},'Voitures':{nb:38,ca:2746.7},'V\u00E9los Musc.':{nb:17,ca:1385.5},'Scoot.125':{nb:3,ca:238.5},'V\u00E9los Enf.':{nb:1,ca:142.2}}},
+  '2025-W20':{nb:83,ca:6688.35,cats:{'Voitures':{nb:29,ca:2312.5},'Scoot.50':{nb:5,ca:602.5},'V\u00E9los \u00C9lec.':{nb:41,ca:2930.46},'V\u00E9los Musc.':{nb:6,ca:752.89},'Scoot.125':{nb:1,ca:75.0}}},
+  '2025-W21':{nb:76,ca:6032.35,cats:{'V\u00E9los Musc.':{nb:8,ca:343.25},'V\u00E9los \u00C9lec.':{nb:41,ca:3716.0},'Scoot.125':{nb:2,ca:184.5},'Scoot.50':{nb:4,ca:306.0},'Voitures':{nb:20,ca:1258.5}}},
+  '2025-W22':{nb:180,ca:18195.9,cats:{'Voitures':{nb:46,ca:3777.0},'V\u00E9los Musc.':{nb:29,ca:1803.05},'V\u00E9los \u00C9lec.':{nb:93,ca:11357.7},'Scoot.50':{nb:5,ca:614.0},'Scoot.125':{nb:2,ca:131.5},'V\u00E9los Enf.':{nb:1,ca:200.0}}},
+  '2025-W23':{nb:128,ca:11831.55,cats:{'Voitures':{nb:30,ca:3315.0},'V\u00E9los Musc.':{nb:14,ca:757.8},'V\u00E9los \u00C9lec.':{nb:77,ca:7108.75},'Scoot.50':{nb:3,ca:328.0},'Scoot.125':{nb:1,ca:75.0}}},
+  '2025-W24':{nb:119,ca:8809.1,cats:{'Voitures':{nb:50,ca:3994.5},'V\u00E9los \u00C9lec.':{nb:48,ca:3301.5},'Scoot.50':{nb:6,ca:562.5},'V\u00E9los Musc.':{nb:10,ca:584.2},'Scoot.125':{nb:2,ca:135.0}}},
+  '2025-W25':{nb:143,ca:11438.96,cats:{'V\u00E9los \u00C9lec.':{nb:69,ca:5940.16},'Voitures':{nb:47,ca:3976.5},'V\u00E9los Musc.':{nb:16,ca:864.3},'Scoot.125':{nb:4,ca:268.5},'Scoot.50':{nb:6,ca:356.5}}},
+  '2025-W26':{nb:115,ca:9700.65,cats:{'V\u00E9los \u00C9lec.':{nb:58,ca:5119.4},'V\u00E9los Musc.':{nb:17,ca:1100.0},'Voitures':{nb:29,ca:2627.25},'Scoot.125':{nb:3,ca:237.5},'Scoot.50':{nb:7,ca:486.0},'V\u00E9los Enf.':{nb:1,ca:130.5}}},
+  '2025-W27':{nb:126,ca:12174.05,cats:{'V\u00E9los \u00C9lec.':{nb:68,ca:6752.35},'Voitures':{nb:24,ca:2723.6},'Scoot.50':{nb:9,ca:882.0},'V\u00E9los Musc.':{nb:18,ca:1020.6},'Scoot.125':{nb:3,ca:215.0},'V\u00E9los Enf.':{nb:1,ca:41.4}}},
+  '2025-W28':{nb:196,ca:19641.65,cats:{'Voitures':{nb:45,ca:5629.85},'V\u00E9los Musc.':{nb:51,ca:3509.5},'V\u00E9los \u00C9lec.':{nb:87,ca:9134.8},'Scoot.50':{nb:6,ca:762.5},'Scoot.125':{nb:4,ca:432.0},'V\u00E9los Enf.':{nb:2,ca:84.0}}},
+  '2025-W29':{nb:169,ca:19450.5,cats:{'V\u00E9los \u00C9lec.':{nb:79,ca:11157.3},'Voitures':{nb:45,ca:4194.5},'V\u00E9los Musc.':{nb:32,ca:2662.8},'V\u00E9los Enf.':{nb:2,ca:304.0},'Scoot.50':{nb:3,ca:245.0},'Scoot.125':{nb:4,ca:465.0}}},
+  '2025-W30':{nb:208,ca:26511.4,cats:{'V\u00E9los \u00C9lec.':{nb:92,ca:13143.9},'V\u00E9los Musc.':{nb:47,ca:3502.8},'Scoot.50':{nb:9,ca:642.0},'Voitures':{nb:48,ca:6489.3},'Scoot.125':{nb:4,ca:480.0},'V\u00E9los Enf.':{nb:4,ca:475.0}}},
+  '2025-W31':{nb:264,ca:30739.2,cats:{'Voitures':{nb:54,ca:6694.0},'V\u00E9los Musc.':{nb:60,ca:4232.2},'V\u00E9los \u00C9lec.':{nb:116,ca:15314.5},'Scoot.50':{nb:10,ca:1310.0},'Scoot.125':{nb:5,ca:640.0},'V\u00E9los Enf.':{nb:5,ca:958.1}}},
+  '2025-W32':{nb:348,ca:41885.45,cats:{'Voitures':{nb:59,ca:9251.5},'V\u00E9los \u00C9lec.':{nb:172,ca:21399.0},'V\u00E9los Musc.':{nb:86,ca:8125.25},'V\u00E9los Enf.':{nb:7,ca:890.0},'Scoot.50':{nb:12,ca:1048.5},'Scoot.125':{nb:1,ca:80.0}}},
+  '2025-W33':{nb:430,ca:49021.8,cats:{'V\u00E9los \u00C9lec.':{nb:214,ca:28276.3},'V\u00E9los Musc.':{nb:98,ca:6573.6},'Scoot.50':{nb:16,ca:1426.0},'Voitures':{nb:70,ca:8797.4},'V\u00E9los Enf.':{nb:14,ca:2178.1}}},
+  '2025-W34':{nb:341,ca:39614.9,cats:{'V\u00E9los \u00C9lec.':{nb:163,ca:21054.0},'V\u00E9los Musc.':{nb:81,ca:5720.9},'Voitures':{nb:67,ca:9197.5},'Scoot.50':{nb:12,ca:1357.0},'V\u00E9los Enf.':{nb:7,ca:593.0}}},
+  '2025-W35':{nb:179,ca:18473.9,cats:{'V\u00E9los \u00C9lec.':{nb:93,ca:9465.3},'V\u00E9los Musc.':{nb:31,ca:2436.5},'Voitures':{nb:46,ca:5511.6},'Scoot.50':{nb:7,ca:716.5}}},
+  '2025-W36':{nb:161,ca:14405.24,cats:{'Voitures':{nb:60,ca:5797.26},'V\u00E9los \u00C9lec.':{nb:73,ca:6488.78},'V\u00E9los Musc.':{nb:19,ca:1126.2},'Scoot.50':{nb:6,ca:600.0},'Scoot.125':{nb:2,ca:135.0}}},
+  '2025-W37':{nb:98,ca:8166.2,cats:{'Voitures':{nb:53,ca:4962.0},'V\u00E9los \u00C9lec.':{nb:36,ca:2309.2},'Scoot.50':{nb:4,ca:510.0},'V\u00E9los Musc.':{nb:5,ca:385.0}}},
+  '2025-W38':{nb:127,ca:9531.94,cats:{'V\u00E9los \u00C9lec.':{nb:56,ca:3756.34},'V\u00E9los Musc.':{nb:11,ca:534.4},'Voitures':{nb:49,ca:4425.5},'Scoot.50':{nb:3,ca:154.0},'Scoot.125':{nb:3,ca:217.5}}},
+  '2025-W39':{nb:114,ca:8603.0,cats:{'V\u00E9los Musc.':{nb:12,ca:572.5},'Voitures':{nb:53,ca:4620.0},'V\u00E9los \u00C9lec.':{nb:41,ca:2908.7},'Scoot.50':{nb:5,ca:351.5}}},
+  '2025-W40':{nb:78,ca:6198.93,cats:{'V\u00E9los \u00C9lec.':{nb:29,ca:1663.93},'Voitures':{nb:40,ca:3903.5},'Scoot.50':{nb:6,ca:497.5},'V\u00E9los Musc.':{nb:3,ca:134.0}}},
+  '2025-W41':{nb:66,ca:5514.84,cats:{'V\u00E9los Musc.':{nb:6,ca:303.6},'V\u00E9los \u00C9lec.':{nb:26,ca:2537.44},'Scoot.50':{nb:3,ca:223.0},'Voitures':{nb:30,ca:2359.0}}},
+  '2025-W42':{nb:48,ca:4832.97,cats:{'Voitures':{nb:21,ca:2699.7},'Scoot.125':{nb:1,ca:58.5},'Scoot.50':{nb:2,ca:247.5},'V\u00E9los Musc.':{nb:3,ca:631.6},'V\u00E9los \u00C9lec.':{nb:21,ca:1195.67}}},
+  '2025-W43':{nb:58,ca:5358.84,cats:{'Scoot.50':{nb:4,ca:521.0},'Voitures':{nb:31,ca:3349.25},'V\u00E9los Musc.':{nb:4,ca:146.0},'V\u00E9los \u00C9lec.':{nb:16,ca:1112.19},'Scoot.125':{nb:1,ca:99.0}}},
+  '2025-W44':{nb:44,ca:3529.46,cats:{'Voitures':{nb:26,ca:2079.0},'V\u00E9los Musc.':{nb:4,ca:310.19},'V\u00E9los \u00C9lec.':{nb:11,ca:833.78},'Scoot.50':{nb:1,ca:81.0}}},
+};
 
 // Donn\u00E9es 2025 par mois (date d\u00E9but) - KPIs mois
 const M25 = {
-  3:  {nb:31, ca:3910, panier:126, dur:62, wdaynb:[1,0,5,8,3,8,6], wdayca:[55,0,288,472,233,2377,485], lead:{same:26,j13:5,j47:0,sem:0,mois:0}, nbJours:31},
-  4:  {nb:285,ca:24643,panier:86, dur:26, nbJours:30},
-  5:  {nb:589,ca:54126,panier:92, dur:24, nbJours:31},
-  6:  {nb:531,ca:43815,panier:83, dur:22, nbJours:30},
-  7:  {nb:836,ca:92432,panier:111,dur:20, nbJours:31},
-  8:  {nb:1406,ca:163729,panier:116,dur:18,nbJours:31},
-  9:  {nb:521,ca:42085,panier:81, dur:22, nbJours:30},
-  10: {nb:273,ca:24056,panier:88, dur:26, nbJours:31}
+  3:{nb:31,ca:3910.15,panier:126,dur:62,nbJours:31,wdaynb:[1,0,5,8,3,8,6],wdayca:[55,0,288,472,233,2377,485],lead:{same:26,j13:5,j47:0,sem:0,mois:0}},
+  4:{nb:285,ca:24642.65,panier:86,dur:22,nbJours:30,wdaynb:[38,46,52,36,20,57,36],wdayca:[4064,4599,4077,2470,1529,4424,3480],lead:{same:171,j13:67,j47:20,sem:24,mois:3}},
+  5:{nb:589,ca:54126.4,panier:92,dur:23,nbJours:31,wdaynb:[29,47,66,127,196,102,22],wdayca:[2185,3002,5138,15935,17635,7961,2270],lead:{same:313,j13:116,j47:44,sem:78,mois:38}},
+  6:{nb:531,ca:43815.16,panier:83,dur:23,nbJours:30,wdaynb:[82,93,64,52,49,93,98],wdayca:[6227,6394,4867,3390,5656,8335,8947],lead:{same:314,j13:118,j47:35,sem:40,mois:24}},
+  7:{nb:836,ca:92432.1,panier:111,dur:34,nbJours:31,wdaynb:[98,127,141,160,107,129,74],wdayca:[10855,11835,12659,15620,9879,19999,11585],lead:{same:427,j13:225,j47:58,sem:83,mois:43}},
+  8:{nb:1406,ca:163728.85,panier:116,dur:31,nbJours:31,wdaynb:[232,223,178,145,232,203,193],wdayca:[30158,25174,19698,14959,22161,25284,26296],lead:{same:546,j13:480,j47:162,sem:139,mois:79}},
+  9:{nb:521,ca:42085.24,panier:81,dur:23,nbJours:30,wdaynb:[52,82,72,83,85,108,39],wdayca:[4768,6504,6173,5303,6641,8637,4059],lead:{same:295,j13:125,j47:46,sem:36,mois:19}},
+  10:{nb:273,ca:24056.18,panier:88,dur:23,nbJours:31,wdaynb:[23,55,57,20,35,51,32],wdayca:[3035,3393,4461,2209,3835,5032,2091],lead:{same:146,j13:67,j47:32,sem:24,mois:4}},
 };
 
 // Cat\u00E9gories mars 2025 (date d\u00E9but)
-const CATS25_M3 = [
-  {n:'V\u00E9los \u00C9lec.',nb:22,ca:1587,panier:72,flotte:30,jours:14.4,dispo:930},
-  {n:'Voitures',nb:4,ca:2065,panier:516,flotte:18,jours:63.2,dispo:558},
-  {n:'V\u00E9los Musc.',nb:3,ca:138,panier:46,flotte:20,jours:1.5,dispo:620},
-  {n:'Scoot. 50',nb:1,ca:55,panier:55,flotte:6,jours:0.3,dispo:186},
-  {n:'V\u00E9los Enf.',nb:1,ca:65,panier:65,flotte:10,jours:1.0,dispo:310}
-];
+const CATS25 = {
+  3:[
+    {n:'Voitures',nb:4,ca:2065.0,panier:516,flotte:18,jours:63.2,dispo:558,taux:11.33,ca_unit:114.7},
+    {n:'V\u00E9los \u00C9lec.',nb:22,ca:1587.2,panier:72,flotte:171,jours:14.4,dispo:5301,taux:0.27,ca_unit:9.3},
+    {n:'V\u00E9los Musc.',nb:3,ca:137.95,panier:46,flotte:107,jours:1.5,dispo:3317,taux:0.05,ca_unit:1.3},
+    {n:'V\u00E9los Enf.',nb:1,ca:65.0,panier:65,flotte:23,jours:1.0,dispo:713,taux:0.14,ca_unit:2.8},
+    {n:'Scoot.50',nb:1,ca:55.0,panier:55,flotte:5,jours:0.3,dispo:155,taux:0.19,ca_unit:11.0},
+  ],
+  4:[
+    {n:'V\u00E9los \u00C9lec.',nb:124,ca:10429.2,panier:84,flotte:171,jours:88.2,dispo:5130,taux:1.72,ca_unit:61.0},
+    {n:'Voitures',nb:82,ca:7992.6,panier:97,flotte:18,jours:105.8,dispo:540,taux:19.59,ca_unit:444.0},
+    {n:'V\u00E9los Musc.',nb:42,ca:2966.35,panier:71,flotte:107,jours:50.5,dispo:3210,taux:1.57,ca_unit:27.7},
+    {n:'Scoot.50',nb:24,ca:2154.0,panier:90,flotte:5,jours:12.4,dispo:150,taux:8.27,ca_unit:430.8},
+    {n:'Scoot.125',nb:6,ca:404.25,panier:67,flotte:1,jours:1.6,dispo:30,taux:5.33,ca_unit:404.2},
+    {n:'V\u00E9los Enf.',nb:2,ca:109.8,panier:55,flotte:23,jours:0.4,dispo:690,taux:0.06,ca_unit:4.8},
+  ],
+  5:[
+    {n:'V\u00E9los \u00C9lec.',nb:311,ca:31540.66,panier:101,flotte:171,jours:300.7,dispo:5301,taux:5.67,ca_unit:184.4},
+    {n:'Voitures',nb:151,ca:12105.9,panier:80,flotte:18,jours:112.2,dispo:558,taux:20.11,ca_unit:672.6},
+    {n:'V\u00E9los Musc.',nb:80,ca:5748.19,panier:72,flotte:107,jours:104.8,dispo:3317,taux:3.16,ca_unit:53.7},
+    {n:'Scoot.50',nb:25,ca:2498.5,panier:100,flotte:5,jours:17.2,dispo:155,taux:11.1,ca_unit:499.7},
+    {n:'Scoot.125',nb:9,ca:697.0,panier:77,flotte:1,jours:2.9,dispo:31,taux:9.35,ca_unit:697.0},
+    {n:'V\u00E9los Enf.',nb:3,ca:378.2,panier:126,flotte:23,jours:8.3,dispo:713,taux:1.16,ca_unit:16.4},
+  ],
+  6:[
+    {n:'V\u00E9los \u00C9lec.',nb:265,ca:22498.31,panier:85,flotte:171,jours:227.1,dispo:5130,taux:4.43,ca_unit:131.6},
+    {n:'Voitures',nb:163,ca:14509.25,panier:89,flotte:18,jours:158.4,dispo:540,taux:29.33,ca_unit:806.1},
+    {n:'V\u00E9los Musc.',nb:61,ca:3511.5,panier:58,flotte:107,jours:100.8,dispo:3210,taux:3.14,ca_unit:32.8},
+    {n:'Scoot.50',nb:23,ca:1796.0,panier:78,flotte:5,jours:10.8,dispo:150,taux:7.2,ca_unit:359.2},
+    {n:'Scoot.125',nb:10,ca:716.0,panier:72,flotte:1,jours:3.0,dispo:30,taux:10.0,ca_unit:716.0},
+    {n:'V\u00E9los Enf.',nb:1,ca:130.5,panier:130,flotte:23,jours:4.0,dispo:690,taux:0.58,ca_unit:5.7},
+  ],
+  7:[
+    {n:'V\u00E9los \u00C9lec.',nb:382,ca:47068.65,panier:123,flotte:171,jours:610.0,dispo:5301,taux:11.51,ca_unit:275.3},
+    {n:'Voitures',nb:193,ca:22540.25,panier:117,flotte:18,jours:154.2,dispo:558,taux:27.63,ca_unit:1252.2},
+    {n:'V\u00E9los Musc.',nb:179,ca:12811.7,panier:72,flotte:107,jours:284.0,dispo:3317,taux:8.56,ca_unit:119.7},
+    {n:'Scoot.50',nb:32,ca:3188.5,panier:100,flotte:5,jours:25.1,dispo:155,taux:16.19,ca_unit:637.7},
+    {n:'Scoot.125',nb:18,ca:1832.0,panier:102,flotte:1,jours:10.7,dispo:31,taux:34.52,ca_unit:1832.0},
+    {n:'V\u00E9los Enf.',nb:11,ca:1039.4,panier:94,flotte:23,jours:13.6,dispo:713,taux:1.91,ca_unit:45.2},
+  ],
+  8:[
+    {n:'V\u00E9los \u00C9lec.',nb:690,ca:87758.3,panier:127,flotte:171,jours:981.2,dispo:5301,taux:18.51,ca_unit:513.2},
+    {n:'Voitures',nb:263,ca:35806.0,panier:136,flotte:18,jours:245.3,dispo:558,taux:43.96,ca_unit:1989.2},
+    {n:'V\u00E9los Musc.',nb:322,ca:24839.25,panier:77,flotte:107,jours:426.6,dispo:3317,taux:12.86,ca_unit:232.1},
+    {n:'Scoot.50',nb:51,ca:5138.0,panier:101,flotte:5,jours:28.7,dispo:155,taux:18.52,ca_unit:1027.6},
+    {n:'V\u00E9los Enf.',nb:31,ca:4484.2,panier:145,flotte:23,jours:66.6,dispo:713,taux:9.34,ca_unit:195.0},
+    {n:'Scoot.125',nb:3,ca:480.0,panier:160,flotte:1,jours:3.7,dispo:31,taux:11.94,ca_unit:480.0},
+  ],
+  9:[
+    {n:'Voitures',nb:225,ca:20637.26,panier:92,flotte:18,jours:241.1,dispo:540,taux:44.65,ca_unit:1146.5},
+    {n:'V\u00E9los \u00C9lec.',nb:216,ca:15901.38,panier:74,flotte:171,jours:150.3,dispo:5130,taux:2.93,ca_unit:93.0},
+    {n:'V\u00E9los Musc.',nb:47,ca:2618.1,panier:56,flotte:107,jours:68.1,dispo:3210,taux:2.12,ca_unit:24.5},
+    {n:'Scoot.50',nb:19,ca:1723.5,panier:91,flotte:5,jours:12.6,dispo:150,taux:8.4,ca_unit:344.7},
+    {n:'Scoot.125',nb:5,ca:352.5,panier:70,flotte:1,jours:1.4,dispo:30,taux:4.67,ca_unit:352.5},
+  ],
+  10:[
+    {n:'Voitures',nb:138,ca:13557.95,panier:98,flotte:18,jours:149.6,dispo:558,taux:26.81,ca_unit:753.2},
+    {n:'V\u00E9los \u00C9lec.',nb:93,ca:6904.65,panier:74,flotte:171,jours:68.1,dispo:5301,taux:1.28,ca_unit:40.4},
+    {n:'V\u00E9los Musc.',nb:20,ca:1525.39,panier:76,flotte:107,jours:25.9,dispo:3317,taux:0.78,ca_unit:14.3},
+    {n:'Scoot.50',nb:15,ca:1462.0,panier:97,flotte:5,jours:16.1,dispo:155,taux:10.39,ca_unit:292.4},
+    {n:'Scoot.125',nb:2,ca:157.5,panier:79,flotte:1,jours:0.2,dispo:31,taux:0.65,ca_unit:157.5},
+  ],
+};
 
 // Donn\u00E9es 2025 PROD par mois cr\u00E9ation
 const PROD25 = {
-  3:{nb:68,ca:9407,panier:138,cats:{'V\u00E9los \u00C9lec.':42,'Voitures':16,'V\u00E9los Musc.':5,'Scoot.50':3,'Scoot.125':1,'V\u00E9los Enf.':1},
-     mois_debut:{3:30,4:11,5:13,6:2,7:4,8:6,9:2},
-     lead:{same:25,j13:8,j47:1,sem:5,mois:29},
-     canal:{online:35,agence:32,autre:1}},
-  4:{nb:0,ca:0,panier:0,cats:{},mois_debut:{},lead:{},canal:{}},
+  3:{nb:68,ca:9407.0,panier:138,online_pct:51,cats:{'V\u00E9los \u00C9lec.':{nb:42,ca:6958.3},'Voitures':{nb:16,ca:1768.0},'V\u00E9los Musc.':{nb:5,ca:371.95},'Scoot.50':{nb:3,ca:180.0},'V\u00E9los Enf.':{nb:1,ca:65.0},'Scoot.125':{nb:1,ca:63.75}},mois_debut:{3:30,4:11,5:13,6:2,7:4,8:6,9:2},lead:{same:25,j13:8,j47:1,sem:5,mois:29},canal:{Online:35,Agence:32,Autre:1}},
+  4:{nb:381,ca:38557.55,panier:101,online_pct:38,cats:{'V\u00E9los \u00C9lec.':{nb:171,ca:18727.75},'Voitures':{nb:119,ca:11550.1},'V\u00E9los Musc.':{nb:47,ca:3693.85},'Scoot.50':{nb:27,ca:2601.0},'V\u00E9los Enf.':{nb:3,ca:366.3},'Scoot.125':{nb:5,ca:340.5}},mois_debut:{4:271,5:80,6:15,7:10,8:5},lead:{same:169,j13:72,j47:27,sem:61,mois:52},canal:{Online:145,Agence:228,Autre:8}},
+  5:{nb:555,ca:50895.75,panier:92,online_pct:32,cats:{'V\u00E9los \u00C9lec.':{nb:292,ca:28124.91},'Voitures':{nb:141,ca:12395.9},'V\u00E9los Musc.':{nb:78,ca:5286.29},'Scoot.50':{nb:22,ca:2221.5},'V\u00E9los Enf.':{nb:5,ca:1363.8},'Scoot.125':{nb:9,ca:697.0}},mois_debut:{4:1,5:493,6:37,7:12,8:12},lead:{same:314,j13:112,j47:37,sem:61,mois:31},canal:{Online:179,Agence:370,Autre:6}},
+  6:{nb:571,ca:55764.76,panier:98,online_pct:32,cats:{'V\u00E9los \u00C9lec.':{nb:284,ca:28955.01},'Voitures':{nb:152,ca:15647.75},'V\u00E9los Musc.':{nb:84,ca:6200.0},'Scoot.50':{nb:24,ca:2096.0},'Scoot.125':{nb:11,ca:876.0},'V\u00E9los Enf.':{nb:3,ca:749.6}},mois_debut:{6:477,7:60,8:33,9:1},lead:{same:314,j13:120,j47:35,sem:52,mois:50},canal:{Online:180,Agence:381,Autre:10}},
+  7:{nb:894,ca:99792.2,panier:112,online_pct:43,cats:{'V\u00E9los \u00C9lec.':{nb:404,ca:48422.35},'Voitures':{nb:216,ca:26191.25},'V\u00E9los Musc.':{nb:188,ca:14863.7},'Scoot.50':{nb:33,ca:3388.5},'Scoot.125':{nb:16,ca:1592.0},'V\u00E9los Enf.':{nb:13,ca:1312.4}},mois_debut:{3:1,4:1,7:749,8:133,9:8,10:2},lead:{same:429,j13:236,j47:69,sem:128,mois:32},canal:{Online:380,Agence:496,Autre:18}},
+  8:{nb:1254,ca:133842.51,panier:107,online_pct:42,cats:{'V\u00E9los \u00C9lec.':{nb:605,ca:69801.0},'Voitures':{nb:250,ca:32426.46},'V\u00E9los Musc.':{nb:287,ca:19628.15},'Scoot.50':{nb:48,ca:4673.0},'V\u00E9los Enf.':{nb:24,ca:2350.0},'Scoot.125':{nb:3,ca:480.0}},mois_debut:{8:1216,9:37,10:1},lead:{same:546,j13:464,j47:159,sem:76,mois:9},canal:{Online:529,Agence:662,Autre:63}},
+  9:{nb:504,ca:39344.18,panier:78,online_pct:31,cats:{'Voitures':{nb:213,ca:18508.3},'V\u00E9los \u00C9lec.':{nb:216,ca:16079.28},'V\u00E9los Musc.':{nb:44,ca:2416.1},'Scoot.50':{nb:18,ca:1393.5},'Scoot.125':{nb:5,ca:352.5}},mois_debut:{9:473,10:29,11:2},lead:{same:295,j13:131,j47:49,sem:26,mois:3},canal:{Online:156,Agence:342,Autre:6}},
+  10:{nb:244,ca:20319.58,panier:83,online_pct:29,cats:{'Voitures':{nb:113,ca:10525.45},'V\u00E9los \u00C9lec.':{nb:90,ca:6243.55},'V\u00E9los Musc.':{nb:19,ca:1482.39},'Scoot.50':{nb:15,ca:1462.0},'Scoot.125':{nb:2,ca:157.5}},mois_debut:{10:241,11:3},lead:{same:146,j13:62,j47:20,sem:16,mois:0},canal:{Online:70,Agence:172,Autre:2}},
 };
 
 const MONTHLY26 = {};
@@ -1477,14 +1571,14 @@ function updatePart2(mo){
     {label:'2026 global',data:[7,6,1,8,65],backgroundColor:'rgba(37,99,235,.8)',borderRadius:3}
   ]},{plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
 
-  const cN=CATS25_M3.map(c=>c.n);
+  const cN=CATS25[mo].map(c=>c.n);
   mkChart('c-m5-panier','bar',{labels:cN,datasets:[
-    {label:'2025',data:CATS25_M3.map(c=>c.panier),backgroundColor:'rgba(148,163,184,.65)',borderRadius:4},
+    {label:'2025',data:CATS25[mo].map(c=>c.panier),backgroundColor:'rgba(148,163,184,.65)',borderRadius:4},
     {label:'2026 global',data:cN.map(c=>({'\u00C9lec':237,'Voitures':120,'Musc':147}[Object.keys({'\u00C9lec':0,'Voitures':0,'Musc':0}).find(k=>c.includes(k))]||0)),backgroundColor:COLS,borderRadius:4}
   ]},{plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'\u20AC'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
 
   mkChart('c-m5-cacat','bar',{labels:cN,datasets:[
-    {label:'2025',data:CATS25_M3.map(c=>c.ca),backgroundColor:'rgba(148,163,184,.65)',borderRadius:4},
+    {label:'2025',data:CATS25[mo].map(c=>c.ca),backgroundColor:'rgba(148,163,184,.65)',borderRadius:4},
     {label:'2026 global',data:[9957,3474,1912,0,80],backgroundColor:COLS,borderRadius:4}
   ]},{plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(1)+'k\u20AC'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
 
@@ -1506,7 +1600,7 @@ function updatePart2(mo){
 
   // CA par unit\u00E9
   if(CHARTS['m5-caveh-wrap']){CHARTS['m5-caveh-wrap'].destroy();delete CHARTS['m5-caveh-wrap'];}
-  const caveh=CATS25_M3.map((c,i)=>({label:c.n,val:Math.round(c.ca/c.flotte),color:COLS[i]})).sort((a,b)=>b.val-a.val);
+  const caveh=CATS25[mo].map((c,i)=>({label:c.n,val:Math.round(c.ca/c.flotte),color:COLS[i]})).sort((a,b)=>b.val-a.val);
   buildHbarSection('m5-caveh-wrap',caveh,caveh[0]?.val||1);
 }
 
