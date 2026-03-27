@@ -218,6 +218,7 @@ document.addEventListener('DOMContentLoaded',function(){
 <!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TABS NAV &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 <div class="tabs-nav">
   <button class="tab-btn active" onclick="showTab(0)">Vue d'ensemble</button>
+  <button class="tab-btn" onclick="showTab(5)">Vue Mois (Mars)</button>
   <button class="tab-btn" onclick="showTab(1)">Saisonnalit&eacute;</button>
   <button class="tab-btn" onclick="showTab(2)">Cat&eacute;gories</button>
   <button class="tab-btn" onclick="showTab(3)">Rentabilit&eacute; flotte</button>
@@ -516,7 +517,6 @@ document.addEventListener('DOMContentLoaded',function(){
       <div style="margin-top:12px">
         <div class="proj-slider-row"><label>Taux de remplissage vs 2025 (%)</label><input type="range" id="sl-fill" min="60" max="120" value="95" step="1" oninput="computeProj()"><span class="sv" id="sl-fill-v">95 %</span></div>
         <div class="proj-slider-row"><label>Hausse du panier moyen (%)</label><input type="range" id="sl-panier" min="-20" max="40" value="5" step="1" oninput="computeProj()"><span class="sv" id="sl-panier-v">+5 %</span></div>
-        <div class="proj-slider-row"><label>Mois de saison</label><input type="range" id="sl-mois" min="5" max="9" value="7" step="1" oninput="computeProj()"><span class="sv" id="sl-mois-v">7 mois</span></div>
       </div>
       <div class="proj-result" id="proj-result">
         <div class="pr-row"><span>CA s&eacute;curis&eacute; aujourd'hui</span><span class="pr-val">15 174 &#8364;</span></div>
@@ -576,6 +576,125 @@ document.addEventListener('DOMContentLoaded',function(){
   </div>
 </div>
 
+
+<!-- TA B 5 : VUE MOIS -->
+<div class="tab-content" id="tab5">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;margin-top:4px">
+    <div class="s-title" style="flex:1;margin:0">Vue Mois &mdash; <span id="mois-label">Mars</span> 2025 vs 2026 pipeline</div>
+    <select id="mois-select" onchange="changeMoisVue()" style="padding:5px 10px;border:1px solid #e2e8f0;border-radius:6px;font-size:11px;font-weight:600">
+      <option value="3" selected>Mars</option>
+      <option value="4">Avril</option>
+      <option value="5">Mai</option>
+      <option value="6">Juin</option>
+      <option value="7">Juillet</option>
+      <option value="8">Ao&ucirc;t</option>
+      <option value="9">Septembre</option>
+      <option value="10">Octobre</option>
+    </select>
+  </div>
+
+  <!-- KPI STRIP MOIS -->
+  <div class="kpi-row" style="grid-template-columns:repeat(5,1fr)">
+    <div class="kpi k1"><div class="kl">CA TTC mois</div><div class="v25" id="m-ca25">3 910 &euro;</div>
+      <div class="kpi-vals"><span class="v26" id="m-ca26">870 &euro;</span><span class="ev fl" id="m-ev-ca">Pipeline</span></div>
+      <div class="ks">R&eacute;alis&eacute; 2025 vs pipeline 2026</div></div>
+    <div class="kpi k2"><div class="kl">R&eacute;servations mois</div><div class="v25" id="m-nb25">31</div>
+      <div class="kpi-vals"><span class="v26" id="m-nb26">12</span><span class="ev up" id="m-ev-nb">+165 %</span></div>
+      <div class="ks">2025 vs 2026</div></div>
+    <div class="kpi k3"><div class="kl">Panier moyen mois</div><div class="v25" id="m-p25">126 &euro;</div>
+      <div class="kpi-vals"><span class="v26" id="m-p26">185 &euro;</span><span class="ev up" id="m-ev-p">+87 %</span></div>
+      <div class="ks">2025 vs 2026</div></div>
+    <div class="kpi k4"><div class="kl">Dur&eacute;e moyenne mois</div><div class="v25" id="m-dur25">62 h</div>
+      <div class="kpi-vals"><span class="v26" id="m-dur26">54 h</span><span class="ev fl" id="m-ev-dur">&mdash;</span></div>
+      <div class="ks">2025 vs 2026</div></div>
+    <div class="kpi k5"><div class="kl">Taux sold&eacute; mois</div><div class="v25">99,1 %</div>
+      <div class="kpi-vals"><span class="v26" id="m-solde26">91,5 %</span><span class="ev dn">&darr; -7,6 pts</span></div>
+      <div class="ks">2025 saison vs 2026</div></div>
+  </div>
+
+  <!-- CA + LEAD TIME -->
+  <div class="g2">
+    <div class="card">
+      <h3>CA TTC &mdash; 2025 r&eacute;alis&eacute; vs 2026 pipeline</h3>
+      <div class="sub">Par semaine du mois</div>
+      <div class="leg"><div class="leg-item"><div class="leg-dot" style="background:#94a3b8"></div>2025</div><div class="leg-item"><div class="leg-dot" style="background:#2563eb"></div>2026</div></div>
+      <div class="ch-wrap h200"><canvas id="c-m-ca"></canvas></div>
+    </div>
+    <div class="card">
+      <h3>Lead time &mdash; 2025 vs 2026</h3>
+      <div class="sub">D&eacute;lai entre cr&eacute;ation et d&eacute;but de location</div>
+      <div class="leg"><div class="leg-item"><div class="leg-dot" style="background:#94a3b8"></div>2025</div><div class="leg-item"><div class="leg-dot" style="background:#2563eb"></div>2026</div></div>
+      <div class="ch-wrap h200"><canvas id="c-m-lead"></canvas></div>
+      <div class="ibox"><p id="m-lead-insight">En mars 2025, 84 % r&eacute;servent le jour m&ecirc;me ou J+3. En 2026, 63 r&eacute;servations sont &agrave; plus d'1 mois &mdash; changement structurel majeur.</p></div>
+    </div>
+  </div>
+
+  <!-- TABLEAUX CATEGORIES -->
+  <div class="s-title">Cat&eacute;gories &mdash; mois en cours 2025 vs 2026</div>
+  <div class="g2">
+    <div class="card">
+      <h3>Tableau comparatif d&eacute;taill&eacute;</h3>
+      <div class="sub">R&eacute;alis&eacute; 2025 vs pipeline 2026 sur la m&ecirc;me p&eacute;riode</div>
+      <table class="tbl" id="m-cat-tbl">
+        <thead><tr><th>Cat&eacute;gorie</th><th>Nb 25</th><th>CA 25</th><th>Panier 25</th><th>Nb 26</th><th>CA 26</th><th>Panier 26</th><th>&Delta;</th></tr></thead>
+        <tbody id="m-cat-body">
+          <tr><td>&#9889; V&eacute;los &Eacute;lec.</td><td>22</td><td>1 587 &euro;</td><td>72 &euro;</td><td class="n" id="m26-velec-nb">&mdash;</td><td class="n" id="m26-velec-ca">&mdash;</td><td class="n" id="m26-velec-p">&mdash;</td><td><span class="tag tgr" id="m26-velec-d">&mdash;</span></td></tr>
+          <tr><td>&#128665; Voitures</td><td>4</td><td>2 065 &euro;</td><td>516 &euro;</td><td class="n" id="m26-voit-nb">&mdash;</td><td class="n" id="m26-voit-ca">&mdash;</td><td class="n" id="m26-voit-p">&mdash;</td><td><span class="tag tgr" id="m26-voit-d">&mdash;</span></td></tr>
+          <tr><td>&#128690; V&eacute;los Musc.</td><td>3</td><td>138 &euro;</td><td>46 &euro;</td><td class="n" id="m26-vmusc-nb">&mdash;</td><td class="n" id="m26-vmusc-ca">&mdash;</td><td class="n" id="m26-vmusc-p">&mdash;</td><td><span class="tag tgr" id="m26-vmusc-d">&mdash;</span></td></tr>
+          <tr><td>&#128675; Scoot.</td><td>1</td><td>55 &euro;</td><td>55 &euro;</td><td class="n" id="m26-sc-nb">&mdash;</td><td class="n" id="m26-sc-ca">&mdash;</td><td class="n" id="m26-sc-p">&mdash;</td><td><span class="tag tgr" id="m26-sc-d">&mdash;</span></td></tr>
+          <tr><td>&#128119; V&eacute;los Enf.</td><td>1</td><td>65 &euro;</td><td>65 &euro;</td><td class="n" id="m26-venf-nb">&mdash;</td><td class="n" id="m26-venf-ca">&mdash;</td><td class="n" id="m26-venf-p">&mdash;</td><td><span class="tag tgr" id="m26-venf-d">&mdash;</span></td></tr>
+        </tbody>
+      </table>
+      <div class="ibox" style="margin-top:8px"><p>Les donn&eacute;es 2026 se mettent &agrave; jour apr&egrave;s synchronisation.</p></div>
+    </div>
+    <div class="card">
+      <h3>Panier moyen par cat&eacute;gorie</h3>
+      <div class="sub">2025 r&eacute;alis&eacute; vs 2026 pipeline &mdash; mois en cours</div>
+      <div class="leg"><div class="leg-item"><div class="leg-dot" style="background:#94a3b8"></div>2025</div><div class="leg-item"><div class="leg-dot" style="background:#2563eb"></div>2026</div></div>
+      <div class="ch-wrap h240"><canvas id="c-m-panier"></canvas></div>
+    </div>
+  </div>
+
+  <!-- TAUX DE SORTIE + CA PAR CATEGORIE -->
+  <div class="g2">
+    <div class="card">
+      <h3>Taux de sortie par cat&eacute;gorie &mdash; 2025</h3>
+      <div class="sub">Jours lou&eacute;s / (nb produits &times; nb jours mois) &mdash; Mars = 31 jours</div>
+      <table class="tbl">
+        <thead><tr><th>Cat&eacute;gorie</th><th>Jours lou&eacute;s</th><th>Flotte</th><th>Dispo totale</th><th>Taux sortie</th></tr></thead>
+        <tbody>
+          <tr><td>V&eacute;los &Eacute;lec.</td><td>14,4 j</td><td>30</td><td>930 j</td><td><span class="tag tb">1,5 %</span></td></tr>
+          <tr><td>Voitures</td><td>63,2 j</td><td>18</td><td>558 j</td><td><span class="tag tg">11,3 %</span></td></tr>
+          <tr><td>V&eacute;los Musc.</td><td>1,5 j</td><td>20</td><td>620 j</td><td><span class="tag tgr">0,2 %</span></td></tr>
+          <tr><td>Scoot. 50</td><td>0,3 j</td><td>6</td><td>186 j</td><td><span class="tag tgr">0,2 %</span></td></tr>
+          <tr><td>V&eacute;los Enf.</td><td>1,0 j</td><td>10</td><td>310 j</td><td><span class="tag tgr">0,3 %</span></td></tr>
+        </tbody>
+      </table>
+      <div class="abox"><p>Mars = basse saison. Les voitures (11 %) tirent la flotte. V&eacute;los &eacute;lec. &agrave; 1,5 % ‚Äî flotte sous-utilis&eacute;e hors saison.</p></div>
+    </div>
+    <div class="card">
+      <h3>CA g&eacute;n&eacute;r&eacute; par cat&eacute;gorie</h3>
+      <div class="sub">2025 vs 2026 &mdash; mois en cours</div>
+      <div class="ch-wrap h240"><canvas id="c-m-ca-cat"></canvas></div>
+    </div>
+  </div>
+
+  <!-- CA PAR UNITE + HEATMAP -->
+  <div class="g2">
+    <div class="card">
+      <h3>CA g&eacute;n&eacute;r&eacute; par unit&eacute; &mdash; mois</h3>
+      <div class="sub">CA total cat&eacute;gorie / nb v&eacute;hicules flotte</div>
+      <div id="m-caveh-bars" style="margin-top:10px"></div>
+      <div class="ibox" style="margin-top:8px"><p>En mars, les voitures g&eacute;n&egrave;rent 115 &euro;/v&eacute;hicule ‚Äî basse saison mais locations longues dur&eacute;e. V&eacute;los &eacute;lec. : 53 &euro;/v&eacute;lo.</p></div>
+    </div>
+    <div class="card">
+      <h3>Intensit&eacute; &mdash; Jour de semaine &mdash; mars 2025</h3>
+      <div class="sub">Nb r&eacute;servations par jour de la semaine</div>
+      <div class="ch-wrap h240"><canvas id="c-m-heatmap"></canvas></div>
+    </div>
+  </div>
+</div>
+
 <footer>Dashboard Happy-ON &#183; Groupe CAREXO &#183; Belle-&Icirc;le-en-Mer &#183; dashboard.groupe-carexo.fr<br>2025 : saison compl&egrave;te 4 478 resa &#183; 449 980 &#8364; CA TTC &#183; 2026 : pipeline &agrave; date &#183; Mis &agrave; jour automatiquement via Google Sheets</footer>
 
 <script>
@@ -625,6 +744,7 @@ function initChartsForTab(i){
   else if(i===2){initTab2();}
   else if(i===3){computeFlotte();}
   else if(i===4){initTab4();computeProj();}
+  else if(i===5){initTab5();}
 }
 
 // \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 CHART DEFAULTS \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
@@ -977,11 +1097,10 @@ function initTab4(){
 function computeProj(){
   const fill=+document.getElementById('sl-fill')?.value||95;
   const panierHausse=+document.getElementById('sl-panier')?.value||5;
-  const mois=+document.getElementById('sl-mois')?.value||7;
+  const mois=7;
   const el=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
   el('sl-fill-v',fill+' %');
   el('sl-panier-v',(panierHausse>0?'+':'')+panierHausse+' %');
-  el('sl-mois-v',mois+' mois');
   const baseNb=4478;const baseCa=449980;const baseP=98.9;
   const projNb=Math.round(baseNb*(fill/100));
   const projP=Math.round(baseP*(1+panierHausse/100)*100)/100;
@@ -1044,6 +1163,7 @@ async function syncData(silent=false){
 
 function applyData(data){
   if(!data) return;
+  window._lastSyncData = data; // Sauvegarde pour Vue Mois
   const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
   // KPIs header
   if(data.nb!==undefined){ set('hdr-resa26',fmt(data.nb)); set('kpi-nb',fmt(data.nb)); }
@@ -1095,6 +1215,127 @@ function applyData(data){
     alertBoxes.forEach(el=>{if(el.textContent.includes('non sold\u00E9s'))el.textContent=`${data.nonSoldes} dossiers non sold\u00E9s`;});
   }
 }
+</script>
+
+<script>
+
+// ======= TAB 5 : VUE MOIS =======
+// Donn\u00E9es Mars 2025 extraites du CSV
+const D25_MARS = {
+  total: {nb:31, ca:3910, panier:126, dur:62},
+  cats: {
+    'V\u00E9los \u00C9lec.': {nb:22, ca:1587, panier:72, dur:15.7, flotte:30},
+    'Voitures':    {nb:4,  ca:2065, panier:516, dur:379.5, flotte:18},
+    'V\u00E9los Musc.': {nb:3,  ca:138,  panier:46,  dur:12.0, flotte:20},
+    'Scoot.50':    {nb:1,  ca:55,   panier:55,  dur:7.0, flotte:6},
+    'V\u00E9los Enf.':  {nb:1,  ca:65,   panier:65,  dur:24.0, flotte:10}
+  },
+  wday: [1,0,5,8,3,8,6], // Lun=0...Dim=6 \u2192 nb resa
+  wdayca: [55,0,288,472,233,2377,485],
+  lead: {same:26, j13:5, j47:0, sem:0, mois:0}
+};
+
+// Donn\u00E9es Mars 2026 (depuis Apps Script)
+const D26_MARS = {
+  total: {nb:12, ca:870, panier:72},
+  cats: {'V\u00E9los \u00C9lec.':{nb:6,ca:480,panier:80},'Voitures':{nb:4,ca:320,panier:80},'V\u00E9los Musc.':{nb:2,ca:70,panier:35}},
+  lead: {same:1, j13:0, j47:0, sem:2, mois:9}
+};
+
+function changeMoisVue(){
+  const mo = parseInt(document.getElementById('mois-select').value);
+  const names = {3:'Mars',4:'Avril',5:'Mai',6:'Juin',7:'Juillet',8:'Ao\u00FBt',9:'Septembre',10:'Octobre'};
+  const el = document.getElementById('mois-label');
+  if(el) el.textContent = names[mo]||'Mars';
+  // Pour l'instant seules les donn\u00E9es mars sont disponibles
+  if(mo !== 3){
+    const st = document.getElementById('m-lead-insight');
+    if(st) st.textContent = 'Donn\u00E9es d\u00E9taill\u00E9es disponibles pour Mars. Autres mois en cours de chargement.';
+  }
+}
+
+function initTab5(){
+  if(CHARTS['c-m-ca']) return;
+  const CATS = ['V\u00E9los \u00C9lec.','Voitures','V\u00E9los Musc.','Scoot.50','V\u00E9los Enf.'];
+  const COLS = ['#2563eb','#059669','#b45309','#d97706','#dc2626'];
+
+  // Graphique CA semaine (simplifi\u00E9 - donn\u00E9es par jour de semaine)
+  const wL = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+  mkChart('c-m-ca','bar',{
+    labels: wL,
+    datasets:[
+      {label:'2025',data:D25_MARS.wdayca,backgroundColor:'rgba(148,163,184,.6)',borderRadius:4},
+      {label:'2026',data:[0,0,0,0,0,0,0],backgroundColor:'rgba(37,99,235,.8)',borderRadius:4}
+    ]
+  },{scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'\u20AC'},grid:{color:gridColor}},x:{grid:{display:false}}}});
+
+  // Graphique Lead time
+  const lL = ['M\u00EAme jour','J+1-3','J+4-7','1-2 sem.','1 mois+'];
+  mkChart('c-m-lead','bar',{
+    labels:lL,
+    datasets:[
+      {label:'2025',data:[D25_MARS.lead.same,D25_MARS.lead.j13,D25_MARS.lead.j47,D25_MARS.lead.sem,D25_MARS.lead.mois],backgroundColor:'rgba(148,163,184,.6)',borderRadius:3},
+      {label:'2026',data:[D26_MARS.lead.same,D26_MARS.lead.j13,D26_MARS.lead.j47,D26_MARS.lead.sem,D26_MARS.lead.mois],backgroundColor:'rgba(37,99,235,.8)',borderRadius:3}
+    ]
+  },{plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},
+    scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
+
+  // Panier moyen par cat\u00E9gorie
+  const panierData25 = CATS.map(c => D25_MARS.cats[c]?.panier||0);
+  const panierData26 = CATS.map(c => D26_MARS.cats[c]?.panier||0);
+  mkChart('c-m-panier','bar',{
+    labels:CATS,
+    datasets:[
+      {label:'2025',data:panierData25,backgroundColor:'rgba(148,163,184,.65)',borderRadius:4},
+      {label:'2026',data:panierData26,backgroundColor:COLS.map(c=>c),borderRadius:4}
+    ]
+  },{plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},
+    scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'\u20AC'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
+
+  // CA par cat\u00E9gorie
+  const caData25 = CATS.map(c => D25_MARS.cats[c]?.ca||0);
+  const caData26 = CATS.map(c => D26_MARS.cats[c]?.ca||0);
+  mkChart('c-m-ca-cat','bar',{
+    labels:CATS,
+    datasets:[
+      {label:'2025',data:caData25,backgroundColor:'rgba(148,163,184,.65)',borderRadius:4},
+      {label:'2026',data:caData26,backgroundColor:COLS,borderRadius:4}
+    ]
+  },{plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},
+    scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(1)+'k\u20AC'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
+
+  // CA par unit\u00E9 (barres horizontales)
+  const cavehItems = CATS.map((c,i)=>{
+    const d = D25_MARS.cats[c];
+    return {label:c, val:d?Math.round(d.ca/d.flotte):0, color:COLS[i]};
+  }).sort((a,b)=>b.val-a.val);
+  buildHbarSection('m-caveh-bars', cavehItems, cavehItems[0]?.val||1);
+
+  // Heatmap jour de semaine (bar chart)
+  mkChart('c-m-heatmap','bar',{
+    labels:wL,
+    datasets:[{
+      data:D25_MARS.wday,
+      backgroundColor:D25_MARS.wday.map(v=>v>=8?'rgba(220,38,38,.8)':v>=5?'rgba(217,119,6,.8)':'rgba(37,99,235,.6)'),
+      borderRadius:4
+    }]
+  },{plugins:{legend:{display:false}},
+    scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{display:false}}}});
+
+  // Mise \u00E0 jour KPIs depuis donn\u00E9es live si disponibles
+  if(window._lastSyncData && window._lastSyncData.monthly && window._lastSyncData.monthly[3]){
+    const m26 = window._lastSyncData.monthly[3];
+    const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+    set('m-ca26', fmt(Math.round(m26.ca))+' \u20AC');
+    set('m-nb26', fmt(m26.nb));
+    if(m26.nb) set('m-p26', Math.round(m26.ca/m26.nb)+' \u20AC');
+    const evCA = document.getElementById('m-ev-ca');
+    const evNb = document.getElementById('m-ev-nb');
+    if(evCA){const p=Math.round((m26.ca-D25_MARS.total.ca)/D25_MARS.total.ca*100);evCA.textContent=(p>0?'\u25B2 +':'\u25BC ')+Math.abs(p)+'%';evCA.className='ev '+(p>=0?'up':'dn');}
+    if(evNb){const p=Math.round((m26.nb-D25_MARS.total.nb)/D25_MARS.total.nb*100);evNb.textContent=(p>0?'\u25B2 +':'\u25BC ')+Math.abs(p)+'%';evNb.className='ev '+(p>=0?'up':'dn');}
+  }
+}
+
 </script>
 
 <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
