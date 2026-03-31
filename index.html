@@ -698,15 +698,9 @@ document.addEventListener('DOMContentLoaded',function(){
         <div class="sub">Jours lou&eacute;s / (flotte &times; jours mois)</div>
         <table class="tbl">
           <thead><tr><th>Cat&eacute;gorie</th><th>Jours lou&eacute;s</th><th>Flotte</th><th>Dispo</th><th>Taux 25</th></tr></thead>
-          <tbody>
-            <tr><td>V&eacute;los &Eacute;lec.</td><td id="m5-ts-velec-j">14,4 j</td><td>171</td><td id="m5-ts-velec-d">5 301 j</td><td><span class="tag tgr" id="m5-ts-velec-t">0,27 %</span></td></tr>
-            <tr><td>Voitures</td><td id="m5-ts-voit-j">63,2 j</td><td>18</td><td id="m5-ts-voit-d">558 j</td><td><span class="tag tg" id="m5-ts-voit-t">11,3 %</span></td></tr>
-            <tr><td>V&eacute;los Musc.</td><td>1,5 j</td><td>20</td><td>620 j</td><td><span class="tag tgr">0,2 %</span></td></tr>
-            <tr><td>Scoot. 50</td><td>0,3 j</td><td>6</td><td>186 j</td><td><span class="tag tgr">0,2 %</span></td></tr>
-            <tr><td>V&eacute;los Enf.</td><td>1,0 j</td><td>10</td><td>310 j</td><td><span class="tag tgr">0,3 %</span></td></tr>
-          </tbody>
+          <tbody id="m5-ts-tbody"></tbody>
         </table>
-        <div class="abox" style="margin-top:6px"><p>Mars = basse saison. Voitures seules d&eacute;passent 10 % (locations longue dur&eacute;e).</p></div></div>
+        <div class="abox" style="margin-top:6px"><p id="m5-ts-insight">Mars = basse saison. Voitures seules dÃ©passent 10 % (locations longue durÃ©e).</p></div></div>
       <div class="card"><h3>CA par cat&eacute;gorie &mdash; 2025 vs 2026</h3>
         <div class="sub">Mois s&eacute;lectionn&eacute;</div>
         <div class="ch-wrap h220"><canvas id="c-m5-cacat"></canvas></div></div>
@@ -1579,26 +1573,38 @@ function updatePart2(mo){
     {label:'2026 global',data:cN.map(c=>({'\u00C9lec':237,'Voitures':120,'Musc':147}[Object.keys({'\u00C9lec':0,'Voitures':0,'Musc':0}).find(k=>c.includes(k))]||0)),backgroundColor:COLS,borderRadius:4}
   ]},{plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'\u20AC'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
 
+  // FIX: CA cat 2026 dynamique depuis cats globales (pas hardcode)
+  const allCats26 = window._lastSyncData?.cats || {};
+  const ca26byName = {};
+  Object.entries(allCats26).forEach(([k,v]) => { ca26byName[CAT_DECODE[k]||k] = v; });
+  const ca26bars = cN.map(n => ca26byName[n]?.ca || 0);
   mkChart('c-m5-cacat','bar',{labels:cN,datasets:[
     {label:'2025',data:CATS25[mo].map(c=>c.ca),backgroundColor:'rgba(148,163,184,.65)',borderRadius:4},
-    {label:'2026 global',data:[9957,3474,1912,0,80],backgroundColor:COLS,borderRadius:4}
+    {label:'2026 global',data:ca26bars,backgroundColor:COLS,borderRadius:4}
   ]},{plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(1)+'k\u20AC'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
 
   mkChart('c-m5-heat','bar',{labels:wL,datasets:[{data:d25.wdaynb||[0,0,0,0,0,0,0],backgroundColor:(d25.wdaynb||[]).map(v=>v>=8?'rgba(220,38,38,.8)':v>=5?'rgba(217,119,6,.8)':'rgba(37,99,235,.6)'),borderRadius:4}]},{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{display:false}}}});
 
-  // Cats tableau 2026
-  const catMap={'\u00C9lec.':'velec','Voitures':'voit','Musc.':'vmusc','Scoot.':'sc','Enf.':'venf'};
-  Object.entries(catMap).forEach(([k,id])=>{
-    const found=Object.keys(MONTHLY26[3]?.cats||{}).find(c=>c.includes(k.replace('.','')))||null;
-    // utilise global cats si pas de monthly par mois
-  });
-  [['V\u00E9los \u00C9lec.','velec'],['Voitures','voit'],['V\u00E9los Musc.','vmusc'],['Scoot.','sc'],['V\u00E9los Enf.','venf']].forEach(([cn,id])=>{
-    const allCats26=window._lastSyncData?.cats||{};
-    const found=Object.entries(allCats26).find(([k])=>k.includes(cn.split(' ').pop().replace('.','')))||null;
-    const d=found?found[1]:null;
+  // FIX: Tableau cat\u00E9gories 2026 - utilise mo pas 3 hardcoded
+  cN.forEach((cn,i)=>{
+    const id=['velec','voit','vmusc','sc','venf'][i]||'x';
+    const d = ca26byName[cn] || null;
     const s2=(sid,v)=>{const e=document.getElementById(sid);if(e)e.textContent=v;};
     if(d){s2('m5c-'+id+'-nb',d.nb);s2('m5c-'+id+'-ca',fmt(Math.round(d.ca))+' \u20AC');s2('m5c-'+id+'-p',d.nb?Math.round(d.ca/d.nb)+' \u20AC':'\u2014');}
   });
+
+  // FIX: Tableau taux de sortie - dynamique selon CATS25[mo]
+  const nj = d25.nbJours || 31;
+  const tbody_ts = document.getElementById('m5-ts-tbody');
+  if(tbody_ts){
+    tbody_ts.innerHTML = CATS25[mo].map(c=>{
+      const tagCls = c.taux >= 10 ? 'tg' : 'tgr';
+      return '<tr><td>'+c.n+'</td><td>'+c.jours+' j</td><td>'+c.flotte+'</td><td>'+(c.flotte*nj).toLocaleString('fr')+' j</td><td><span class="tag '+tagCls+'">'+c.taux+' %</span></td></tr>';
+    }).join('');
+  }
+  const ins = document.getElementById('m5-ts-insight');
+  const topCat = CATS25[mo].reduce((a,b)=>b.taux>a.taux?b:a,{taux:0,n:''});
+  if(ins) ins.textContent = NOMS_MOIS[mo]+' : '+topCat.n+' = taux de sortie le plus \u00E9lev\u00E9 ('+topCat.taux+' %).';
 
   // CA par unit\u00E9
   if(CHARTS['m5-caveh-wrap']){CHARTS['m5-caveh-wrap'].destroy();delete CHARTS['m5-caveh-wrap'];}
