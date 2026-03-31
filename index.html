@@ -679,14 +679,8 @@ document.addEventListener('DOMContentLoaded',function(){
       <div class="card"><h3>Cat&eacute;gories &mdash; tableau comparatif</h3>
         <div class="sub" id="m5-cat-sub">Mois s&eacute;lectionn&eacute; &mdash; 2025 r&eacute;alis&eacute; vs 2026 m&ecirc;me mois</div>
         <table class="tbl">
-          <thead><tr><th>Cat&eacute;gorie</th><th>Nb 25</th><th>CA 25</th><th>Pan. 25</th><th>Nb 26</th><th>CA 26</th><th>Pan. 26</th></tr></thead>
-          <tbody>
-            <tr><td>&#9889; V&eacute;los &Eacute;lec.</td><td id="m5c-velec-nb25">&mdash;</td><td id="m5c-velec-ca25">&mdash;</td><td id="m5c-velec-p25">&mdash;</td><td id="m5c-velec-nb" class="n">&mdash;</td><td id="m5c-velec-ca" class="n">&mdash;</td><td id="m5c-velec-p" class="n">&mdash;</td></tr>
-            <tr><td>&#128665; Voitures</td><td id="m5c-voit-nb25">&mdash;</td><td id="m5c-voit-ca25">&mdash;</td><td id="m5c-voit-p25">&mdash;</td><td id="m5c-voit-nb" class="n">&mdash;</td><td id="m5c-voit-ca" class="n">&mdash;</td><td id="m5c-voit-p" class="n">&mdash;</td></tr>
-            <tr><td>&#128690; V&eacute;los Musc.</td><td id="m5c-vmusc-nb25">&mdash;</td><td id="m5c-vmusc-ca25">&mdash;</td><td id="m5c-vmusc-p25">&mdash;</td><td id="m5c-vmusc-nb" class="n">&mdash;</td><td id="m5c-vmusc-ca" class="n">&mdash;</td><td id="m5c-vmusc-p" class="n">&mdash;</td></tr>
-            <tr><td>&#128675; Scoot.</td><td id="m5c-sc-nb25">&mdash;</td><td id="m5c-sc-ca25">&mdash;</td><td id="m5c-sc-p25">&mdash;</td><td id="m5c-sc-nb" class="n">&mdash;</td><td id="m5c-sc-ca" class="n">&mdash;</td><td id="m5c-sc-p" class="n">&mdash;</td></tr>
-            <tr><td>&#128119; V&eacute;los Enf.</td><td id="m5c-venf-nb25">&mdash;</td><td id="m5c-venf-ca25">&mdash;</td><td id="m5c-venf-p25">&mdash;</td><td id="m5c-venf-nb" class="n">&mdash;</td><td id="m5c-venf-ca" class="n">&mdash;</td><td id="m5c-venf-p" class="n">&mdash;</td></tr>
-          </tbody>
+          <thead><tr><th>Cat&eacute;gorie</th><th>Nb 25</th><th>CA 25</th><th>Pan. 25</th><th>Nb 26</th><th>CA 26</th><th>Pan. 26</th><th>&Delta;</th></tr></thead>
+          <tbody id="m5-cat-tbody"><tr><td colspan="8" style="text-align:center;color:#94a3b8;padding:10px;font-style:italic">Chargement...</td></tr></tbody>
         </table></div>
       <div class="card"><h3>Panier moyen par cat&eacute;gorie</h3>
         <div class="sub" id="m5-panier-sub">2025 vs 2026 m&ecirc;me mois</div>
@@ -1592,43 +1586,57 @@ function updatePart2(mo){
 
   mkChart('c-m5-heat','bar',{labels:wL,datasets:[{data:d25.wdaynb||[0,0,0,0,0,0,0],backgroundColor:(d25.wdaynb||[]).map(v=>v>=8?'rgba(220,38,38,.8)':v>=5?'rgba(217,119,6,.8)':'rgba(37,99,235,.6)'),borderRadius:4}]},{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{display:false}}}});
 
-  // Tableau catÃ©gories 2026 - mois Ã©quivalent
+  // ââ TABLEAU COMPARATIF CATÃGORIES âââââââââââââââââââââââââââââââââââââââââ
+  // IcÃ´nes par nom de catÃ©gorie
+  const CAT_ICON = {
+    'V\u00E9los \u00C9lec.':'\u26A1','Voitures':'\uD83D\uDE99',
+    'V\u00E9los Musc.':'\uD83D\uDEB2','V\u00E9los Enf.':'\uD83D\uDC77',
+    'Scoot.50':'\uD83D\uDEF5','Scoot.125':'\uD83D\uDEF5','Access.':'\uD83C\uDF92'
+  };
   const hasMoCats = Object.keys(allCats26mo).length > 0;
-  const subLabel = hasMoCats ? '2025 vs 2026 '+NOMS_MOIS[mo]+' (mÃªme mois)' : '2025 vs 2026 saison (mois non synchro)';
   const sub1 = document.getElementById('m5-cat-sub');
   const sub2 = document.getElementById('m5-panier-sub');
-  if(sub1) sub1.textContent = 'Mois sÃ©lectionnÃ© â 2025 rÃ©alisÃ© vs 2026 '+NOMS_MOIS[mo];
-  if(sub2) sub2.textContent = subLabel;
+  if(sub1) sub1.textContent = hasMoCats
+    ? NOMS_MOIS[mo]+' 2025 r\u00E9alis\u00E9 vs '+NOMS_MOIS[mo]+' 2026'
+    : NOMS_MOIS[mo]+' 2025 r\u00E9alis\u00E9 vs 2026 (saison)';
+  if(sub2) sub2.textContent = hasMoCats
+    ? '2025 vs 2026 \u2014 '+NOMS_MOIS[mo]
+    : '2025 vs 2026 saison globale';
 
-  // Mapping nom â id (par nom, pas par position)
-  const nameToId = {
-    'V\u00E9los \u00C9lec.':'velec', 'Voitures':'voit',
-    'V\u00E9los Musc.':'vmusc', 'V\u00E9los Enf.':'venf',
-    'Scoot.50':'sc', 'Scoot.125':'sc'
-  };
-  const s2=(sid,v)=>{const e=document.getElementById(sid);if(e)e.textContent=v;};
+  // Union des catÃ©gories 2025 + 2026 pour ce mois
+  const cats25Map = {};
+  CATS25[mo].forEach(c => { cats25Map[c.n] = c; });
+  const allCatNames = [...new Set([
+    ...CATS25[mo].map(c=>c.n),
+    ...Object.keys(ca26byName)
+  ])].filter(n => cats25Map[n] || ca26byName[n]);
 
-  // Remettre toutes les cellules Ã  â par dÃ©faut
-  ['velec','voit','vmusc','sc','venf'].forEach(id=>{
-    ['nb25','ca25','p25','nb','ca','p'].forEach(f=>s2('m5c-'+id+'-'+f,'\u2014'));
-  });
-
-  // Remplir 2025 depuis CATS25[mo]
-  CATS25[mo].forEach(c=>{
-    const id = nameToId[c.n];
-    if(!id) return;
-    s2('m5c-'+id+'-nb25', c.nb||'\u2014');
-    s2('m5c-'+id+'-ca25', c.ca ? fmt(Math.round(c.ca))+' \u20AC' : '\u2014');
-    s2('m5c-'+id+'-p25',  c.panier ? c.panier+' \u20AC' : '\u2014');
-  });
-
-  // Remplir 2026 depuis ca26byName
-  cN.forEach(cn=>{
-    const id = nameToId[cn];
-    if(!id) return;
-    const d = ca26byName[cn] || null;
-    if(d){s2('m5c-'+id+'-nb',d.nb);s2('m5c-'+id+'-ca',fmt(Math.round(d.ca))+' \u20AC');s2('m5c-'+id+'-p',d.nb?Math.round(d.ca/d.nb)+' \u20AC':'\u2014');}
-  });
+  const tbody_cat = document.getElementById('m5-cat-tbody');
+  if(tbody_cat){
+    tbody_cat.innerHTML = allCatNames.map(cn=>{
+      const c25 = cats25Map[cn];
+      const c26 = ca26byName[cn];
+      const nb25 = c25?.nb||0, ca25v = c25?.ca||0, p25v = c25?.panier||0;
+      const nb26 = c26?.nb||0, ca26v = c26?.ca||0, p26v = nb26?Math.round(ca26v/nb26):0;
+      const icon = CAT_ICON[cn]||'\uD83D\uDCCB';
+      // Delta CA
+      let delta = '';
+      if(ca25v && ca26v){
+        const pct = Math.round((ca26v-ca25v)/ca25v*100);
+        delta = '<span style="font-size:10px;font-weight:600;color:'+(pct>=0?'#166534':'#dc2626')+'">'+(pct>=0?'\u25B2 +':'\u25BC ')+Math.abs(pct)+' %</span>';
+      } else { delta = '<span style="color:#94a3b8">\u2014</span>'; }
+      return '<tr>'
+        +'<td>'+icon+' '+cn+'</td>'
+        +'<td>'+(nb25||'\u2014')+'</td>'
+        +'<td>'+(ca25v?fmt(Math.round(ca25v))+' \u20AC':'\u2014')+'</td>'
+        +'<td>'+(p25v?p25v+' \u20AC':'\u2014')+'</td>'
+        +'<td class="n">'+(nb26||'\u2014')+'</td>'
+        +'<td class="n">'+(ca26v?fmt(Math.round(ca26v))+' \u20AC':'\u2014')+'</td>'
+        +'<td class="n">'+(p26v?p26v+' \u20AC':'\u2014')+'</td>'
+        +'<td>'+delta+'</td>'
+        +'</tr>';
+    }).join('');
+  }
 
   // FIX: Tableau taux de sortie - dynamique selon CATS25[mo]
   const nj = d25.nbJours || 31;
