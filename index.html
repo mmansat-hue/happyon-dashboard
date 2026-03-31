@@ -1600,19 +1600,34 @@ function updatePart2(mo){
   if(sub1) sub1.textContent = 'Mois sÃ©lectionnÃ© â 2025 rÃ©alisÃ© vs 2026 '+NOMS_MOIS[mo];
   if(sub2) sub2.textContent = subLabel;
 
-  // Mapper CATS25[mo] par code pour retrouver les lignes
-  const catIdMap = {'velec':'VÃ©los Ãlec.','voit':'Voitures','vmusc':'VÃ©los Musc.','sc':'Scoot.','venf':'VÃ©los Enf.'};
+  // Mapping nom â id (par nom, pas par position)
+  const nameToId = {
+    'V\u00E9los \u00C9lec.':'velec', 'Voitures':'voit',
+    'V\u00E9los Musc.':'vmusc', 'V\u00E9los Enf.':'venf',
+    'Scoot.50':'sc', 'Scoot.125':'sc'
+  };
   const s2=(sid,v)=>{const e=document.getElementById(sid);if(e)e.textContent=v;};
-  cN.forEach((cn,i)=>{
-    const id=['velec','voit','vmusc','sc','venf'][i]||'x';
-    // DonnÃ©es 2025
-    const c25 = CATS25[mo].find(c=>c.n===cn) || null;
-    if(c25){s2('m5c-'+id+'-nb25',c25.nb||'â');s2('m5c-'+id+'-ca25',c25.ca?fmt(Math.round(c25.ca))+' â¬':'â');s2('m5c-'+id+'-p25',c25.panier?c25.panier+' â¬':'â');}
-    else {s2('m5c-'+id+'-nb25','â');s2('m5c-'+id+'-ca25','â');s2('m5c-'+id+'-p25','â');}
-    // DonnÃ©es 2026
+
+  // Remettre toutes les cellules Ã  â par dÃ©faut
+  ['velec','voit','vmusc','sc','venf'].forEach(id=>{
+    ['nb25','ca25','p25','nb','ca','p'].forEach(f=>s2('m5c-'+id+'-'+f,'\u2014'));
+  });
+
+  // Remplir 2025 depuis CATS25[mo]
+  CATS25[mo].forEach(c=>{
+    const id = nameToId[c.n];
+    if(!id) return;
+    s2('m5c-'+id+'-nb25', c.nb||'\u2014');
+    s2('m5c-'+id+'-ca25', c.ca ? fmt(Math.round(c.ca))+' \u20AC' : '\u2014');
+    s2('m5c-'+id+'-p25',  c.panier ? c.panier+' \u20AC' : '\u2014');
+  });
+
+  // Remplir 2026 depuis ca26byName
+  cN.forEach(cn=>{
+    const id = nameToId[cn];
+    if(!id) return;
     const d = ca26byName[cn] || null;
     if(d){s2('m5c-'+id+'-nb',d.nb);s2('m5c-'+id+'-ca',fmt(Math.round(d.ca))+' \u20AC');s2('m5c-'+id+'-p',d.nb?Math.round(d.ca/d.nb)+' \u20AC':'\u2014');}
-    else {s2('m5c-'+id+'-nb','\u2014');s2('m5c-'+id+'-ca','\u2014');s2('m5c-'+id+'-p','\u2014');}
   });
 
   // FIX: Tableau taux de sortie - dynamique selon CATS25[mo]
