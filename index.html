@@ -677,19 +677,19 @@ document.addEventListener('DOMContentLoaded',function(){
 
     <div class="g2">
       <div class="card"><h3>Cat&eacute;gories &mdash; tableau comparatif</h3>
-        <div class="sub">Mois s&eacute;lectionn&eacute; &mdash; 2025 r&eacute;alis&eacute; vs 2026 pipeline</div>
+        <div class="sub" id="m5-cat-sub">Mois s&eacute;lectionn&eacute; &mdash; 2025 r&eacute;alis&eacute; vs 2026 m&ecirc;me mois</div>
         <table class="tbl">
           <thead><tr><th>Cat&eacute;gorie</th><th>Nb 25</th><th>CA 25</th><th>Pan. 25</th><th>Nb 26</th><th>CA 26</th><th>Pan. 26</th></tr></thead>
           <tbody>
-            <tr><td>&#9889; V&eacute;los &Eacute;lec.</td><td>22</td><td>1 587 &euro;</td><td>72 &euro;</td><td id="m5c-velec-nb" class="n">&mdash;</td><td id="m5c-velec-ca" class="n">&mdash;</td><td id="m5c-velec-p" class="n">&mdash;</td></tr>
-            <tr><td>&#128665; Voitures</td><td>4</td><td>2 065 &euro;</td><td>516 &euro;</td><td id="m5c-voit-nb" class="n">&mdash;</td><td id="m5c-voit-ca" class="n">&mdash;</td><td id="m5c-voit-p" class="n">&mdash;</td></tr>
-            <tr><td>&#128690; V&eacute;los Musc.</td><td>3</td><td>138 &euro;</td><td>46 &euro;</td><td id="m5c-vmusc-nb" class="n">&mdash;</td><td id="m5c-vmusc-ca" class="n">&mdash;</td><td id="m5c-vmusc-p" class="n">&mdash;</td></tr>
-            <tr><td>&#128675; Scoot.</td><td>1</td><td>55 &euro;</td><td>55 &euro;</td><td id="m5c-sc-nb" class="n">&mdash;</td><td id="m5c-sc-ca" class="n">&mdash;</td><td id="m5c-sc-p" class="n">&mdash;</td></tr>
-            <tr><td>&#128119; V&eacute;los Enf.</td><td>1</td><td>65 &euro;</td><td>65 &euro;</td><td id="m5c-venf-nb" class="n">&mdash;</td><td id="m5c-venf-ca" class="n">&mdash;</td><td id="m5c-venf-p" class="n">&mdash;</td></tr>
+            <tr><td>&#9889; V&eacute;los &Eacute;lec.</td><td id="m5c-velec-nb25">&mdash;</td><td id="m5c-velec-ca25">&mdash;</td><td id="m5c-velec-p25">&mdash;</td><td id="m5c-velec-nb" class="n">&mdash;</td><td id="m5c-velec-ca" class="n">&mdash;</td><td id="m5c-velec-p" class="n">&mdash;</td></tr>
+            <tr><td>&#128665; Voitures</td><td id="m5c-voit-nb25">&mdash;</td><td id="m5c-voit-ca25">&mdash;</td><td id="m5c-voit-p25">&mdash;</td><td id="m5c-voit-nb" class="n">&mdash;</td><td id="m5c-voit-ca" class="n">&mdash;</td><td id="m5c-voit-p" class="n">&mdash;</td></tr>
+            <tr><td>&#128690; V&eacute;los Musc.</td><td id="m5c-vmusc-nb25">&mdash;</td><td id="m5c-vmusc-ca25">&mdash;</td><td id="m5c-vmusc-p25">&mdash;</td><td id="m5c-vmusc-nb" class="n">&mdash;</td><td id="m5c-vmusc-ca" class="n">&mdash;</td><td id="m5c-vmusc-p" class="n">&mdash;</td></tr>
+            <tr><td>&#128675; Scoot.</td><td id="m5c-sc-nb25">&mdash;</td><td id="m5c-sc-ca25">&mdash;</td><td id="m5c-sc-p25">&mdash;</td><td id="m5c-sc-nb" class="n">&mdash;</td><td id="m5c-sc-ca" class="n">&mdash;</td><td id="m5c-sc-p" class="n">&mdash;</td></tr>
+            <tr><td>&#128119; V&eacute;los Enf.</td><td id="m5c-venf-nb25">&mdash;</td><td id="m5c-venf-ca25">&mdash;</td><td id="m5c-venf-p25">&mdash;</td><td id="m5c-venf-nb" class="n">&mdash;</td><td id="m5c-venf-ca" class="n">&mdash;</td><td id="m5c-venf-p" class="n">&mdash;</td></tr>
           </tbody>
         </table></div>
       <div class="card"><h3>Panier moyen par cat&eacute;gorie</h3>
-        <div class="sub">2025 mars vs 2026 global saison</div>
+        <div class="sub" id="m5-panier-sub">2025 vs 2026 m&ecirc;me mois</div>
         <div class="ch-wrap h220"><canvas id="c-m5-panier"></canvas></div></div>
     </div>
 
@@ -1573,24 +1573,46 @@ function updatePart2(mo){
     {label:'2026 global',data:cN.map(c=>({'\u00C9lec':237,'Voitures':120,'Musc':147}[Object.keys({'\u00C9lec':0,'Voitures':0,'Musc':0}).find(k=>c.includes(k))]||0)),backgroundColor:COLS,borderRadius:4}
   ]},{plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'\u20AC'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
 
-  // FIX: CA cat 2026 dynamique depuis cats globales (pas hardcode)
-  const allCats26 = window._lastSyncData?.cats || {};
+  // Cats 2026 : mois Ã©quivalent si dispo, sinon global saison
+  const allCats26mo = d26mo?.cats || {};
+  const allCats26gl = window._lastSyncData?.cats || {};
   const ca26byName = {};
-  Object.entries(allCats26).forEach(([k,v]) => { ca26byName[CAT_DECODE[k]||k] = v; });
+  // PrioritÃ© : cats du mois Ã©quivalent
+  if(Object.keys(allCats26mo).length) {
+    Object.entries(allCats26mo).forEach(([k,v]) => { ca26byName[CAT_DECODE[k]||k] = v; });
+  } else {
+    Object.entries(allCats26gl).forEach(([k,v]) => { ca26byName[CAT_DECODE[k]||k] = v; });
+  }
   const ca26bars = cN.map(n => ca26byName[n]?.ca || 0);
+  const lbl26cat = Object.keys(allCats26mo).length ? '2026 '+NOMS_MOIS[mo] : '2026 saison';
   mkChart('c-m5-cacat','bar',{labels:cN,datasets:[
     {label:'2025',data:CATS25[mo].map(c=>c.ca),backgroundColor:'rgba(148,163,184,.65)',borderRadius:4},
-    {label:'2026 global',data:ca26bars,backgroundColor:COLS,borderRadius:4}
+    {label:lbl26cat,data:ca26bars,backgroundColor:COLS,borderRadius:4}
   ]},{plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(1)+'k\u20AC'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
 
   mkChart('c-m5-heat','bar',{labels:wL,datasets:[{data:d25.wdaynb||[0,0,0,0,0,0,0],backgroundColor:(d25.wdaynb||[]).map(v=>v>=8?'rgba(220,38,38,.8)':v>=5?'rgba(217,119,6,.8)':'rgba(37,99,235,.6)'),borderRadius:4}]},{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{display:false}}}});
 
-  // FIX: Tableau cat\u00E9gories 2026 - utilise mo pas 3 hardcoded
+  // Tableau catÃ©gories 2026 - mois Ã©quivalent
+  const hasMoCats = Object.keys(allCats26mo).length > 0;
+  const subLabel = hasMoCats ? '2025 vs 2026 '+NOMS_MOIS[mo]+' (mÃªme mois)' : '2025 vs 2026 saison (mois non synchro)';
+  const sub1 = document.getElementById('m5-cat-sub');
+  const sub2 = document.getElementById('m5-panier-sub');
+  if(sub1) sub1.textContent = 'Mois sÃ©lectionnÃ© â 2025 rÃ©alisÃ© vs 2026 '+NOMS_MOIS[mo];
+  if(sub2) sub2.textContent = subLabel;
+
+  // Mapper CATS25[mo] par code pour retrouver les lignes
+  const catIdMap = {'velec':'VÃ©los Ãlec.','voit':'Voitures','vmusc':'VÃ©los Musc.','sc':'Scoot.','venf':'VÃ©los Enf.'};
+  const s2=(sid,v)=>{const e=document.getElementById(sid);if(e)e.textContent=v;};
   cN.forEach((cn,i)=>{
     const id=['velec','voit','vmusc','sc','venf'][i]||'x';
+    // DonnÃ©es 2025
+    const c25 = CATS25[mo].find(c=>c.n===cn) || null;
+    if(c25){s2('m5c-'+id+'-nb25',c25.nb||'â');s2('m5c-'+id+'-ca25',c25.ca?fmt(Math.round(c25.ca))+' â¬':'â');s2('m5c-'+id+'-p25',c25.panier?c25.panier+' â¬':'â');}
+    else {s2('m5c-'+id+'-nb25','â');s2('m5c-'+id+'-ca25','â');s2('m5c-'+id+'-p25','â');}
+    // DonnÃ©es 2026
     const d = ca26byName[cn] || null;
-    const s2=(sid,v)=>{const e=document.getElementById(sid);if(e)e.textContent=v;};
     if(d){s2('m5c-'+id+'-nb',d.nb);s2('m5c-'+id+'-ca',fmt(Math.round(d.ca))+' \u20AC');s2('m5c-'+id+'-p',d.nb?Math.round(d.ca/d.nb)+' \u20AC':'\u2014');}
+    else {s2('m5c-'+id+'-nb','\u2014');s2('m5c-'+id+'-ca','\u2014');s2('m5c-'+id+'-p','\u2014');}
   });
 
   // FIX: Tableau taux de sortie - dynamique selon CATS25[mo]
