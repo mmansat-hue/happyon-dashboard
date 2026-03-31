@@ -1,4 +1,351 @@
-iv class="ibox"><p>Samedi = CA max (82 251 &#8364;). Dimanche = meilleur panier (118 &#8364;). Lundi: 111 &#8364;/resa - segment week-end long.</p></div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy-ON - Dashboard Pilotage 2025 / 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#1a202c;font-size:13px;min-height:100vh}
+/* HEADER */
+.header{background:#0f2a4a;color:white;padding:16px 28px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.1)}
+.header-logo svg{height:36px;width:auto}
+.header-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.hbadge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:7px 14px;text-align:center;min-width:90px}
+.hbadge .bv{font-size:16px;font-weight:700;display:block}
+.hbadge .bl{font-size:9px;opacity:.65;display:block;margin-top:1px;text-transform:uppercase;letter-spacing:.5px}
+/* DATEBAR */
+.datebar{background:#1e293b;color:#94a3b8;padding:7px 28px;font-size:11px;display:flex;justify-content:space-between;align-items:center}
+.datebar strong{color:#e2e8f0}
+.live-badge{display:flex;align-items:center;gap:5px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:20px;padding:3px 10px;font-size:10px;color:#86efac}
+.live-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+/* SYNC BUTTON */
+.sync-bar{background:#0f2a4a;padding:6px 28px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #1e3a5f}
+.sync-btn{background:#2563eb;color:white;border:none;padding:6px 16px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;transition:background .2s}
+.sync-btn:hover{background:#1d4ed8}
+.sync-btn:disabled{background:#374151;cursor:not-allowed}
+.sync-status{font-size:11px;color:#94a3b8}
+/* TABS */
+.tabs-nav{background:white;border-bottom:1px solid #e2e8f0;display:flex;padding:0 28px;overflow-x:auto}
+.tab-btn{padding:12px 18px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;border-bottom:2px solid transparent;color:#64748b;white-space:nowrap;transition:all .2s}
+.tab-btn:hover{color:#1e293b}
+.tab-btn.active{color:#2563eb;border-bottom-color:#2563eb}
+.tab-content{display:none;padding:18px 28px}
+.tab-content.active{display:block}
+/* SECTION TITLE */
+.s-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#64748b;display:flex;align-items:center;gap:8px;margin:18px 0 10px}
+.s-title::after{content:'';flex:1;height:1px;background:#e2e8f0}
+/* KPI STRIP */
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px}
+.kpi{background:white;border-radius:10px;padding:13px 15px;box-shadow:0 1px 3px rgba(0,0,0,.07);position:relative;overflow:hidden}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.kpi.k1::before{background:#2563eb}.kpi.k2::before{background:#059669}
+.kpi.k3::before{background:#d97706}.kpi.k4::before{background:#7c3aed}
+.kpi.k5::before{background:#dc2626}
+.kpi .kl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:#94a3b8;margin-bottom:4px}
+.kpi-vals{display:flex;align-items:flex-end;gap:7px;margin-bottom:3px}
+.kpi .v25{font-size:11px;font-weight:600;color:#94a3b8;margin-bottom:2px}
+.kpi .v26{font-size:20px;font-weight:700;color:#0f172a;line-height:1}
+.kpi .ev{font-size:10px;font-weight:700;padding:2px 6px;border-radius:20px;align-self:center}
+.ev.up{background:#dcfce7;color:#166534}.ev.up::before{content:'\25B2 '}
+.ev.dn{background:#fee2e2;color:#991b1b}.ev.dn::before{content:'\25BC '}
+.ev.fl{background:#f1f5f9;color:#64748b}
+.kpi .ks{font-size:10px;color:#94a3b8}
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px}
+.g12{display:grid;grid-template-columns:1fr 2fr;gap:14px;margin-bottom:14px}
+.g21{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:14px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+/* CARD */
+.card{background:white;border-radius:10px;padding:15px 17px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
+.card h3{font-size:12px;font-weight:700;color:#1e293b;margin-bottom:2px}
+.card .sub{font-size:10px;color:#94a3b8;margin-bottom:11px}
+/* CHART WRAPPER */
+.ch-wrap{position:relative}
+.h180{height:180px}.h220{height:220px}.h260{height:260px}.h300{height:300px}
+/* LEGEND */
+.leg{display:flex;gap:14px;margin-bottom:8px;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:4px;font-size:11px;color:#64748b}
+.leg-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+/* BOXES */
+.ibox{background:#eff6ff;border-left:3px solid #2563eb;border-radius:0 8px 8px 0;padding:9px 13px;margin-top:9px}
+.ibox p{font-size:11px;color:#1e40af;line-height:1.7;font-weight:500}
+.abox{background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:9px 13px;margin-top:9px}
+.abox .at{font-size:11px;font-weight:700;color:#c2410c;margin-bottom:3px}
+.abox p{font-size:11px;color:#7c2d12;line-height:1.6}
+.sbox{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:9px 13px;margin-top:9px}
+.sbox p{font-size:11px;color:#166534;line-height:1.6;font-weight:500}
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;margin-top:8px;font-size:11px}
+.tbl th{text-align:left;padding:5px 8px;border-bottom:2px solid #f1f5f9;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:#94a3b8}
+.tbl td{padding:6px 8px;border-bottom:1px solid #f8fafc;color:#334155}
+.tbl tr:last-child td{border:none}
+.tbl .n{font-weight:700;color:#0f172a}
+.tag{display:inline-block;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:600}
+.tg{background:#dcfce7;color:#166534}.to{background:#fef3c7;color:#92400e}
+.tr{background:#fee2e2;color:#991b1b}.tb{background:#dbeafe;color:#1e40af}
+.tgr{background:#f1f5f9;color:#64748b}
+/* CAT CARDS */
+.cat-card{border-radius:10px;padding:14px 16px;color:white;position:relative;overflow:hidden}
+.cat-card .cc-icon{position:absolute;right:-6px;top:-6px;font-size:44px;opacity:.15}
+.cat-card .cc-name{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;opacity:.75;margin-bottom:5px}
+.cat-card .cc-val{font-size:18px;font-weight:700;margin-bottom:2px}
+.cat-card .cc-sub{font-size:10px;opacity:.65}
+/* PIPELINE */
+.pipeline-card{background:linear-gradient(140deg,#1e3a5f,#2563eb);border-radius:10px;padding:16px 18px;color:white}
+.pipeline-card h3{font-size:12px;font-weight:700;margin-bottom:12px;opacity:.9}
+.pipe-item{margin-bottom:9px}
+.pipe-lbl{font-size:10px;opacity:.7;margin-bottom:3px;display:flex;justify-content:space-between}
+.pipe-track{background:rgba(255,255,255,.15);border-radius:4px;height:14px;overflow:hidden}
+.pipe-fill{height:100%;border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:5px}
+.pipe-fill span{font-size:9px;font-weight:700;color:rgba(0,0,0,.6)}
+/* FLOTTE */
+.flotte-input{background:white;border-radius:10px;padding:15px 17px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
+.flotte-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f1f5f9}
+.flotte-row:last-child{border:none}
+.flotte-row .fr-name{font-size:12px;font-weight:500;min-width:150px;display:flex;align-items:center;gap:6px}
+.flotte-row .fr-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.fr-input{padding:4px 8px;border:1px solid #e2e8f0;border-radius:6px;font-size:12px;width:70px;text-align:center}
+.fr-input:focus{outline:none;border-color:#2563eb}
+.fr-unit{font-size:10px;color:#94a3b8}
+/* BAR HORIZ */
+.hbar{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.hbar-lbl{font-size:11px;color:#475569;min-width:85px;text-align:right;white-space:nowrap}
+.hbar-track{flex:1;background:#f1f5f9;border-radius:4px;height:16px;overflow:hidden}
+.hbar-fill{height:100%;border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:5px}
+.hbar-fill span{font-size:9px;font-weight:700;color:white}
+.hbar-val{font-size:11px;font-weight:700;color:#0f172a;min-width:60px}
+/* HEATMAP */
+.hmtbl{border-collapse:separate;border-spacing:3px;width:100%;margin-top:8px}
+.hmtbl th{font-size:10px;font-weight:600;color:#64748b;text-align:center;padding:4px}
+.hmtbl td{text-align:center;padding:7px 3px;font-size:11px;font-weight:700;border-radius:5px;min-width:40px}
+/* PROJECTION */
+.proj-slider-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.proj-slider-row label{font-size:11px;color:#475569;min-width:180px}
+.proj-slider-row input[type=range]{flex:1}
+.proj-slider-row .sv{font-size:12px;font-weight:600;min-width:70px;text-align:right}
+.proj-result{background:#0f2a4a;border-radius:10px;padding:16px 20px;color:white;margin-top:12px}
+.proj-result .pr-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:12px}
+.proj-result .pr-row:last-child{border:none;font-weight:700;font-size:13px}
+.proj-result .pr-row .pr-val{color:#60a5fa}
+footer{text-align:center;padding:18px;font-size:10px;color:#94a3b8;border-top:1px solid #e2e8f0;margin-top:20px}
+@media(max-width:900px){
+  .kpi-row{grid-template-columns:repeat(3,1fr)}
+  .g2,.g3,.g12,.g21,.g4{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div id="ls" style="position:fixed;inset:0;background:#0f2a4a;display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:20px">
+<div style="color:#ef7ae7;font-size:32px;font-weight:900;letter-spacing:2px">Happy-ON</div>
+<div style="color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:1px;text-transform:uppercase">Dashboard Pilotage - Groupe CAREXO</div>
+<div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:28px 32px;width:300px">
+<div style="color:white;font-size:14px;font-weight:600;text-align:center;margin-bottom:6px">Acces restreint</div>
+<div style="color:rgba(255,255,255,0.45);font-size:11px;text-align:center;margin-bottom:16px">Code d'acces requis</div>
+<input id="lsi" type="password" placeholder="Code acces" maxlength="20"
+style="width:100%;padding:11px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:white;font-size:15px;text-align:center;outline:none;box-sizing:border-box;margin-bottom:10px"
+onkeydown="if(event.key==='Enter')chkL()"/>
+<button onclick="chkL()" style="width:100%;padding:11px;border-radius:8px;background:#2563eb;color:white;font-size:13px;font-weight:600;border:none;cursor:pointer">Acceder au dashboard</button>
+<div id="lse" style="color:#f87171;font-size:11px;text-align:center;margin-top:8px;display:none">Code incorrect</div>
+</div>
+<div style="color:rgba(255,255,255,0.2);font-size:10px">Belle-Ile-en-Mer - Happy-ON</div>
+</div>
+<script>
+var AC='happyon2026';
+function chkL(){
+  if(document.getElementById('lsi').value.trim()===AC){
+    document.getElementById('ls').style.display='none';
+    localStorage.setItem('hauth','1');
+  } else {
+    var e=document.getElementById('lse');
+    e.style.display='block';
+    document.getElementById('lsi').value='';
+    setTimeout(function(){e.style.display='none';},3000);
+  }
+}
+if(localStorage.getItem('hauth')==='1'){
+  document.addEventListener('DOMContentLoaded',function(){
+    var s=document.getElementById('ls');
+    if(s) s.style.display='none';
+  });
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var i=document.getElementById('lsi');
+  if(i) i.focus();
+});
+</script>
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; &Eacute;CRAN DE CONNEXION &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+
+
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; HEADER &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<div class="header">
+  <svg xmlns="http://www.w3.org/2000/svg" width="534.1" height="138.875" viewBox="0 0 534.1 138.875" style="height:38px;width:auto">
+    <g transform="translate(-309.293 521.654)">
+      <path d="M16.405-15.284h1.343v4.028H19.09v-2.685h5.371q2.685,0,2.685,8.056l4.028,1.343q0-4.028,2.685-4.028L35.2-7.228v1.343L28.489,30.367l20.14-1.343H62.056L63.4,22.311l-1.343-1.343h2.685L63.4,11.57V10.227h2.685L64.741,8.885V6.2h2.685V3.514H64.741V2.171h2.685L66.084.828v-9.4l1.343,1.343h1.343V-12.6l-1.343-1.343v-1.343h4.028L64.741,30.367q2.685,0,8.056-44.308l5.371-1.343Q79.511-4.542,82.2-4.542h1.343q0-4.028,2.685-4.028h1.343Q80.853,37.87,67.427,100.186H66.084l-1.343-1.343L66.084,97.5V86.76H64.741l-4.028,13.427H56.685Q54,100.186,54,92.13H52.657V97.5H51.315q-2.685,0-2.685-4.028,0-9.715,8.056-45.651H55.343L37.888,49.165,25.8,47.822q-4.028,32.224-8.056,42.966H13.72q-2.685,0-2.685-10.741H9.692l-1.343,9.4L5.664,86.76V82.732l1.343-1.343V80.046L5.664,78.7H4.321L2.978,80.046H1.636L.293,74.676Q5.664,29.341,12.377,8.885H13.72L12.377,7.542V3.514l4.028-14.769H15.062Z" transform="translate(309 -501)" fill="#ef7ae7"/>
+      <path d="M20.667,91.646c14.786,0,20.048-9.344,20.048-23.767V14.236c0-14.424-5.261-23.223-20.048-23.223C5.789-8.987.528-.278.528,14.236V67.788C.528,82.393,5.7,91.646,20.667,91.646Zm0-8.074c-8.255,0-9.8-5.352-9.8-13.516V12.149C10.869,3.985,12.412-1,20.667-1c8.164,0,9.706,4.989,9.706,13.154V70.056C30.373,78.221,28.831,83.573,20.667,83.573Zm30.117,8.074h8.709V20.058L80.629,91.646H87.16v-100H78.633V56.78L57.769-8.352H50.784Z" transform="translate(756.233 -507.358)" fill="#56b0f5"/>
+      <path d="M39.741,22.425c-20.264,0-37.6-11.865-38.323-12.37A6.206,6.206,0,0,1,8.49-.144c.371.253,15.075,10.158,31.251,10.158C56.535,10.014,76.034-.4,76.229-.505a6.206,6.206,0,1,1,5.892,10.923C81.213,10.908,59.634,22.425,39.741,22.425Z" transform="translate(758.011 -405.204)" fill="#ef7ae7"/>
+    </g>
+  </svg>
+  <div class="header-right">
+    <div class="hbadge"><span class="bv" id="hdr-resa">4 478</span><span class="bl">Resa 2025</span></div>
+    <div class="hbadge"><span class="bv" id="hdr-ca25">449 980 &#8364;</span><span class="bl">CA 2025</span></div>
+    <div class="hbadge" style="border-color:rgba(99,179,237,.5)"><span class="bv" id="hdr-resa26" style="color:#60a5fa">82</span><span class="bl">Resa 2026</span></div>
+    <div class="hbadge" style="border-color:rgba(99,179,237,.5)"><span class="bv" id="hdr-ca26" style="color:#60a5fa">15 174 &#8364;</span><span class="bl">CA 2026</span></div>
+  </div>
+</div>
+
+<!-- DATEBAR -->
+<div class="datebar">
+  <span>Arr&ecirc;t&eacute; au <strong id="dateLabel">25/03/2026</strong> &#183; 2025 = saison compl&egrave;te &#183; 2026 = pipeline &agrave; date &#183; Belle-&Icirc;le-en-Mer &#183; Groupe CAREXO</span>
+  <div class="live-badge"><div class="live-dot"></div><span id="srcLabel">Donn&eacute;es en direct</span></div>
+</div>
+
+<!-- SYNC BAR -->
+<div class="sync-bar">
+  <button class="sync-btn" id="syncBtn" onclick="syncData()">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+    Synchroniser les donn&eacute;es 2026
+  </button>
+  <span class="sync-status" id="syncStatus">Derni&egrave;re synchro : aujourd'hui 08:00 &#183; Configurez l'URL Google Sheets ci-dessous pour activer la mise &agrave; jour automatique</span>
+  <input id="sheetsUrl" placeholder="URL Google Sheets 2026 (Apps Script)" style="flex:1;padding:5px 10px;border:1px solid #334155;border-radius:6px;background:#1e293b;color:#94a3b8;font-size:11px;min-width:200px" />
+</div>
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TABS NAV &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<div class="tabs-nav">
+  <button class="tab-btn active" onclick="showTab(0)">Vue d'ensemble</button>
+  <button class="tab-btn" onclick="showTab(5)">Vue Mois (Mars)</button>
+  <button class="tab-btn" onclick="showTab(1)">Saisonnalit&eacute;</button>
+  <button class="tab-btn" onclick="showTab(2)">Cat&eacute;gories</button>
+  <button class="tab-btn" onclick="showTab(3)">Rentabilit&eacute; flotte</button>
+  <button class="tab-btn" onclick="showTab(4)">Projection 2026</button>
+</div>
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TAB 0 : VUE D'ENSEMBLE &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<div class="tab-content active" id="tab0">
+  <div class="s-title">Indicateurs cl&eacute;s - Comparaison p&eacute;riode &eacute;quivalente</div>
+  <div class="kpi-row">
+    <div class="kpi k1">
+      <div class="kl">CA TTC</div>
+      <div class="v25">449 980 &#8364; (saison 25)</div>
+      <div class="kpi-vals"><span class="v26" id="kpi-ca">15 174 &#8364;</span><span class="ev fl" id="ev-ca">Pipeline</span></div>
+      <div class="ks">S&eacute;curis&eacute; &agrave; date</div>
+    </div>
+    <div class="kpi k2">
+      <div class="kl">R&eacute;servations</div>
+      <div class="v25">31 en mars 2025</div>
+      <div class="kpi-vals"><span class="v26" id="kpi-nb">82</span><span class="ev up" id="ev-nb">+165 %</span></div>
+      <div class="ks">Pos&eacute;es &agrave; fin mars 2026</div>
+    </div>
+    <div class="kpi k3">
+      <div class="kl">Panier Moyen</div>
+      <div class="v25">98,9 &#8364;</div>
+      <div class="kpi-vals"><span class="v26" id="kpi-panier">185 &#8364;</span><span class="ev up" id="ev-panier">+87 %</span></div>
+      <div class="ks">Early-bookers budget &eacute;lev&eacute;</div>
+    </div>
+    <div class="kpi k4">
+      <div class="kl">Dur&eacute;e Moyenne</div>
+      <div class="v25">26,5 h</div>
+      <div class="kpi-vals"><span class="v26" id="kpi-duree">54,3 h</span><span class="ev up" id="ev-duree">+105 %</span></div>
+      <div class="ks">S&eacute;jours plus longs</div>
+    </div>
+    <div class="kpi k5">
+      <div class="kl">Taux Sold&eacute;</div>
+      <div class="v25">99,1 %</div>
+      <div class="kpi-vals"><span class="v26" id="kpi-solde">91,5 %</span><span class="ev dn" id="ev-solde">-7,6 pts</span></div>
+      <div class="ks">7 dossiers &agrave; relancer</div>
+    </div>
+  </div>
+
+  <div class="g21">
+    <div class="card">
+      <h3>CA TTC par mois - 2025 r&eacute;alis&eacute; vs 2026 pipeline</h3>
+      <div class="sub">Barres grises = 2025 &#183; Barres bleues = 2026 s&eacute;curis&eacute;</div>
+      <div class="leg"><div class="leg-item"><div class="leg-dot" style="background:#94a3b8"></div>2025</div><div class="leg-item"><div class="leg-dot" style="background:#2563eb"></div>2026 pipeline</div></div>
+      <div class="ch-wrap h220"><canvas id="c-ca-overview"></canvas></div>
+    </div>
+    <div class="card">
+      <h3>Volume r&eacute;servations</h3>
+      <div class="sub">Nb resa par mois</div>
+      <div class="ch-wrap h220"><canvas id="c-nb-overview"></canvas></div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card">
+      <h3>Lead time - 2025 vs 2026</h3>
+      <div class="sub">76,8 % r&eacute;servent +1 mois &agrave; l'avance</div>
+      <div class="ch-wrap h180"><canvas id="c-lead-overview"></canvas></div>
+      <div class="sbox"><p>Changement structurel majeur : en 2025, 50 % r&eacute;servaient le jour m&ecirc;me. En 2026, les early-bookers planifient longtemps &agrave; l'avance.</p></div>
+    </div>
+    <div class="card">
+      <h3>Modes de paiement - 2026</h3>
+      <div class="sub">82 r&eacute;servations &agrave; date</div>
+      <div class="ch-wrap h180"><canvas id="c-paie-overview"></canvas></div>
+    </div>
+    <div class="card">
+      <h3>Alertes & signaux</h3>
+      <div class="sub">Points d'attention imm&eacute;diats</div>
+      <div class="abox" style="margin-top:8px"><div class="at">7 dossiers non sold&eacute;s</div><p>Risque &#8776; 6 500 &#8364;. Dont 1 resa ao&ucirc;t (1 024 &#8364;) et 1 oct. (1 488 &#8364;) anormalement &eacute;lev&eacute;s.</p></div>
+      <div class="abox" style="margin-top:6px"><div class="at">Juillet + ao&ucirc;t quasi vides</div><p>Seulement 8 resa sur les 2 mois = 57 % du CA 2025. Calendrier Lokki ouvert ?</p></div>
+      <div class="sbox" style="margin-top:6px"><p>+165 % de resa pos&eacute;es vs mars 2025. Panier +87 %. D&eacute;marrage solide.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TAB 1 : SAISONNALIT&Eacute; &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<div class="tab-content" id="tab1">
+  <div class="s-title">CA mensuel & saisonnalit&eacute;</div>
+  <div class="card" style="margin-bottom:14px">
+    <h3>Chiffre d'affaires TTC par mois - 2025 r&eacute;alis&eacute; + panier moyen</h3>
+    <div class="sub">Barres = CA &#183; Ligne orange = nb r&eacute;servations &#183; Ligne violette = panier moyen</div>
+    <div class="leg">
+      <div class="leg-item"><div class="leg-dot" style="background:#2563eb"></div>CA TTC</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#d97706"></div>Nb r&eacute;servations</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#7c3aed"></div>Panier moyen</div>
+    </div>
+    <div class="ch-wrap h260"><canvas id="c-monthly-full"></canvas></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <h3>Courbe Pareto - concentration de la saison</h3>
+      <div class="sub">Juillet + ao&ucirc;t = 57 % du CA annuel sur 2 mois</div>
+      <div class="ch-wrap h220"><canvas id="c-pareto"></canvas></div>
+      <div class="ibox"><p>Juillet + Ao&ucirc;t 2025 = <strong>256 161 &#8364;</strong> soit 57 % du CA. La rentabilit&eacute; se joue en 8 semaines.</p></div>
+    </div>
+    <div class="card">
+      <h3>Top 10 semaines 2025</h3>
+      <div class="sub">Classement par CA TTC</div>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Semaine</th><th>P&eacute;riode</th><th>Resa</th><th>CA TTC</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tb">1</span></td><td class="n">S33</td><td>11-17 ao&ucirc;t</td><td>443</td><td class="n">50 563 &#8364;</td></tr>
+          <tr><td><span class="tag tb">2</span></td><td class="n">S34</td><td>18-24 ao&ucirc;t</td><td>358</td><td class="n">41 972 &#8364;</td></tr>
+          <tr><td><span class="tag tb">3</span></td><td class="n">S32</td><td>4-10 ao&ucirc;t</td><td>317</td><td class="n">39 523 &#8364;</td></tr>
+          <tr><td><span class="tag to">4</span></td><td class="n">S31</td><td>28 juil-3 ao&ucirc;t</td><td>254</td><td class="n">28 680 &#8364;</td></tr>
+          <tr><td><span class="tag to">5</span></td><td class="n">S30</td><td>21-27 juil</td><td>201</td><td class="n">26 312 &#8364;</td></tr>
+          <tr><td><span class="tag tg">6</span></td><td class="n">S35</td><td>25-31 ao&ucirc;t</td><td>197</td><td class="n">20 936 &#8364;</td></tr>
+          <tr><td><span class="tag tg">7</span></td><td class="n">S29</td><td>14-20 juil</td><td>183</td><td class="n">19 110 &#8364;</td></tr>
+          <tr><td><span class="tag tg">8</span></td><td class="n">S22</td><td>26 mai-1 juin</td><td>180</td><td class="n">17 919 &#8364;</td></tr>
+          <tr><td>9</td><td class="n">S28</td><td>7-13 juil</td><td>175</td><td class="n">17 824 &#8364;</td></tr>
+          <tr><td>10</td><td class="n">S18</td><td>28 avr-4 mai</td><td>158</td><td class="n">14 990 &#8364;</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="s-title">Comportement par jour de semaine</div>
+  <div class="g2">
+    <div class="card">
+      <h3>CA TTC par jour de semaine - 2025</h3>
+      <div class="sub">Barres = CA &#183; Ligne = panier moyen</div>
+      <div class="ch-wrap h200"><canvas id="c-wday"></canvas></div>
+      <div class="ibox"><p>Samedi = CA max (82 251 &#8364;). Dimanche = meilleur panier (118 &#8364;). Lundi: 111 &#8364;/resa - segment week-end long.</p></div>
     </div>
     <div class="card">
       <h3>Heatmap intensit&eacute; - Mois &#215; Jour de semaine</h3>
