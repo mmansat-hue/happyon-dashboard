@@ -671,7 +671,7 @@ document.addEventListener('DOMContentLoaded',function(){
         <div class="ibox"><p id="m5-lead-txt">Mars 2025 : 84 % r&eacute;servent le jour m&ecirc;me ou J+3. 2026 global : 75 % r&eacute;servent &agrave; +1 mois.</p></div></div>
       <div class="card"><h3>Panier moyen par cat&eacute;gorie</h3>
         <div class="sub" id="m5-panier-sub">2025 r&eacute;alis&eacute; vs 2026 m&ecirc;me mois</div>
-        <div class="ch-wrap h220"><canvas id="c-m5-panier"></canvas></div></div>
+        <div class="ch-wrap h220"><canvas id="c-m5-panier2"></canvas></div></div>
     </div>
 
     <div class="g2">
@@ -1541,7 +1541,7 @@ function updatePart2(mo){
   s('m5-p25',  d25.panier+' \u20AC');
   // DurÃ©e : dispo en 2025, pas encore en 2026
   s('m5-dur25', d25.dur ? d25.dur+' h' : '\u2014');
-  s('m5-dur26', '\u2014');
+  {const _d=window._lastSyncData?.durees;const _t=_d?((_d['lt8h']||0)+(_d['8-24h']||0)+(_d['1-2j']||0)+(_d['3-5j']||0)+(_d['6jplus']||0)):0;s('m5-dur26',_t?Math.round(((_d['lt8h']||0)*8+(_d['8-24h']||0)*16+(_d['1-2j']||0)*36+(_d['3-5j']||0)*96+(_d['6jplus']||0)*192)/_t)+' h':'\u2014');}
   // Taux soldÃ© 2025 = stat saison globale (99.1%) â pas dispo par mois
   s('m5-taux25', '99,1 %');
 
@@ -1579,14 +1579,14 @@ function updatePart2(mo){
   }
 
   // Reconstruire graphiques partie 2
-  ['c-m5-lead','c-m5-panier','c-m5-cacat'].forEach(id=>{if(CHARTS[id]){CHARTS[id].destroy();delete CHARTS[id];}});
+  ['c-m5-lead','c-m5-panier','c-m5-panier2','c-m5-cacat'].forEach(id=>{if(CHARTS[id]){CHARTS[id].destroy();delete CHARTS[id];}});
 
   var wL=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
 
   const lL=['M\u00EAme jour','J+1-3','J+4-7','1-2 sem.','1 mois+'];
   const lead25=d25.lead?[d25.lead.same,d25.lead.j13,d25.lead.j47,d25.lead.sem,d25.lead.mois]:[0,0,0,0,0];
   // Lead 2026 : depuis donnÃ©es synchro si dispo, sinon global saison
-  const lead26src = window._lastSyncData?.lead || {};
+  const lead26src = PROD26_MO[mo]?.lead_prod || window._lastSyncData?.lead || {};
   const lead26=[lead26src.same||0,lead26src.j13||0,lead26src.j47||0,lead26src.sem||0,lead26src.mois||0];
   const lbl26lead = Object.keys(lead26src).length ? '2026 '+NOMS_MOIS[mo] : '2026 saison';
   const sub_lead = document.getElementById('m5-lead-sub');
@@ -1621,7 +1621,7 @@ function updatePart2(mo){
     const d = ca26byName[n];
     return (d && d.nb) ? Math.round(d.ca / d.nb) : 0;
   });
-  const lbl26panier = Object.keys(allCats26mo).length ? '2026 '+NOMS_MOIS[mo] : '2026 saison';
+  const lbl26panier = Object.keys(allCats26mo).length ? '2026 '+NOMS_MOIS[mo] : '2026 saison';  mkChart('c-m5-panier2','bar',{labels:cN,datasets:[{label:'2025',data:panier25byCat,backgroundColor:'rgba(148,163,184,.65)',borderRadius:4},{label:lbl26panier,data:panier26byCat,backgroundColor:COLS,borderRadius:4}]},{plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'\u20AC'},grid:{color:gridColor}},x:{grid:{display:false}}}}); ? '2026 '+NOMS_MOIS[mo] : '2026 saison';
   mkChart('c-m5-panier','bar',{labels:cN,datasets:[
     {label:'2025',data:panier25byCat,backgroundColor:'rgba(148,163,184,.65)',borderRadius:4},
     {label:lbl26panier,data:panier26byCat,backgroundColor:COLS,borderRadius:4}
