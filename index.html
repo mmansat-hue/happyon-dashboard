@@ -1580,7 +1580,7 @@ function updatePart2(mo){
   // Reconstruire graphiques partie 2
   ['c-m5-lead','c-m5-panier','c-m5-cacat'].forEach(id=>{if(CHARTS[id]){CHARTS[id].destroy();delete CHARTS[id];}});
 
-  const wL=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+  var wL=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
 
   const lL=['M\u00EAme jour','J+1-3','J+4-7','1-2 sem.','1 mois+'];
   const lead25=d25.lead?[d25.lead.same,d25.lead.j13,d25.lead.j47,d25.lead.sem,d25.lead.mois]:[0,0,0,0,0];
