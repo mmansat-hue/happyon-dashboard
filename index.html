@@ -1753,7 +1753,6 @@ function updatePart2(mo){
 
   // graphique distribution durÃ©es 2025
   if(CHARTS['c-m5-heat']){CHARTS['c-m5-heat'].destroy();delete CHARTS['c-m5-heat'];}
-  const wL=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
   mkChart('c-m5-heat','bar',{labels:wL,datasets:[{label:'Nb r\u00E9sa 2025',data:d25.wdaynb||[0,0,0,0,0,0,0],backgroundColor:(d25.wdaynb||[]).map(v=>v>=8?'rgba(220,38,38,.8)':v>=5?'rgba(217,119,6,.8)':'rgba(37,99,235,.6)'),borderRadius:4}]},{plugins:{legend:{display:false},title:{display:true,text:'R\u00E9partitions nb r\u00E9sa par jour semaine \u2014 2025',font:{size:10}}},scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{display:false}}}});
 }
 
