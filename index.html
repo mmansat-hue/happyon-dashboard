@@ -1285,12 +1285,16 @@ function applyData(data){
     CHARTS['c-paie-overview'].data.datasets[0].data=pKeys.map(k=>data.paiement[k]||0);
     CHARTS['c-paie-overview'].update();
   }
-  // Alerte non sold\u00E9s
-  if(data.nonSoldes!==undefined){
-    const alertBoxes=document.querySelectorAll('.abox .at');
-    alertBoxes.forEach(el=>{if(el.textContent.includes('non sold\u00E9s'))el.textContent=`${data.nonSoldes} dossiers non sold\u00E9s`;});
+  // ââ Mise Ã  jour MONTHLY26 / PROD26 / PROD26_MO ââââââââââââââââââââââââââââ
+  if(data.monthly) Object.entries(data.monthly).forEach(([k,v])=>MONTHLY26[parseInt(k)]=v);
+  if(data.weekly) WEEKLY26=decodeWeekly(data.weekly);
+  if(data.prod) PROD26=decodeProd(data.prod);
+  if(data.prod_monthly) Object.entries(data.prod_monthly).forEach(([k,v])=>PROD26_MO[parseInt(k)]=decodeProd(v));
+  // RafraÃ®chir Vue Mois si elle est active
+  if(document.getElementById('tab5')?.classList.contains('active')){
+    const mo=parseInt(document.getElementById('m5-sel')?.value||3);
+    updatePart2(mo); updatePart3(mo);
   }
-}
 </script>
 
 <script>
