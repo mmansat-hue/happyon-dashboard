@@ -1738,7 +1738,7 @@ function updatePart2(mo){
     // Construire calendrier : 1er jour du mois s√É¬©lectionn√É¬© 2026
     const firstDay = new Date(2026, mo-1, 1).getDay(); // 0=dim
     const nbDays = new Date(2026, mo, 0).getDate();
-    const dow = d25.wdaynb || [0,0,0,0,0,0,0]; // Lun..Dim
+    const dow = (d26mo && d26mo.wdaynb) || d25.wdaynb || [0,0,0,0,0,0,0];
     const maxV = Math.max(...dow, 1);
     const jours7=['Lu','Ma','Me','Je','Ve','Sa','Di'];
     // Intensit√É¬© par jour du mois : utiliser wdaynb (Lun=0..Dim=6)
