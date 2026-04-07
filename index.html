@@ -602,7 +602,7 @@ document.addEventListener('DOMContentLoaded',function(){
     </select>
   </div>
 
-  <!-- √¢¬ï¬ê√¢¬ï¬ê√¢¬ï¬ê PARTIE 1 : CHIFFRES DE LA SEMAINE √¢¬ï¬ê√¢¬ï¬ê√¢¬ï¬ê -->
+  <!-- ‚àö¬¢¬¨√Ø¬¨√™‚àö¬¢¬¨√Ø¬¨√™‚àö¬¢¬¨√Ø¬¨√™ PARTIE 1 : CHIFFRES DE LA SEMAINE ‚àö¬¢¬¨√Ø¬¨√™‚àö¬¢¬¨√Ø¬¨√™‚àö¬¢¬¨√Ø¬¨√™ -->
   <div style="background:#1e293b;color:white;padding:8px 14px;border-radius:8px 8px 0 0;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;display:flex;align-items:center;gap:8px">
     <span style="background:#2563eb;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:10px">1</span>
     Chiffres de la semaine &mdash; S<span id="m5-wk-num">13</span> &mdash; <span id="m5-wk-dates">24-30 mars</span>
@@ -632,7 +632,7 @@ document.addEventListener('DOMContentLoaded',function(){
       </div>
     </div>
 
-    <!-- Tableau cat√É¬©gories semaine -->
+    <!-- Tableau cat‚àö√â¬¨¬©gories semaine -->
     <h3 style="font-size:11px;font-weight:700;color:#1e293b;margin:0 0 8px 0">Panier moyen &amp; volume par cat&eacute;gorie &mdash; semaine en cours</h3>
     <table class="tbl">
       <thead><tr><th>Cat&eacute;gorie</th><th>Nb 25</th><th>CA 25</th><th>Panier 25</th><th>Nb 26</th><th>CA 26</th><th>Panier 26</th><th>&Delta; Panier</th></tr></thead>
@@ -642,7 +642,7 @@ document.addEventListener('DOMContentLoaded',function(){
     </table>
   </div>
 
-  <!-- √¢¬ï¬ê√¢¬ï¬ê√¢¬ï¬ê PARTIE 2 : CHIFFRES DU MOIS √¢¬ï¬ê√¢¬ï¬ê√¢¬ï¬ê -->
+  <!-- ‚àö¬¢¬¨√Ø¬¨√™‚àö¬¢¬¨√Ø¬¨√™‚àö¬¢¬¨√Ø¬¨√™ PARTIE 2 : CHIFFRES DU MOIS ‚àö¬¢¬¨√Ø¬¨√™‚àö¬¢¬¨√Ø¬¨√™‚àö¬¢¬¨√Ø¬¨√™ -->
   <div style="background:#1e293b;color:white;padding:8px 14px;border-radius:8px 8px 0 0;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;display:flex;align-items:center;gap:8px">
     <span style="background:#059669;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:10px">2</span>
     Chiffres du mois &mdash; <span id="m5-p2-titre">Mars</span> &mdash; Locations dont la date de d&eacute;but est dans ce mois
@@ -715,7 +715,7 @@ document.addEventListener('DOMContentLoaded',function(){
     </div>
   </div>
 
-  <!-- √¢¬ï¬ê√¢¬ï¬ê√¢¬ï¬ê PARTIE 3 : PROD DU MOIS √¢¬ï¬ê√¢¬ï¬ê√¢¬ï¬ê -->
+  <!-- ‚àö¬¢¬¨√Ø¬¨√™‚àö¬¢¬¨√Ø¬¨√™‚àö¬¢¬¨√Ø¬¨√™ PARTIE 3 : PROD DU MOIS ‚àö¬¢¬¨√Ø¬¨√™‚àö¬¢¬¨√Ø¬¨√™‚àö¬¢¬¨√Ø¬¨√™ -->
   <div style="background:#1e293b;color:white;padding:8px 14px;border-radius:8px 8px 0 0;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;display:flex;align-items:center;gap:8px">
     <span style="background:#d97706;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:10px">3</span>
     Prod du mois &mdash; <span id="m5-p3-titre">Mars</span> &mdash; R&eacute;servations cr&eacute;&eacute;es ce mois (toutes dates de d&eacute;but)
@@ -1298,12 +1298,12 @@ function applyData(data){
     CHARTS['c-paie-overview'].data.datasets[0].data=pKeys.map(k=>data.paiement[k]||0);
     CHARTS['c-paie-overview'].update();
   }
-  // √¢¬î¬Ä√¢¬î¬Ä Mise √É¬† jour MONTHLY26 / PROD26 / PROD26_MO √¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä
+  // ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ Mise ‚àö√â¬¨‚Ä† jour MONTHLY26 / PROD26 / PROD26_MO ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ
   if(data.monthly) Object.entries(data.monthly).forEach(([k,v])=>MONTHLY26[parseInt(k)]=v);
   if(data.weekly) WEEKLY26=decodeWeekly(data.weekly);
   if(data.prod) PROD26=decodeProd(data.prod);
   if(data.prod_monthly) Object.entries(data.prod_monthly).forEach(([k,v])=>PROD26_MO[parseInt(k)]=decodeProd(v));
-  // Rafra√É¬Æchir Vue Mois si elle est active
+  // Rafra‚àö√â¬¨√Üchir Vue Mois si elle est active
   if(document.getElementById('tab5')?.classList.contains('active')){
     const mo=parseInt(document.getElementById('m5-sel')?.value||3);
     updatePart2(mo); updatePart3(mo);
@@ -1446,7 +1446,7 @@ const PROD25 = {
 const MONTHLY26 = {};
 let WEEKLY26 = {nb:0,ca:0,cats:{}};
 let PROD26 = {nb:0,ca:0,cats:{},mois_debut:{},lead_prod:{},canal:{}};
-const PROD26_MO = {}; // prod ventil√É¬© par mois de cr√É¬©ation
+const PROD26_MO = {}; // prod ventil‚àö√â¬¨¬© par mois de cr‚àö√â¬¨¬©ation
 let CUR_WEEK = 13;
 const NOMS_MOIS = {3:'Mars',4:'Avril',5:'Mai',6:'Juin',7:'Juillet',8:'Ao\u00FBt',9:'Septembre',10:'Octobre'};
 const COLS = ['#2563eb','#059669','#b45309','#d97706','#dc2626','#7c3aed'];
@@ -1548,17 +1548,17 @@ function updatePart2(mo){
   const arrow=(v,unit)=>(v>=0?'\u25B2 +':'\u25BC ')+Math.abs(v)+(unit||' %');
   const setEv=(id,v,unit)=>{s(id,arrow(v,unit));const e=document.getElementById(id);if(e)e.className='ev '+(v>=0?'up':'dn');};
 
-  // √¢¬î¬Ä√¢¬î¬Ä KPIs 2025 √¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä
+  // ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ KPIs 2025 ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ
   s('m5-ca25', fmt(d25.ca)+' \u20AC');
   s('m5-nb25', d25.nb);
   s('m5-p25',  d25.panier+' \u20AC');
-  // Dur√É¬©e : dispo en 2025, pas encore en 2026
+  // Dur‚àö√â¬¨¬©e : dispo en 2025, pas encore en 2026
   s('m5-dur25', d25.dur ? d25.dur+' h' : '\u2014');
   {const _d=window._lastSyncData?.durees;const _t=_d?((_d['lt8h']||0)+(_d['8-24h']||0)+(_d['1-2j']||0)+(_d['3-5j']||0)+(_d['6jplus']||0)):0;s('m5-dur26',_t?Math.round(((_d['lt8h']||0)*8+(_d['8-24h']||0)*16+(_d['1-2j']||0)*36+(_d['3-5j']||0)*96+(_d['6jplus']||0)*192)/_t)+' h':'\u2014');}
-  // Taux sold√É¬© 2025 = stat saison globale (99.1%) √¢¬Ä¬î pas dispo par mois
+  // Taux sold‚àö√â¬¨¬© 2025 = stat saison globale (99.1%) ‚àö¬¢¬¨√Ñ¬¨√Æ pas dispo par mois
   s('m5-taux25', '99,1 %');
 
-  // √¢¬î¬Ä√¢¬î¬Ä KPIs 2026 : mois √É¬©quivalent seulement √¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä
+  // ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ KPIs 2026 : mois ‚àö√â¬¨¬©quivalent seulement ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ
   const hasMo26 = d26mo && d26mo.nb > 0;
   const lbl26 = hasMo26 ? nomMo+' 2026' : '2026 (non synchro)';
 
@@ -1579,7 +1579,7 @@ function updatePart2(mo){
     ['m5-ev-ca','m5-ev-nb','m5-ev-p'].forEach(id=>{s(id,'\u2014');const e=document.getElementById(id);if(e)e.className='ev fl';});
   }
 
-  // Taux sold√É¬© 2026 global (non disponible par mois)
+  // Taux sold‚àö√â¬¨¬© 2026 global (non disponible par mois)
   const sd=window._lastSyncData;
   if(sd){
     const ts=sd.tauxSolde;const ns=sd.nonSoldes;
@@ -1598,7 +1598,7 @@ function updatePart2(mo){
 
   const lL=['M\u00EAme jour','J+1-3','J+4-7','1-2 sem.','1 mois+'];
   const lead25=d25.lead?[d25.lead.same,d25.lead.j13,d25.lead.j47,d25.lead.sem,d25.lead.mois]:[0,0,0,0,0];
-  // Lead 2026 : depuis donn√É¬©es synchro si dispo, sinon global saison
+  // Lead 2026 : depuis donn‚àö√â¬¨¬©es synchro si dispo, sinon global saison
   const lead26src = PROD26_MO[mo]?.lead_prod || window._lastSyncData?.lead || {};
   const lead26=[lead26src.same||0,lead26src.j13||0,lead26src.j47||0,lead26src.sem||0,lead26src.mois||0];
   const lbl26lead = Object.keys(lead26src).length ? '2026 '+NOMS_MOIS[mo] : '2026 saison';
@@ -1609,13 +1609,13 @@ function updatePart2(mo){
     {label:lbl26lead,data:lead26,backgroundColor:'rgba(37,99,235,.8)',borderRadius:3}
   ]},{plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
 
-  const cN=CATS25[mo].map(c=>c.n);
+  const cN=(CATS25[mo]||CATS25[3]).map(c=>c.n);
 
-  // Cats 2026 : mois √É¬©quivalent si dispo, sinon global saison
+  // Cats 2026 : mois ‚àö√â¬¨¬©quivalent si dispo, sinon global saison
   const allCats26mo = d26mo?.cats || {};
   const allCats26gl = window._lastSyncData?.cats || {};
   const ca26byName = {};
-  // Priorit√É¬© : cats du mois √É¬©quivalent
+  // Priorit‚àö√â¬¨¬© : cats du mois ‚àö√â¬¨¬©quivalent
   if(Object.keys(allCats26mo).length) {
     Object.entries(allCats26mo).forEach(([k,v]) => { ca26byName[CAT_DECODE[k]||k] = v; });
   } else {
@@ -1628,8 +1628,8 @@ function updatePart2(mo){
     {label:lbl26cat,data:ca26bars,backgroundColor:COLS,borderRadius:4}
   ]},{plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(1)+'k\u20AC'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
 
-  // Panier moyen par cat√É¬©gorie √¢¬Ä¬î calcul√É¬© depuis les vraies donn√É¬©es
-  const panier25byCat = CATS25[mo].map(c => c.panier || 0);
+  // Panier moyen par cat‚àö√â¬¨¬©gorie ‚àö¬¢¬¨√Ñ¬¨√Æ calcul‚àö√â¬¨¬© depuis les vraies donn‚àö√â¬¨¬©es
+  const panier25byCat = (CATS25[mo]||CATS25[3]).map(c => c.panier || 0);
   const panier26byCat = cN.map(n => {
     const d = ca26byName[n];
     return (d && d.nb) ? Math.round(d.ca / d.nb) : 0;
@@ -1642,8 +1642,8 @@ function updatePart2(mo){
 
   mkChart('c-m5-heat','bar',{labels:wL,datasets:[{data:d25.wdaynb||[0,0,0,0,0,0,0],backgroundColor:(d25.wdaynb||[]).map(v=>v>=8?'rgba(220,38,38,.8)':v>=5?'rgba(217,119,6,.8)':'rgba(37,99,235,.6)'),borderRadius:4}]},{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{display:false}}}});
 
-  // √¢¬î¬Ä√¢¬î¬Ä TABLEAU COMPARATIF CAT√É¬âGORIES √¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä
-  // Ic√É¬¥nes par nom de cat√É¬©gorie
+  // ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ TABLEAU COMPARATIF CAT‚àö√â¬¨√¢GORIES ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ
+  // Ic‚àö√â¬¨¬•nes par nom de cat‚àö√â¬¨¬©gorie
   const CAT_ICON = {
     'V\u00E9los \u00C9lec.':'\u26A1','Voitures':'\uD83D\uDE99',
     'V\u00E9los Musc.':'\uD83D\uDEB2','V\u00E9los Enf.':'\uD83D\uDC77',
@@ -1659,7 +1659,7 @@ function updatePart2(mo){
     ? '2025 vs 2026 \u2014 '+NOMS_MOIS[mo]
     : '2025 vs 2026 saison globale';
 
-  // Union des cat√É¬©gories 2025 + 2026 pour ce mois
+  // Union des cat‚àö√â¬¨¬©gories 2025 + 2026 pour ce mois
   const cats25Map = {};
   CATS25[mo].forEach(c => { cats25Map[c.n] = c; });
   const allCatNames = [...new Set([
@@ -1694,14 +1694,14 @@ function updatePart2(mo){
     }).join('');
   }
 
-  // √¢¬î¬Ä√¢¬î¬Ä TAUX DE SORTIE comparatif 2025 vs 2026 √¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä
+  // ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ TAUX DE SORTIE comparatif 2025 vs 2026 ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ
   const nj = d25.nbJours || 31;
   const tbody_ts = document.getElementById('m5-ts-tbody');
   if(tbody_ts){
-    tbody_ts.innerHTML = CATS25[mo].map(c=>{
+    tbody_ts.innerHTML = (CATS25[mo]||CATS25[3]).map(c=>{
       // 2025
       const taux25cls = c.taux >= 10 ? 'tg' : 'tgr';
-      // 2026 : estimer jours lou√É¬©s depuis nb * dur_moy_cat (si jours26 dispo) ou √¢¬Ä¬î 
+      // 2026 : estimer jours lou‚àö√â¬¨¬©s depuis nb * dur_moy_cat (si jours26 dispo) ou ‚àö¬¢¬¨√Ñ¬¨√Æ 
       const cat26 = ca26byName[c.n];
       let taux26html = '<span style="color:#94a3b8">\u2014</span>';
       let jours26html = '<span style="color:#94a3b8">\u2014</span>';
@@ -1713,7 +1713,7 @@ function updatePart2(mo){
         const diffStr = diff >= 0 ? '+'+diff : ''+diff;
         taux26html = '<span class="tag '+t26cls+'">'+t26+' %</span> <span style="font-size:9px;color:'+(diff>=0?'#166534':'#dc2626')+'">'+diffStr+'</span>';
       } else if(cat26 && cat26.nb){
-        // estimation depuis nb * dur√É¬©e moy 2025 par cat
+        // estimation depuis nb * dur‚àö√â¬¨¬©e moy 2025 par cat
         const durMoy25 = c.jours / (c.nb || 1);
         const jours26est = (cat26.nb * durMoy25);
         const t26 = Math.round(jours26est/(c.flotte*nj)*10000)/100;
@@ -1727,23 +1727,23 @@ function updatePart2(mo){
     }).join('');
   }
   const ins = document.getElementById('m5-ts-insight');
-  const topCat = CATS25[mo].reduce((a,b)=>b.taux>a.taux?b:a,{taux:0,n:''});
+  const topCat = (CATS25[mo]||CATS25[3]).reduce((a,b)=>b.taux>a.taux?b:a,{taux:0,n:''});
   if(ins) ins.textContent = NOMS_MOIS[mo]+' 2025 : '+topCat.n+' = taux le plus \u00E9lev\u00E9 ('+topCat.taux+' %). Taux 2026 estim\u00E9 depuis nb r\u00E9sa \u00D7 dur\u00E9e moy 2025.';
 
-  // √¢¬î¬Ä√¢¬î¬Ä CALENDRIER DU MOIS √¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä√¢¬î¬Ä
+  // ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ CALENDRIER DU MOIS ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ
   const calTitre = document.getElementById('m5-cal-titre');
   if(calTitre) calTitre.textContent = NOMS_MOIS[mo]+' 2026';
   const calWrap = document.getElementById('m5-cal-wrap');
   if(calWrap){
-    // Construire calendrier : 1er jour du mois s√É¬©lectionn√É¬© 2026
+    // Construire calendrier : 1er jour du mois s‚àö√â¬¨¬©lectionn‚àö√â¬¨¬© 2026
     const firstDay = new Date(2026, mo-1, 1).getDay(); // 0=dim
     const nbDays = new Date(2026, mo, 0).getDate();
     const dow = (d26mo && d26mo.wdaynb) || d25.wdaynb || [0,0,0,0,0,0,0];
     const maxV = Math.max(...dow, 1);
     const jours7=['Lu','Ma','Me','Je','Ve','Sa','Di'];
-    // Intensit√É¬© par jour du mois : utiliser wdaynb (Lun=0..Dim=6)
+    // Intensit‚àö√â¬¨¬© par jour du mois : utiliser wdaynb (Lun=0..Dim=6)
     // getDay() : 0=dim, 1=lun... on mappe vers wdaynb index Lun=0..Dim=6
-    const dayToIdx = d => d===0 ? 6 : d-1; // dim√¢¬Ü¬í6, lun√¢¬Ü¬í0...
+    const dayToIdx = d => d===0 ? 6 : d-1; // dim‚àö¬¢¬¨√ú¬¨√≠6, lun‚àö¬¢¬¨√ú¬¨√≠0...
     let html = '<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;font-size:9px">';
     jours7.forEach(j => { html += '<div style="text-align:center;font-weight:600;color:#64748b;padding:2px">'+j+'</div>'; });
     const startDow = dayToIdx(firstDay); // 0=lun
@@ -1765,14 +1765,14 @@ function updatePart2(mo){
     calWrap.innerHTML = html;
   }
 
-  // graphique distribution dur√É¬©es 2025
+  // graphique distribution dur‚àö√â¬¨¬©es 2025
   if(CHARTS['c-m5-heat']){CHARTS['c-m5-heat'].destroy();delete CHARTS['c-m5-heat'];}
   mkChart('c-m5-heat','bar',{labels:wL,datasets:[{label:'Nb r\u00E9sa 2025',data:d25.wdaynb||[0,0,0,0,0,0,0],backgroundColor:(d25.wdaynb||[]).map(v=>v>=8?'rgba(220,38,38,.8)':v>=5?'rgba(217,119,6,.8)':'rgba(37,99,235,.6)'),borderRadius:4}]},{plugins:{legend:{display:false},title:{display:true,text:'R\u00E9partitions nb r\u00E9sa par jour semaine \u2014 2025',font:{size:10}}},scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{display:false}}}});
 }
 
 function updatePart3(mo){
   const pr25=PROD25[mo]||PROD25[3];
-  // Priorit√É¬© : mois sp√É¬©cifique PROD26_MO[mo], fallback sur PROD26 si mois courant
+  // Priorit‚àö√â¬¨¬© : mois sp‚àö√â¬¨¬©cifique PROD26_MO[mo], fallback sur PROD26 si mois courant
   const nowMo = new Date().getMonth()+1;
   const pr26 = PROD26_MO[mo] || (mo===nowMo ? PROD26 : null);
   const hasPr26 = pr26 && pr26.nb > 0;
@@ -1829,7 +1829,7 @@ function updatePart3(mo){
     {label:'2026 nb resa',data:catVals26,backgroundColor:COLS,borderRadius:4}
   ]},{plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
 
-  // Canal 2025 : cl√É¬©s avec majuscule (Online/Agence/Autre)
+  // Canal 2025 : cl‚àö√â¬¨¬©s avec majuscule (Online/Agence/Autre)
   const tot25canal = Object.values(pr25.canal||{}).reduce((a,b)=>a+b,0)||1;
   const canal25=[
     pr25.canal?.Online||pr25.canal?.online||0,
