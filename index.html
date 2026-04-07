@@ -1248,7 +1248,7 @@ function applyData(data){
   window._lastSyncData = data; // Sauvegarde pour Vue Mois
   const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
   // KPIs header
-  if(data.nb!==undefined){ set('hdr-resa26',fmt(data.nb)); set('kpi-nb',fmt(data.nb)); }
+  if(data.nb!==undefined){ set('hdr-resa26',fmt(data.nb));  }
   if(data.ca!==undefined){ set('hdr-ca26',fmtE(data.ca)); set('kpi-ca',fmtE(data.ca)); }
   if(data.panier!==undefined){ set('kpi-panier',data.panier.toFixed(0)+' \u20AC'); }
   if(data.duree!==undefined){ set('kpi-duree',data.duree.toFixed(1)+' h'); }
