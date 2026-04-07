@@ -1264,9 +1264,9 @@ function applyData(data){
   const _nb25=Object.entries(W25).filter(([k])=>parseInt(k.split('-W')[1])<=_nwk).reduce((s,[,v])=>s+v.nb,0);
   const _ca25=Object.entries(W25).filter(([k])=>parseInt(k.split('-W')[1])<=_nwk).reduce((s,[,v])=>s+v.ca,0);
   const _e25=document.getElementById('kpi-nb25');if(_e25)_e25.textContent=_nb25+' resa (\u00e0 S'+_nwk+')';
-  const _eca=document.getElementById('kpi-ca-date');if(_eca)_eca.textContent=fmtE(data.ca||0);
+  const _eca=document.getElementById('kpi-ca-date');if(_eca)_eca.textContent=fmtE(data.ca_realise||0);
   const _eca25=document.getElementById('kpi-ca25-date');if(_eca25)_eca25.textContent=fmtE(Math.round(_ca25))+' (2025 S'+_nwk+')';
-  ev('ev-ca-date',data.ca||0,_ca25);
+  ev('ev-ca-date',data.ca_realise||0,_ca25);
   if(data.nb) ev('ev-nb',data.nb,_nb25);
   if(data.panier) ev('ev-panier',data.panier,98.9);
   if(data.duree) ev('ev-duree',data.duree,26.5);
