@@ -38,7 +38,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#1a202c;fo
 .s-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#64748b;display:flex;align-items:center;gap:8px;margin:18px 0 10px}
 .s-title::after{content:'';flex:1;height:1px;background:#e2e8f0}
 /* KPI STRIP */
-.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px}
+.kpi-row{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:16px}
 .kpi{background:white;border-radius:10px;padding:13px 15px;box-shadow:0 1px 3px rgba(0,0,0,.07);position:relative;overflow:hidden}
 .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
 .kpi.k1::before{background:#2563eb}.kpi.k2::before{background:#059669}
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded',function(){
 <!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TABS NAV &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 <div class="tabs-nav">
   <button class="tab-btn active" onclick="showTab(0)">Vue d'ensemble</button>
-  <button class="tab-btn" onclick="showTab(5)">Vue Mois (Mars)</button>
+  <button class="tab-btn" id="tab-btn-mois" onclick="showTab(5)">Vue Mois (Mars)</button>
   <button class="tab-btn" onclick="showTab(1)">Saisonnalit&eacute;</button>
   <button class="tab-btn" onclick="showTab(2)">Cat&eacute;gories</button>
   <button class="tab-btn" onclick="showTab(3)">Rentabilit&eacute; flotte</button>
@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded',function(){
       <div class="kl">CA TTC</div>
       <div class="v25">449 980 &#8364; (saison 25)</div>
       <div class="kpi-vals"><span class="v26" id="kpi-ca">15 174 &#8364;</span><span class="ev fl" id="ev-ca">Pipeline</span></div>
-      <div class="ks">S&eacute;curis&eacute; &agrave; date</div>
+      <div class="ks">CA Total Pipeline</div>
     </div>
     <div class="kpi k2">
       <div class="kl">R&eacute;servations</div>
@@ -816,7 +816,7 @@ function fmtE(n){return fmt(n)+' \u20AC';}
 
 // \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 TABS \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 let initedTabs = new Set([0]);
-function showTab(i) {
+function showTab(i) {window.scrollTo(0,0);
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.getAttribute('onclick')==='showTab('+i+')'));
   document.querySelectorAll('.tab-content').forEach(c=>c.classList.toggle('active', c.id==='tab'+i));
   if(!initedTabs.has(i)){initedTabs.add(i);setTimeout(()=>initChartsForTab(i),50);}
@@ -1305,7 +1305,7 @@ function applyData(data){
   if(data.prod_monthly) Object.entries(data.prod_monthly).forEach(([k,v])=>PROD26_MO[parseInt(k)]=decodeProd(v));
   // Rafra‚àö√â¬¨√Üchir Vue Mois si elle est active
   if(document.getElementById('tab5')?.classList.contains('active')){
-    const mo=parseInt(document.getElementById('m5-sel')?.value||3);
+    const mo=parseInt(document.getElementById('m5-sel')?.value||3);const _tbm2=document.getElementById('tab-btn-mois');if(_tbm2)_tbm2.textContent='Vue Mois ('+(NOMS_MOIS[mo]||'Mars')+')';
     updatePart2(mo); updatePart3(mo);
   }
 }
@@ -1455,7 +1455,7 @@ function decodeCAT(o){if(!o||typeof o!=='object')return o;const r={};Object.entr
 
 function onMoisChange(){
   const mo = parseInt(document.getElementById('m5-sel').value);
-  const nom = NOMS_MOIS[mo]||'Mars';
+  const nom = NOMS_MOIS[mo]||'Mars';const _tbm=document.getElementById('tab-btn-mois');if(_tbm)_tbm.textContent='Vue Mois ('+nom+')';
   ['m5-p2-titre','m5-p3-titre','m5-pr-mois-lbl','m5-pr-lead-lbl','m5-pr-cat-lbl','m5-pr-canal-lbl'].forEach(id=>{
     const e=document.getElementById(id); if(e) e.textContent=nom;
   });
