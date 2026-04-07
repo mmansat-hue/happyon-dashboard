@@ -1260,7 +1260,7 @@ function applyData(data){
     el.textContent=(p>0?'\u25B2 +':'\u25BC ')+Math.abs(p).toFixed(1)+'%';
     el.className='ev '+(Math.abs(p)<0.5?'fl':up?'up':'dn');
   };
-  const _nwk=getISOWeek(new Date()).week;
+  const _nwk=getISOWeek(new Date());
   const _nb25=Object.entries(W25).filter(([k])=>parseInt(k.split('-W')[1])<=_nwk).reduce((s,[,v])=>s+v.nb,0);
   const _ca25=Object.entries(W25).filter(([k])=>parseInt(k.split('-W')[1])<=_nwk).reduce((s,[,v])=>s+v.ca,0);
   const _e25=document.getElementById('kpi-nb25');if(_e25)_e25.textContent=_nb25+' resa (√† S'+_nwk+')';
