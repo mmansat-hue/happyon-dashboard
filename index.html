@@ -1861,7 +1861,7 @@ function initTab5(){
   }
 
   updatePart1();
-  const _mo=new Date().getMonth()+1;const _sel=document.getElementById('m5-sel');if(_sel)_sel.value=_mo;updatePart2(_mo);
+  const _mo=new Date().getMonth()+1;const _sel=document.getElementById('m5-sel');if(_sel){_sel.value=_mo;onMoisChange();}else{updatePart2(_mo);}
   updatePart3(3);
 }
 
