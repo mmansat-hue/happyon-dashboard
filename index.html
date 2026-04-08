@@ -1268,7 +1268,7 @@ function applyData(data){
   const _eca25=document.getElementById('kpi-ca25-date');if(_eca25)_eca25.textContent=fmtE(Math.round(_ca25))+' (2025 S'+_nwk+')';
   ev('ev-ca-date',data.ca_realise||0,_ca25);
   if(data.nb) ev('ev-nb',data.nb_realise!=null?data.nb_realise:data.nb,_nb25);
-  if(data.panier) ev('ev-panier',data.panier,98.9);
+  if(data.panier){if(data.nb_realise&&data.nb_realise>0){ev('ev-panier',Math.round(data.ca_realise/data.nb_realise),98.9);}else{ev('ev-panier',data.panier,98.9);}}
   if(data.duree) ev('ev-duree',data.duree,26.5);
   if(data.tauxSolde) ev('ev-solde',data.tauxSolde,99.1,true);
   // Mise \u00E0 jour graphique CA mensuel si donn\u00E9es monthly
@@ -1529,7 +1529,7 @@ function updatePart1(){
     tbody.innerHTML='<tr><td colspan="8" style="text-align:center;color:#94a3b8;font-style:italic;padding:10px">Synchroniser pour afficher les donn\u00E9es 2026</td></tr>';
     return;
   }
-  tbody.innerHTML = allCats.sort().map(cat=>{
+  tbody.innerHTML = allCats.filter(c=>/^[A-Z]/.test(c)||c==='autre').sort().map(cat=>{
     const c25=cats25[cat]||{nb:0,ca:0};
     const c26=cats26[cat]||{nb:0,ca:0};
     const p25=c25.nb?Math.round(c25.ca/c25.nb):0;
