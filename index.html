@@ -711,7 +711,7 @@ document.addEventListener('DOMContentLoaded',function(){
         <div id="m5-cal-wrap" style="margin-top:8px"></div></div>
       <div class="card"><h3>R&eacute;partitions 2025</h3>
         <div class="sub" id="m5-distrib-sub">Dur&eacute;es &amp; cr&eacute;neaux &mdash; mois s&eacute;lectionn&eacute;</div>
-        <div class="ch-wrap h220"><canvas id="c-m5-heat"></canvas></div></div>
+        <div class="ch-wrap h220"><canvas id="c-m5-heat-disabled"></canvas></div></div>
     </div>
   </div>
 
@@ -1640,7 +1640,7 @@ function updatePart2(mo){
     {label:lbl26panier,data:panier26byCat,backgroundColor:COLS,borderRadius:4}
   ]},{plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'\u20AC'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:9}}}}});
 
-  mkChart('c-m5-heat','bar',{labels:wL,datasets:[{data:d25.wdaynb||[0,0,0,0,0,0,0],backgroundColor:(d25.wdaynb||[]).map(v=>v>=8?'rgba(220,38,38,.8)':v>=5?'rgba(217,119,6,.8)':'rgba(37,99,235,.6)'),borderRadius:4}]},{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{display:false}}}});
+  mkChart('c-m5-heat-disabled','bar',{labels:wL,datasets:[{data:d25.wdaynb||[0,0,0,0,0,0,0],backgroundColor:(d25.wdaynb||[]).map(v=>v>=8?'rgba(220,38,38,.8)':v>=5?'rgba(217,119,6,.8)':'rgba(37,99,235,.6)'),borderRadius:4}]},{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{display:false}}}});
 
   // ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ TABLEAU COMPARATIF CAT‚àö√â¬¨√¢GORIES ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ‚àö¬¢¬¨√Æ¬¨√Ñ
   // Ic‚àö√â¬¨¬•nes par nom de cat‚àö√â¬¨¬©gorie
@@ -1766,8 +1766,8 @@ function updatePart2(mo){
   }
 
   // graphique distribution dur‚àö√â¬¨¬©es 2025
-  if(CHARTS['c-m5-heat']){CHARTS['c-m5-heat'].destroy();delete CHARTS['c-m5-heat'];}
-  mkChart('c-m5-heat','bar',{labels:wL,datasets:[{label:'Nb r\u00E9sa 2025',data:d25.wdaynb||[0,0,0,0,0,0,0],backgroundColor:(d25.wdaynb||[]).map(v=>v>=8?'rgba(220,38,38,.8)':v>=5?'rgba(217,119,6,.8)':'rgba(37,99,235,.6)'),borderRadius:4}]},{plugins:{legend:{display:false},title:{display:true,text:'R\u00E9partitions nb r\u00E9sa par jour semaine \u2014 2025',font:{size:10}}},scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{display:false}}}});
+  if(CHARTS['c-m5-heat-disabled']){CHARTS['c-m5-heat-disabled'].destroy();delete CHARTS['c-m5-heat-disabled'];}
+  mkChart('c-m5-heat-disabled','bar',{labels:wL,datasets:[{label:'Nb r\u00E9sa 2025',data:d25.wdaynb||[0,0,0,0,0,0,0],backgroundColor:(d25.wdaynb||[]).map(v=>v>=8?'rgba(220,38,38,.8)':v>=5?'rgba(217,119,6,.8)':'rgba(37,99,235,.6)'),borderRadius:4}]},{plugins:{legend:{display:false},title:{display:true,text:'R\u00E9partitions nb r\u00E9sa par jour semaine \u2014 2025',font:{size:10}}},scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{display:false}}}});
 }
 
 function updatePart3(mo){
