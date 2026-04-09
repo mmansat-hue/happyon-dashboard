@@ -1862,7 +1862,7 @@ function initTab5(){
 
   updatePart1();
   const _mo=new Date().getMonth()+1;const _sel=document.getElementById('m5-sel');setTimeout(()=>{const _s=document.getElementById('m5-sel');if(_s){_s.value=_mo;onMoisChange();}else{updatePart2(_mo);}},50);
-  updatePart3(3);
+  updatePart3(new Date().getMonth()+1);
 }
 
 </script>
