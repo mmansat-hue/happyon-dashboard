@@ -1634,7 +1634,7 @@ function updatePart2(mo){
     const d = ca26byName[n];
     return (d && d.nb) ? Math.round(d.ca / d.nb) : 0;
   });
-  const lbl26panier = Object.keys(allCats26mo).length ? '2026 '+NOMS_MOIS[mo] : '2026 saison';  mkChart('c-m5-canal','bar',{labels:cN,datasets:[{label:'2025',data:panier25byCat,backgroundColor:'rgba(148,163,184,.65)',borderRadius:4},{label:lbl26panier,data:panier26byCat,backgroundColor:COLS,borderRadius:4}]},{plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'\u20AC'},grid:{color:gridColor}},x:{grid:{display:false}}}});
+  const lbl26panier = Object.keys(allCats26mo).length ? '2026 '+NOMS_MOIS[mo] : '2026 saison';  mkChart('c-m5-canal','doughnut',{labels:cN,datasets:[{label:'2025',data:panier25byCat,backgroundColor:'rgba(148,163,184,.65)',borderRadius:4},{label:lbl26panier,data:panier26byCat,backgroundColor:COLS,borderRadius:4}]},{plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'\u20AC'},grid:{color:gridColor}},x:{grid:{display:false}}}});
   mkChart('c-m5-panier','bar',{labels:cN,datasets:[
     {label:'2025',data:panier25byCat,backgroundColor:'rgba(148,163,184,.65)',borderRadius:4},
     {label:lbl26panier,data:panier26byCat,backgroundColor:COLS,borderRadius:4}
