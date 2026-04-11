@@ -1305,7 +1305,7 @@ function applyData(data){
   if(data.prod_monthly) Object.entries(data.prod_monthly).forEach(([k,v])=>PROD26_MO[parseInt(k)]=decodeProd(v));
   // Rafra‚àö√â¬¨√Üchir Vue Mois si elle est active
   if(document.getElementById('tab5')?.classList.contains('active')){
-    const mo=parseInt(document.getElementById('m5-sel')?.value||3);const _tbm2=document.getElementById('tab-btn-mois');if(_tbm2)_tbm2.textContent='Vue Mois ('+(NOMS_MOIS[mo]||'Mars')+')';
+    const mo=parseInt(document.getElementById('m5-sel')?.value||3);const _tbm2=document.getElementById('tab-btn-mois');if(_tbm2)_tbm2.textContent='Vue Mois ('+(NOMS_MOIS[mo]||'Mars')+')';     updatePart1(); updatePart2(mo); updatePart3(mo);
     
   }
 }
