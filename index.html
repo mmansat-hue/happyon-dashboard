@@ -767,7 +767,7 @@ document.addEventListener('DOMContentLoaded',function(){
         <div class="sub">R&eacute;serv. cr&eacute;&eacute;es en <span id="m5-pr-cat-lbl">mars</span> &mdash; 2025 vs 2026</div>
         <div class="ch-wrap h200"><canvas id="c-m5-pr-cat"></canvas></div></div>
       <div class="card"><h3>Canal de r&eacute;servation</h3>
-        <div class="sub">Online / Agence / Autre &mdash; r&eacute;serv. cr&eacute;&eacute;es en <span id="m5-pr-canal-lbl">mars</span></div>
+        <div class="sub">Online / Agence / Autre &mdash; r&eacute;serv. cr&eacute;&eacute;es en <span id="">mars</span></div>
         <div class="ch-wrap h200"><canvas id="c-m5-pr-canal"></canvas></div>
         <div class="ibox"><p id="m5-pr-canal-insight">Mars 2025 : 51 % online (35 resa), 47 % agence (32 resa), 1 % Lokki &mdash; mix &eacute;quilibr&eacute;.</p></div></div>
     </div>
@@ -1456,14 +1456,10 @@ function decodeCAT(o){if(!o||typeof o!=='object')return o;const r={};Object.entr
 function onMoisChange(){
   const mo = parseInt(document.getElementById('m5-sel').value);
   const nom = NOMS_MOIS[mo]||'Mars';const _tbm=document.getElementById('tab-btn-mois');if(_tbm)_tbm.textContent='Vue Mois ('+nom+')';
-  ['m5-p2-titre','m5-p3-titre','m5-pr-mois-lbl','m5-pr-lead-lbl','m5-pr-cat-lbl','m5-pr-canal-lbl'].forEach(id=>{
+  ['m5-p2-titre','m5-p3-titre','m5-pr-mois-lbl','m5-pr-lead-lbl','m5-pr-cat-lbl',''].forEach(id=>{
     const e=document.getElementById(id); if(e) e.textContent=nom;
   });
- }
-  updatePart3(mo);
-}
-
-function getISOWeek(d){
+m5-pr-canal-lbl(d){
   const date=new Date(d.getTime());
   date.setHours(0,0,0,0);
   date.setDate(date.getDate()+3-(date.getDay()+6)%7);
