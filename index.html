@@ -1456,17 +1456,9 @@ function decodeCAT(o){if(!o||typeof o!=='object')return o;const r={};Object.entr
 function onMoisChange(){
   const mo = parseInt(document.getElementById('m5-sel').value);
   const nom = NOMS_MOIS[mo]||'Mars';const _tbm=document.getElementById('tab-btn-mois');if(_tbm)_tbm.textContent='Vue Mois ('+nom+')';
-  ['m5-p2-titre','m5-p3-titre','m5-pr-mois-lbl','(id=>{
+  ['m5-p2-titre','m5-p3-titre','
     const e=document.getElementById(id); if(e) e.textContent=nom;
-m5-pr-cat-lbl','m5-pr-canal-lbl']
-  const date=new Date(d.getTime());
-  date.setHours(0,0,0,0);
-  date.setDate(date.getDate()+3-(date.getDay()+6)%7);
-  const w1=new Date(date.getFullYear(),0,4);
-  return 1+Math.round(((date.getTime()-w1.getTime())/86400000-3+(w1.getDay()+6)%7)/7);
-}
-
-function getWeekDates(wk, yr){
+m5-pr-cat-lbl','m5-pr-mois-lbl','m5-pr-lead-lbl','m5-pr-cat-lbl','m5-pr-canal-lbl'].forEach(id=>{(wk, yr){
   const jan4=new Date(yr,0,4);
   const d=new Date(jan4.getTime()+(wk-1)*7*86400000);
   d.setDate(d.getDate()-((d.getDay()+6)%7));
