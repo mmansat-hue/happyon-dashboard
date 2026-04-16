@@ -1456,11 +1456,11 @@ function decodeCAT(o){if(!o||typeof o!=='object')return o;const r={};Object.entr
 function onMoisChange(){
   const mo = parseInt(document.getElementById('m5-sel').value);
   const nom = NOMS_MOIS[mo]||'Mars';const _tbm=document.getElementById('tab-btn-mois');if(_tbm)_tbm.textContent='Vue Mois ('+nom+')';
-  ['
+m5-pr-cat-lbl','  });
     const e=document.getElementById(id); if(e) e.textContent=nom;
-m5-pr-cat-lbl','(id=>{(wk, yr){
-m5-pr-canal-lbl'].forEach(id=>{
-  const d=new Date(jan4.getTime()+(wk-1)*7*86400000);
+
+  });
+    updatePart2(mo);
   d.setDate(d.getDate()-((d.getDay()+6)%7));
   const fin=new Date(d.getTime()+6*86400000);
   const fmt=dt=>dt.getDate()+(dt.getMonth()!==d.getMonth()?' '+NOMS_MOIS[dt.getMonth()+1].substring(0,3):'');
@@ -1550,7 +1550,7 @@ function updatePart2(mo){
   const lbl26 = hasMo26 ? nomMo+' 2026' : '2026 (non synchro)';
 
   // Mettre les labels de contexte
-  ['m5-ks-ca','m5-ks-nb','m5-ks-p'].forEach(id=>s(id, nomMo+' 2025 vs '+lbl26));
+m5-pr-cat-lbl','  });m5-ks-ca','m5-ks-nb','m5-ks-p'].forEach(id=>s(id, nomMo+' 2025 vs '+lbl26));
   s('m5-ks-solde', nomMo+' 2025 vs 2026 global');
 
   if(hasMo26){
@@ -1562,8 +1562,8 @@ function updatePart2(mo){
     if(d25.nb)   setEv('m5-ev-nb', Math.round((d26mo.nb-d25.nb)/d25.nb*100));
     if(d25.panier) setEv('m5-ev-p', Math.round((p26-d25.panier)/d25.panier*100));
   } else {
-    ['m5-ca26','m5-nb26','m5-p26'].forEach(id=>s(id,'\u2014'));
-    ['m5-ev-ca','m5-ev-nb','m5-ev-p'].forEach(id=>{s(id,'\u2014');const e=document.getElementById(id);if(e)e.className='ev fl';});
+  m5-pr-cat-lbl','  });m5-ca26','m5-nb26','m5-p26'].forEach(id=>s(id,'\u2014'));
+  m5-pr-cat-lbl','  });m5-ev-ca','m5-ev-nb','m5-ev-p'].forEach(id=>{s(id,'\u2014');const e=document.getElementById(id);if(e)e.className='ev fl';});
   }
 
   // Taux sold‚àö√â¬¨¬© 2026 global (non disponible par mois)
@@ -1579,7 +1579,7 @@ function updatePart2(mo){
   }
 
   // Reconstruire graphiques partie 2
-  ['c-m5-lead','c-m5-panier','c-m5-canal','c-m5-cacat'].forEach(id=>{if(CHARTS[id]){CHARTS[id].destroy();delete CHARTS[id];}});
+m5-pr-cat-lbl','  });c-m5-lead','c-m5-panier','c-m5-canal','c-m5-cacat'].forEach(id=>{if(CHARTS[id]){CHARTS[id].destroy();delete CHARTS[id];}});
 
   var wL=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
 
@@ -1790,7 +1790,7 @@ function updatePart3(mo){
   }
 
   // Graphiques partie 3
-  ['c-m5-pr-mois','c-m5-pr-lead','c-m5-pr-cat','c-m5-pr-canal'].forEach(id=>{if(CHARTS[id]){CHARTS[id].destroy();delete CHARTS[id];}});
+m5-pr-cat-lbl','  });c-m5-pr-mois','c-m5-pr-lead','c-m5-pr-cat','c-m5-pr-canal'].forEach(id=>{if(CHARTS[id]){CHARTS[id].destroy();delete CHARTS[id];}});
 
   const MOIS_NMS=['Mar','Avr','Mai','Juin','Juil','Ao\u00FBt','Sep','Oct'];
   const moisData25=[3,4,5,6,7,8,9,10].map(m=>pr25.mois_debut?.[m]||0);
