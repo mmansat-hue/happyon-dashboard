@@ -1458,8 +1458,8 @@ function onMoisChange(){
   const nom = NOMS_MOIS[mo]||'Mars';const _tbm=document.getElementById('tab-btn-mois');if(_tbm)_tbm.textContent='Vue Mois ('+nom+')';
   ['
     const e=document.getElementById(id); if(e) e.textContent=nom;
-m5-pr-cat-lbl','m5-pr-mois-lbl','m5-pr-lead-lbl','m5-pr-cat-lbl','m5-pr-canal-lbl'].forEach(id=>{(wk, yr){
-  const jan4=new Date(yr,0,4);
+m5-pr-cat-lbl','(id=>{(wk, yr){
+m5-pr-canal-lbl'].forEach(id=>{
   const d=new Date(jan4.getTime()+(wk-1)*7*86400000);
   d.setDate(d.getDate()-((d.getDay()+6)%7));
   const fin=new Date(d.getTime()+6*86400000);
