@@ -233,7 +233,8 @@ function normRow(row,year){
   }catch(e){ERR_COUNT++;return null;}
 }
 function parseCSVText(text,year){
-  const p=Papa.parse(text,{header:true,skipEmptyLines:true});
+  const p=Papa.parse(text,{header:true,skipEmptyLines:true,delimitersToGuess:[',',';','\t','|']});
+  console.log('Parsing année',year,'- lignes CSV détectées:',p.data.length,'- délimiteur:',p.meta.delimiter,'- premier:',p.data[0]);
   const out=[];
   p.data.forEach(r=>{const n=normRow(r,year);if(n)out.push(n);});
   return out;
