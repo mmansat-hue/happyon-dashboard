@@ -1548,7 +1548,7 @@ function updatePart2(mo){
   s('m5-p25',  d25.panier+' \u20AC');
   // Dur‚àö√â¬¨¬©e : dispo en 2025, pas encore en 2026
   s('m5-dur25', d25.dur ? d25.dur+' h' : '\u2014');
-  {const _d=window._lastSyncData?.durees;const _t=_d?((_d['lt8h']||0)+(_d['8-24h']||0)+(_d['1-2j']||0)+(_d['3-5j']||0)+(_d['6jplus']||0)):0;s('m5-dur26',_t?Math.round(((_d['lt8h']||0)*8+(_d['8-24h']||0)*16+(_d['1-2j']||0)*36+(_d['3-5j']||0)*96+(_d['6jplus']||0)*192)/_t)+' h':'\u2014');}
+  {const _dur=window._lastSyncData?.duree;s('m5-dur26',_dur?_dur.toFixed(1)+' h':'\u2014');}
   // Taux sold‚àö√â¬¨¬© 2025 = stat saison globale (99.1%) ‚àö¬¢¬¨√Ñ¬¨√Æ pas dispo par mois
   s('m5-taux25', '99,1 %');
 
@@ -1626,7 +1626,8 @@ function updatePart2(mo){
   const panier25byCat = (CATS25[mo]||CATS25[3]).map(c => c.panier || 0);
   const panier26byCat = cN.map(n => {
     const d = ca26byName[n];
-    return (d && d.nb) ? Math.round(d.ca / d.nb) : 0;
+    const nbR = (d && (d.nb_resa||d.nb)) ? (d.nb_resa||d.nb) : 0;
+    return nbR ? Math.round(d.ca / nbR) : 0;
   });
   const canalMo=PROD26_MO[mo]?.canal||{};const lbl26panier = Object.keys(allCats26mo).length ? '2026 '+NOMS_MOIS[mo] : '2026 saison';  mkChart('c-m5-canal','doughnut',{labels:['Online','Agence','Autre'],datasets:[{data:[canalMo.Online||0,canalMo.Agence||0,(canalMo.Phone||0)+(canalMo.Autre||0)],backgroundColor:['rgba(37,99,235,.85)','rgba(34,197,94,.85)','rgba(148,163,184,.7)'],borderWidth:2}]},{plugins:{legend:{display:true,position:'right',labels:{font:{size:10},boxWidth:12}}}});
   mkChart('c-m5-panier','bar',{labels:cN,datasets:[
