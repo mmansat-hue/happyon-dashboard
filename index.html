@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy-On Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#f3f4f6;color:#111827;font-size:13px}
+  #login{position:fixed;inset:0;background:#0f172a;display:flex;align-items:center;justify-content:center;z-index:1000;flex-direction:column;gap:16px}
+  #login h1{color:#fff;font-size:24px}
+  #login input{padding:10px 16px;font-size:14px;border-radius:6px;border:none;width:260px}
+  #login button{padding:10px 24px;background:#3b82f6;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:600}
+  #login .err{color:#ef4444;height:18px;font-size:12px}
+  header{background:#0f172a;color:#fff;padding:12px 20px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+  header h1{font-size:17px;font-weight:600}
+  header .spacer{flex:1}
+  header .meta{font-size:11px;color:#94a3b8}
+  header button{background:#3b82f6;color:#fff;border:none;padding:7px 14px;border-radius:5px;cursor:pointer;font-size:12px;font-weight:600}
+  header button:hover{background:#2563eb}
+  header button:disabled{background:#475569;cursor:wait}
+  .err-count{background:#dc2626;color:#fff;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:600}
+  .err-count.ok{background:#10b981}
+  nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:0 20px;display:flex;gap:4px}
+  nav button{background:none;border:none;padding:12px 18px;cursor:pointer;font-size:13px;color:#6b7280;border-bottom:3px solid transparent;font-weight:500}
+  nav button.active{color:#0f172a;border-bottom-color:#3b82f6;font-weight:600}
+  main{padding:16px 20px}
+  .section-band{color:#fff;padding:10px 14px;border-radius:6px 6px 0 0;font-weight:600;font-size:12px;letter-spacing:.5px;display:flex;align-items:center;gap:10px;margin-top:16px}
+  .section-band .badge{background:rgba(255,255,255,.2);width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px}
+  .band-dark{background:#0f172a}
+  .band-blue{background:#1e3a8a}
+  .band-green{background:#065f46}
+  .band-orange{background:#c2410c}
+  .kpi-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;background:#fff;padding:14px;border-radius:0 0 6px 6px;border:1px solid #e5e7eb;border-top:none}
+  .kpi-grid.g5{grid-template-columns:repeat(5,1fr)}
+  .kpi-grid.g4{grid-template-columns:repeat(4,1fr)}
+  .kpi-grid.g3{grid-template-columns:repeat(3,1fr)}
+  .kpi{padding:10px;border-top:3px solid #3b82f6;background:#f9fafb;border-radius:4px}
+  .kpi.accent-ca{border-top-color:#3b82f6}
+  .kpi.accent-resa{border-top-color:#10b981}
+  .kpi.accent-panier{border-top-color:#f59e0b}
+  .kpi.accent-duree{border-top-color:#8b5cf6}
+  .kpi.accent-solde{border-top-color:#ef4444}
+  .kpi.accent-date{border-top-color:#06b6d4}
+  .kpi .lbl{font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+  .kpi .val{font-size:20px;font-weight:700;margin-top:6px;line-height:1.1}
+  .kpi .sub{font-size:11px;color:#6b7280;margin-top:3px}
+  .kpi .delta{display:inline-block;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:600;margin-top:5px}
+  .delta.pos{background:#d1fae5;color:#065f46}
+  .delta.neg{background:#fee2e2;color:#991b1b}
+  .delta.neu{background:#f3f4f6;color:#4b5563}
+  .card{background:#fff;border:1px solid #e5e7eb;border-radius:6px;padding:14px;margin-top:12px}
+  .card h3{font-size:13px;font-weight:600;margin-bottom:3px}
+  .card .sub{font-size:11px;color:#6b7280;margin-bottom:10px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+  th{text-align:left;color:#6b7280;font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:.5px;padding:8px 6px;border-bottom:1px solid #e5e7eb}
+  td{padding:8px 6px;border-bottom:1px solid #f3f4f6}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  select{padding:7px 10px;border-radius:5px;border:1px solid #d1d5db;font-size:13px;background:#fff;cursor:pointer}
+  .chart-wrap{position:relative;height:260px}
+  .chart-wrap.tall{height:320px}
+  .calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-top:8px}
+  .cal-day{aspect-ratio:1;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#6b7280;background:#f3f4f6}
+  .cal-day.has{color:#fff}
+  .cal-header{font-weight:600;font-size:9px;text-transform:uppercase;color:#9ca3af;text-align:center;padding:4px}
+  .loading{text-align:center;padding:40px;color:#6b7280;font-size:13px}
+  .error-box{background:#fee2e2;color:#991b1b;padding:14px;border-radius:6px;border:1px solid #fecaca;margin:16px 0;font-size:12px;line-height:1.6}
+  .error-box code{background:#fef2f2;padding:2px 6px;border-radius:3px;font-family:ui-monospace,monospace;font-size:11px}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <h1>🔐 Happy-On Dashboard</h1>
+  <input type="password" id="pwd" placeholder="Mot de passe" autofocus>
+  <button onclick="checkPwd()">Entrer</button>
+  <div class="err" id="pwderr"></div>
+</div>
+
+<div id="app" hidden>
+  <header>
+    <h1>🚲 Happy-On Dashboard</h1>
+    <span class="meta" id="meta">—</span>
+    <span class="err-count ok" id="errcount">0 erreur parsing</span>
+    <div class="spacer"></div>
+    <button onclick="reload()" id="reloadBtn">🔄 Rafraîchir</button>
+  </header>
+  <nav>
+    <button class="active" data-view="ensemble" onclick="switchView('ensemble')">Vue Ensemble</button>
+    <button data-view="mois" onclick="switchView('mois')">Vue Mois</button>
+  </nav>
+  <main>
+    <div id="viewContent"><div class="loading">Chargement des données…</div></div>
+  </main>
+</div>
+
+<script>
+/* ============================================================
+   CONFIGURATION — À MODIFIER
+   ============================================================ */
+const CONFIG = {
+  // Mot de passe en clair (risque assumé)
+  password: 'HappyOn2026!',
+
+  // URLs CSV publiés des deux onglets du Google Sheet
+  // Fichier → Partager → Publier sur le web → choisir l'onglet → format "Valeurs séparées par des virgules (.csv)"
+  csvUrl2025: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQhjRPJXFoeQvzE42ndgRcxaz7lYkzFV8D4wYYg8HzBYo2p0AOanJiI2QjobQjMgzJNoex7XbbQJkf7/pub?gid=1067889758&single=true&output=csv',
+  csvUrl2026: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQhjRPJXFoeQvzE42ndgRcxaz7lYkzFV8D4wYYg8HzBYo2p0AOanJiI2QjobQjMgzJNoex7XbbQJkf7/pub?gid=181928389&single=true&output=csv'
+};
+
+/* ============================================================
+   AUTH
+   ============================================================ */
+function checkPwd(){
+  const v=document.getElementById('pwd').value;
+  if(v===CONFIG.password){
+    document.getElementById('login').style.display='none';
+    document.getElementById('app').hidden=false;
+    load();
+  }else{
+    document.getElementById('pwderr').textContent='Mot de passe incorrect';
+  }
+}
+document.getElementById('pwd').addEventListener('keydown',e=>{if(e.key==='Enter')checkPwd();});
+
+/* ============================================================
+   ÉTAT GLOBAL
+   ============================================================ */
+let DATA25=[],DATA26=[],ERR_COUNT=0,CHARTS=[];
+const TODAY=new Date();
+const MONTHS=['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
+const MONTHS_FULL=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+
+/* ============================================================
+   PARSING
+   ============================================================ */
+function parseDate(s,year){
+  if(!s||typeof s!=='string')return null;
+  s=s.trim();
+  if(!s)return null;
+  let m,d,y,hh=0,mm=0;
+  // Format 2026: DD/MM/YYYY HH:MM
+  let fr=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s+(\d{1,2}):(\d{2}))?$/);
+  if(fr){d=+fr[1];m=+fr[2];y=+fr[3];hh=+(fr[4]||0);mm=+(fr[5]||0);}
+  else{
+    // Format 2025: M/D/YY HH:MM (US)
+    let us=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2})(?:\s+(\d{1,2}):(\d{2}))?$/);
+    if(us){m=+us[1];d=+us[2];y=2000+(+us[3]);hh=+(us[4]||0);mm=+(us[5]||0);}
+    else return null;
+  }
+  if(m<1||m>12||d<1||d>31)return null;
+  const dt=new Date(y,m-1,d,hh,mm);
+  return isNaN(dt)?null:dt;
+}
+function parseMoney(s){
+  if(s==null)return 0;
+  if(typeof s==='number')return s;
+  s=String(s).trim();
+  if(!s)return 0;
+  // "496,00 €" ou "1487.50"
+  s=s.replace(/[€\s]/g,'').replace(/,/g,'.');
+  // Si plusieurs points (ex "1.487.50"), garder le dernier comme décimale
+  const parts=s.split('.');
+  if(parts.length>2)s=parts.slice(0,-1).join('')+'.'+parts[parts.length-1];
+  const n=parseFloat(s);
+  return isNaN(n)?0:n;
+}
+function mapCanal(o){
+  if(!o)return'Autre';
+  o=o.toUpperCase();
+  if(o.includes('ONLINE_STORE'))return'Online';
+  if(o.includes('QUICK_ORDER'))return'Agence';
+  if(o.includes('RENTAL_PLACE_LOKKI'))return'Lokki';
+  return'Autre';
+}
+function normRow(row,year){
+  try{
+    const dateCrea=parseDate(row['Date de création'],year);
+    const dateDebut=parseDate(row['Date de début'],year);
+    const dateFin=parseDate(row['Date de fin'],year);
+    const ttc=parseMoney(row['Total TTC']);
+    if(!dateDebut||!ttc){ERR_COUNT++;return null;}
+    const statut=(row['Statut de paiement']||'').trim();
+    let caEnc=0;
+    if(statut==='Soldé')caEnc=ttc;
+    else if(statut==='Partiellement Soldé'){
+      let sum=0;
+      Object.keys(row).forEach(k=>{if(k.startsWith('Montant paiement'))sum+=parseMoney(row[k]);});
+      caEnc=sum>0?Math.min(sum,ttc):ttc*0.5;
+    }
+    // Catégories produits (plusieurs colonnes répétées)
+    const cats={};
+    Object.keys(row).forEach(k=>{
+      if(k.startsWith('Catégorie de produit')){
+        const v=(row[k]||'').trim();
+        if(v){
+          // Chercher le prix correspondant via le suffixe (k='Catégorie de produit {productNb}' ou 'Catégorie de produit {productNb}34' etc)
+          const suf=k.replace('Catégorie de produit {productNb}','');
+          const prixKey='Prix du produit {productNb}'+suf;
+          const nbKey='Nombre de produits {productNb}'+suf;
+          const prix=parseMoney(row[prixKey]||0);
+          const nb=parseInt(row[nbKey]||0)||0;
+          cats[v]=cats[v]||{ca:0,nb:0};
+          cats[v].ca+=prix;
+          cats[v].nb+=nb;
+        }
+      }
+    });
+    const leadJours=dateCrea?Math.round((dateDebut-dateCrea)/86400000):null;
+    const dureeH=parseFloat(row['Durée de la location (en h)'])||0;
+    // Mode paiement principal
+    let modePaie='Non renseigné';
+    Object.keys(row).forEach(k=>{
+      if(k.startsWith('Type de paiement')&&!modePaie.length){/*noop*/}
+    });
+    const tp1=row['Type de paiement {paymentNb}']||'';
+    if(tp1){
+      if(tp1.toLowerCase().includes('cb'))modePaie='CB';
+      else if(tp1.toLowerCase().includes('apple'))modePaie='Apple/G.Pay';
+      else if(tp1.toLowerCase().includes('chèque')||tp1.toLowerCase().includes('ancv'))modePaie='Chèq.Vac/ANCV';
+      else if(tp1.toLowerCase().includes('espèce'))modePaie='Espèces';
+      else modePaie=tp1;
+    }
+    return{
+      dateCrea,dateDebut,dateFin,ttc,caEnc,statut,
+      canal:mapCanal(row['Origine']),
+      modePaie,leadJours,dureeH,cats,year
+    };
+  }catch(e){ERR_COUNT++;return null;}
+}
+function parseCSVText(text,year){
+  const p=Papa.parse(text,{header:true,skipEmptyLines:true});
+  const out=[];
+  p.data.forEach(r=>{const n=normRow(r,year);if(n)out.push(n);});
+  return out;
+}
+
+/* ============================================================
+   FETCH & LOAD
+   ============================================================ */
+async function load(){
+  const btn=document.getElementById('reloadBtn');
+  btn.disabled=true;btn.textContent='⏳ Chargement…';
+  ERR_COUNT=0;
+  const vc=document.getElementById('viewContent');
+  vc.innerHTML='<div class="loading">Chargement des données…</div>';
+
+  if(CONFIG.csvUrl2025.startsWith('COLLE_ICI')||CONFIG.csvUrl2026.startsWith('COLLE_ICI')){
+    vc.innerHTML=`<div class="error-box">
+      <strong>⚠️ Configuration requise</strong><br><br>
+      Édite le fichier <code>index.html</code> et remplace les valeurs <code>https://docs.google.com/spreadsheets/d/e/2PACX-1vQhjRPJXFoeQvzE42ndgRcxaz7lYkzFV8D4wYYg8HzBYo2p0AOanJiI2QjobQjMgzJNoex7XbbQJkf7/pub?gid=1067889758&single=true&output=csv</code> et <code>https://docs.google.com/spreadsheets/d/e/2PACX-1vQhjRPJXFoeQvzE42ndgRcxaz7lYkzFV8D4wYYg8HzBYo2p0AOanJiI2QjobQjMgzJNoex7XbbQJkf7/pub?gid=181928389&single=true&output=csv</code> par les vraies URLs CSV publiés de tes deux onglets.<br><br>
+      <strong>Comment obtenir ces URLs :</strong><br>
+      1. Ouvre ton Google Sheet<br>
+      2. Fichier → Partager → Publier sur le web<br>
+      3. Pour l'onglet 2025 : choisir "Feuille 2025" + format "Valeurs séparées par des virgules (.csv)" + Publier → copier l'URL<br>
+      4. Refaire pour l'onglet 2026<br>
+      5. Coller les 2 URLs dans le code JavaScript
+    </div>`;
+    btn.disabled=false;btn.textContent='🔄 Rafraîchir';
+    return;
+  }
+
+  try{
+    const [t25,t26]=await Promise.all([
+      fetch(CONFIG.csvUrl2025).then(r=>r.text()),
+      fetch(CONFIG.csvUrl2026).then(r=>r.text())
+    ]);
+    DATA25=parseCSVText(t25,2025);
+    DATA26=parseCSVText(t26,2026);
+    const ec=document.getElementById('errcount');
+    ec.textContent=ERR_COUNT+' erreur'+(ERR_COUNT>1?'s':'')+' parsing';
+    ec.className='err-count '+(ERR_COUNT===0?'ok':'');
+    document.getElementById('meta').textContent=`2025: ${DATA25.length} résa · 2026: ${DATA26.length} résa · maj ${TODAY.toLocaleString('fr-FR')}`;
+    render();
+  }catch(e){
+    vc.innerHTML=`<div class="error-box"><strong>Erreur chargement</strong><br>${e.message}<br><br>Vérifie que les URLs CSV sont bien publiques (Fichier → Partager → Publier sur le web).</div>`;
+  }
+  btn.disabled=false;btn.textContent='🔄 Rafraîchir';
+}
+function reload(){load();}
+
+/* ============================================================
+   KPI & STATS
+   ============================================================ */
+function sumCA(rows){return rows.reduce((s,r)=>s+r.ttc,0);}
+function sumCaEnc(rows){return rows.reduce((s,r)=>s+r.caEnc,0);}
+function avg(arr){return arr.length?arr.reduce((a,b)=>a+b,0)/arr.length:0;}
+function fmtEUR(n){return new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n||0);}
+function fmtNum(n,dec=0){return new Intl.NumberFormat('fr-FR',{maximumFractionDigits:dec}).format(n||0);}
+function delta(cur,ref){
+  if(!ref||ref===0)return{txt:'—',cls:'neu'};
+  const d=((cur-ref)/ref)*100;
+  return{txt:(d>=0?'▲+':'▼')+fmtNum(Math.abs(d),1)+' %',cls:d>=0?'pos':'neg'};
+}
+function deltaPts(cur,ref){
+  const d=cur-ref;
+  return{txt:(d>=0?'▲+':'▼')+fmtNum(Math.abs(d),1)+' pts',cls:d>=0?'pos':'neg'};
+}
+
+// Date équivalente année précédente (20 avril 2026 -> 20 avril 2025)
+function eqDate(d,toYear){return new Date(toYear,d.getMonth(),d.getDate(),23,59,59);}
+
+function filterUpToDate(rows,refDate,field='dateDebut'){
+  const ref=new Date(refDate.getFullYear(),refDate.getMonth(),refDate.getDate(),23,59,59);
+  return rows.filter(r=>r[field]&&r[field]<=ref);
+}
+function filterMonth(rows,year,month,field='dateDebut'){
+  return rows.filter(r=>r[field]&&r[field].getFullYear()===year&&r[field].getMonth()===month);
+}
+function filterYear(rows,year,field='dateDebut'){
+  return rows.filter(r=>r[field]&&r[field].getFullYear()===year);
+}
+function filterISOWeek(rows,date,field='dateDebut'){
+  const w=getISOWeek(date);
+  return rows.filter(r=>{if(!r[field])return false;const rw=getISOWeek(r[field]);return rw.year===w.year&&rw.week===w.week;});
+}
+function getISOWeek(d){
+  const target=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));
+  const day=target.getUTCDay()||7;
+  target.setUTCDate(target.getUTCDate()+4-day);
+  const yearStart=new Date(Date.UTC(target.getUTCFullYear(),0,1));
+  const week=Math.ceil(((target-yearStart)/86400000+1)/7);
+  return{year:target.getUTCFullYear(),week};
+}
+function getISOWeekRange(date){
+  const d=new Date(date);
+  const day=d.getDay()||7;
+  const mon=new Date(d);mon.setDate(d.getDate()-day+1);
+  const sun=new Date(mon);sun.setDate(mon.getDate()+6);
+  return{start:mon,end:sun};
+}
+
+function computeKPIs(rows){
+  const ca=sumCA(rows);
+  const nb=rows.length;
+  const caEnc=sumCaEnc(rows);
+  const leads=rows.filter(r=>r.leadJours!=null).map(r=>r.leadJours);
+  const durees=rows.filter(r=>r.dureeH>0).map(r=>r.dureeH);
+  return{
+    ca,nb,
+    panier:nb?ca/nb:0,
+    dureeH:avg(durees),
+    tauxSolde:ca?(caEnc/ca)*100:0,
+    leadMoy:avg(leads)
+  };
+}
+
+function leadBucket(j){
+  if(j==null)return null;
+  if(j<=0)return'Même jour';
+  if(j<=3)return'J+1-3';
+  if(j<=7)return'J+4-7';
+  if(j<=14)return'1-2 sem.';
+  return'1 mois+';
+}
+function leadDistrib(rows){
+  const buckets={'Même jour':0,'J+1-3':0,'J+4-7':0,'1-2 sem.':0,'1 mois+':0};
+  rows.forEach(r=>{const b=leadBucket(r.leadJours);if(b)buckets[b]++;});
+  return buckets;
+}
+function monthlyAgg(rows){
+  const ca=Array(12).fill(0),nb=Array(12).fill(0);
+  rows.forEach(r=>{if(r.dateDebut){const m=r.dateDebut.getMonth();ca[m]+=r.ttc;nb[m]++;}});
+  return{ca,nb};
+}
+function canalAgg(rows){
+  const c={Online:0,Agence:0,Lokki:0,Autre:0};
+  rows.forEach(r=>c[r.canal]=(c[r.canal]||0)+1);
+  return c;
+}
+function paiementAgg(rows){
+  const p={};
+  rows.forEach(r=>{const m=r.modePaie||'Non renseigné';p[m]=(p[m]||0)+1;});
+  return p;
+}
+function categoriesAgg(rows){
+  const agg={};
+  rows.forEach(r=>{
+    Object.entries(r.cats).forEach(([cat,v])=>{
+      agg[cat]=agg[cat]||{nb:0,ca:0};
+      agg[cat].nb+=v.nb;
+      agg[cat].ca+=v.ca;
+    });
+  });
+  return agg;
+}
+function joursLouesCat(rows){
+  const agg={};
+  rows.forEach(r=>{
+    const j=r.dureeH/24;
+    Object.keys(r.cats).forEach(cat=>{
+      agg[cat]=(agg[cat]||0)+j*r.cats[cat].nb;
+    });
+  });
+  return agg;
+}
+function calendarIntensity(rows,year,month){
+  const days={};
+  rows.forEach(r=>{
+    if(r.dateDebut&&r.dateDebut.getFullYear()===year&&r.dateDebut.getMonth()===month){
+      const d=r.dateDebut.getDate();
+      days[d]=(days[d]||0)+1;
+    }
+  });
+  return days;
+}
+
+/* ============================================================
+   RENDERING
+   ============================================================ */
+function destroyCharts(){CHARTS.forEach(c=>c.destroy());CHARTS=[];}
+function switchView(v){
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===v));
+  render(v);
+}
+function render(view){
+  view=view||document.querySelector('nav button.active').dataset.view;
+  destroyCharts();
+  const vc=document.getElementById('viewContent');
+  if(view==='ensemble')vc.innerHTML=htmlEnsemble();
+  else vc.innerHTML=htmlMois();
+  setTimeout(()=>{
+    if(view==='ensemble')drawEnsemble();
+    else drawMois();
+  },50);
+}
+
+/* ---------- VUE ENSEMBLE ---------- */
+function htmlEnsemble(){
+  const refDate=TODAY;
+  const eq25=eqDate(refDate,2025);
+  const rows26All=filterYear(DATA26,2026);
+  const rows25All=filterYear(DATA25,2025);
+  const rows26AD=filterUpToDate(rows26All,refDate);
+  const rows25AD=filterUpToDate(rows25All,eq25);
+  const k26=computeKPIs(rows26AD);
+  const k25=computeKPIs(rows25AD);
+  const kFull25=computeKPIs(rows25All);
+
+  const dCA=delta(k26.ca,k25.ca),dNb=delta(k26.nb,k25.nb),dP=delta(k26.panier,k25.panier);
+  const dD=delta(k26.dureeH,k25.dureeH),dS=deltaPts(k26.tauxSolde,k25.tauxSolde);
+
+  // Prod : résa créées à date
+  const prod26=filterUpToDate(rows26All,refDate,'dateCrea');
+  const prod25=filterUpToDate(rows25All,eq25,'dateCrea');
+  const kp26=computeKPIs(prod26);
+  const kp25=computeKPIs(prod25);
+  const c26=canalAgg(prod26);
+  const cTot26=Object.values(c26).reduce((a,b)=>a+b,0)||1;
+  const onlinePct26=(c26.Online/cTot26)*100;
+  const c25=canalAgg(prod25);
+  const cTot25=Object.values(c25).reduce((a,b)=>a+b,0)||1;
+  const onlinePct25=(c25.Online/cTot25)*100;
+  const dProd=delta(kp26.nb,kp25.nb),dProdCA=delta(kp26.ca,kp25.ca),dProdP=delta(kp26.panier,kp25.panier);
+
+  return`
+  <div class="section-band band-dark"><span class="badge">1</span> INDICATEURS CLÉS — COMPARAISON À DATE ${refDate.toLocaleDateString('fr-FR')}</div>
+  <div class="kpi-grid">
+    <div class="kpi accent-ca"><div class="lbl">CA TTC</div><div class="sub">${fmtEUR(kFull25.ca)} (saison 25)</div><div class="val">${fmtEUR(k26.ca)}</div><span class="delta ${dCA.cls}">${dCA.txt}</span><div class="sub">À date 2026 vs 2025 équivalent</div></div>
+    <div class="kpi accent-resa"><div class="lbl">Réservations</div><div class="sub">— à date 2025</div><div class="val">${fmtNum(k26.nb)}</div><span class="delta ${dNb.cls}">${dNb.txt}</span><div class="sub">Nb dossiers à date 2026</div></div>
+    <div class="kpi accent-panier"><div class="lbl">Panier moyen</div><div class="sub">${fmtEUR(k25.panier)}</div><div class="val">${fmtEUR(k26.panier)}</div><span class="delta ${dP.cls}">${dP.txt}</span><div class="sub">CA / nb réservations</div></div>
+    <div class="kpi accent-duree"><div class="lbl">Durée moyenne</div><div class="sub">${fmtNum(k25.dureeH,1)} h</div><div class="val">${fmtNum(k26.dureeH,1)} h</div><span class="delta ${dD.cls}">${dD.txt}</span><div class="sub">Heures par résa</div></div>
+    <div class="kpi accent-solde"><div class="lbl">Taux soldé</div><div class="sub">${fmtNum(k25.tauxSolde,1)} %</div><div class="val">${fmtNum(k26.tauxSolde,1)} %</div><span class="delta ${dS.cls}">${dS.txt}</span><div class="sub">CA encaissé / CA total</div></div>
+    <div class="kpi accent-date"><div class="lbl">CA à date</div><div class="sub">${fmtEUR(k25.ca)} (2025)</div><div class="val">${fmtEUR(k26.ca)}</div><span class="delta ${dCA.cls}">${dCA.txt}</span><div class="sub">Résa avec date début ≤ aujourd'hui</div></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card"><h3>CA TTC par mois — 2025 vs 2026</h3><div class="sub">Barres grises = 2025 · Barres bleues = 2026</div><div class="chart-wrap tall"><canvas id="chCA"></canvas></div></div>
+    <div class="card"><h3>Volume réservations par mois</h3><div class="sub">Nb résa / mois</div><div class="chart-wrap tall"><canvas id="chVol"></canvas></div></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card"><h3>Lead time — 2025 vs 2026</h3><div class="sub">Anticipation à la réservation</div><div class="chart-wrap"><canvas id="chLead"></canvas></div></div>
+    <div class="card"><h3>Modes de paiement — 2026</h3><div class="sub">${rows26All.length} résa totales 2026</div><div class="chart-wrap"><canvas id="chPay"></canvas></div></div>
+  </div>
+
+  <div class="section-band band-orange"><span class="badge">2</span> PROD À DATE — RÉSERVATIONS CRÉÉES (DATE DE CRÉATION ≤ ${refDate.toLocaleDateString('fr-FR')})</div>
+  <div class="kpi-grid g4">
+    <div class="kpi accent-resa"><div class="lbl">Résa créées</div><div class="sub">${fmtNum(kp25.nb)} en 2025</div><div class="val">${fmtNum(kp26.nb)}</div><span class="delta ${dProd.cls}">${dProd.txt}</span></div>
+    <div class="kpi accent-ca"><div class="lbl">CA réservé</div><div class="sub">${fmtEUR(kp25.ca)} en 2025</div><div class="val">${fmtEUR(kp26.ca)}</div><span class="delta ${dProdCA.cls}">${dProdCA.txt}</span></div>
+    <div class="kpi accent-panier"><div class="lbl">Panier moyen</div><div class="sub">${fmtEUR(kp25.panier)} en 2025</div><div class="val">${fmtEUR(kp26.panier)}</div><span class="delta ${dProdP.cls}">${dProdP.txt}</span></div>
+    <div class="kpi accent-date"><div class="lbl">% Online</div><div class="sub">${fmtNum(onlinePct25,0)} % en 2025</div><div class="val">${fmtNum(onlinePct26,0)} %</div><span class="delta ${deltaPts(onlinePct26,onlinePct25).cls}">${deltaPts(onlinePct26,onlinePct25).txt}</span></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card"><h3>Canal de réservation — Prod à date</h3><div class="sub">Répartition Online / Agence / Lokki</div><div class="chart-wrap"><canvas id="chCanal"></canvas></div></div>
+    <div class="card"><h3>Lead time — Résa créées à date</h3><div class="sub">Anticipation des résa récentes</div><div class="chart-wrap"><canvas id="chLeadProd"></canvas></div></div>
+  </div>
+  `;
+}
+
+function drawEnsemble(){
+  const refDate=TODAY;
+  const eq25=eqDate(refDate,2025);
+  const rows26All=filterYear(DATA26,2026);
+  const rows25All=filterYear(DATA25,2025);
+  const m25=monthlyAgg(rows25All),m26=monthlyAgg(rows26All);
+
+  CHARTS.push(new Chart(document.getElementById('chCA'),{
+    type:'bar',
+    data:{labels:MONTHS,datasets:[
+      {label:'2025',data:m25.ca,backgroundColor:'#9ca3af'},
+      {label:'2026',data:m26.ca,backgroundColor:'#3b82f6'}
+    ]},
+    options:{maintainAspectRatio:false,plugins:{legend:{position:'top',align:'start'}},scales:{y:{ticks:{callback:v=>fmtEUR(v)}}}}
+  }));
+
+  CHARTS.push(new Chart(document.getElementById('chVol'),{
+    type:'bar',
+    data:{labels:MONTHS,datasets:[
+      {label:'2025',data:m25.nb,backgroundColor:'#9ca3af'},
+      {label:'2026',data:m26.nb,backgroundColor:'#10b981'}
+    ]},
+    options:{maintainAspectRatio:false,plugins:{legend:{position:'top',align:'start'}}}
+  }));
+
+  const l25=leadDistrib(filterUpToDate(rows25All,eq25)),l26=leadDistrib(filterUpToDate(rows26All,refDate));
+  const labels=['Même jour','J+1-3','J+4-7','1-2 sem.','1 mois+'];
+  CHARTS.push(new Chart(document.getElementById('chLead'),{
+    type:'bar',
+    data:{labels,datasets:[
+      {label:'2025',data:labels.map(l=>l25[l]),backgroundColor:'#9ca3af'},
+      {label:'2026',data:labels.map(l=>l26[l]),backgroundColor:'#3b82f6'}
+    ]},
+    options:{maintainAspectRatio:false,plugins:{legend:{position:'top',align:'start'}}}
+  }));
+
+  const pa=paiementAgg(rows26All);
+  const pk=Object.keys(pa),pv=Object.values(pa);
+  CHARTS.push(new Chart(document.getElementById('chPay'),{
+    type:'doughnut',
+    data:{labels:pk,datasets:[{data:pv,backgroundColor:['#3b82f6','#10b981','#8b5cf6','#9ca3af','#ef4444','#f59e0b']}]},
+    options:{maintainAspectRatio:false,plugins:{legend:{position:'right'}}}
+  }));
+
+  const prod26=filterUpToDate(rows26All,refDate,'dateCrea');
+  const prod25=filterUpToDate(rows25All,eq25,'dateCrea');
+  const c26=canalAgg(prod26),c25=canalAgg(prod25);
+  CHARTS.push(new Chart(document.getElementById('chCanal'),{
+    type:'bar',
+    data:{labels:['Online','Agence','Lokki','Autre'],datasets:[
+      {label:'2025',data:['Online','Agence','Lokki','Autre'].map(k=>c25[k]||0),backgroundColor:'#9ca3af'},
+      {label:'2026',data:['Online','Agence','Lokki','Autre'].map(k=>c26[k]||0),backgroundColor:'#c2410c'}
+    ]},
+    options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{position:'top',align:'start'}}}
+  }));
+
+  const lp25=leadDistrib(prod25),lp26=leadDistrib(prod26);
+  CHARTS.push(new Chart(document.getElementById('chLeadProd'),{
+    type:'bar',
+    data:{labels,datasets:[
+      {label:'2025',data:labels.map(l=>lp25[l]),backgroundColor:'#9ca3af'},
+      {label:'2026',data:labels.map(l=>lp26[l]),backgroundColor:'#c2410c'}
+    ]},
+    options:{maintainAspectRatio:false,plugins:{legend:{position:'top',align:'start'}}}
+  }));
+}
+
+/* ---------- VUE MOIS ---------- */
+let SELECTED_MONTH=TODAY.getMonth();
+function htmlMois(){
+  let opts='';
+  for(let i=0;i<12;i++)opts+=`<option value="${i}"${i===SELECTED_MONTH?' selected':''}>${MONTHS_FULL[i]}</option>`;
+  return`
+  <div class="card" style="display:flex;align-items:center;gap:12px">
+    <strong>Mois :</strong>
+    <select id="monthSel" onchange="onMonthChange(this.value)">${opts}</select>
+    <span class="sub" style="margin-left:auto">2025 réalisé vs 2026 pipeline — données synchronisées</span>
+  </div>
+  ${renderSemaine()}
+  ${renderMoisBlock()}
+  ${renderProdBlock()}
+  `;
+}
+function onMonthChange(v){
+  SELECTED_MONTH=parseInt(v);
+  render('mois');
+}
+
+function renderSemaine(){
+  const w=getISOWeek(TODAY);
+  const rg=getISOWeekRange(TODAY);
+  const wk26=filterISOWeek(filterYear(DATA26,2026),TODAY);
+  const wk25=filterISOWeek(filterYear(DATA25,2025),new Date(2025,TODAY.getMonth(),TODAY.getDate()));
+  const k26=computeKPIs(wk26),k25=computeKPIs(wk25);
+  return`
+  <div class="section-band band-blue"><span class="badge">1</span> CHIFFRES DE LA SEMAINE — S ${w.week} — ${rg.start.toLocaleDateString('fr-FR',{day:'2-digit',month:'short'})} → ${rg.end.toLocaleDateString('fr-FR',{day:'2-digit',month:'short'})}</div>
+  <div class="kpi-grid g3">
+    <div class="kpi accent-ca"><div class="lbl">CA semaine</div><div class="sub">2025 : ${fmtEUR(k25.ca)}</div><div class="val">${fmtEUR(k26.ca)}</div><div class="sub">Semaine ISO ${w.week}</div></div>
+    <div class="kpi accent-resa"><div class="lbl">Locations semaine</div><div class="sub">2025 : ${fmtNum(k25.nb)}</div><div class="val">${fmtNum(k26.nb)}</div><div class="sub">Nb résa avec date début dans la semaine</div></div>
+    <div class="kpi accent-panier"><div class="lbl">Panier moyen</div><div class="sub">2025 : ${fmtEUR(k25.panier)}</div><div class="val">${fmtEUR(k26.panier)}</div><div class="sub">CA / nb résa</div></div>
+  </div>
+  `;
+}
+
+function renderMoisBlock(){
+  const m=SELECTED_MONTH;
+  const r26=filterMonth(DATA26,2026,m);
+  const r25=filterMonth(DATA25,2025,m);
+  const k26=computeKPIs(r26),k25=computeKPIs(r25);
+  const dCA=delta(k26.ca,k25.ca),dNb=delta(k26.nb,k25.nb),dP=delta(k26.panier,k25.panier);
+  const dD=delta(k26.dureeH,k25.dureeH),dS=deltaPts(k26.tauxSolde,k25.tauxSolde);
+  const dL=delta(k26.leadMoy,k25.leadMoy);
+
+  const cats25=categoriesAgg(r25),cats26=categoriesAgg(r26);
+  const allCats=Array.from(new Set([...Object.keys(cats25),...Object.keys(cats26)])).sort();
+
+  let catRows='';
+  allCats.forEach(c=>{
+    const a25=cats25[c]||{nb:0,ca:0},a26=cats26[c]||{nb:0,ca:0};
+    const p25=a25.nb?a25.ca/a25.nb:0,p26=a26.nb?a26.ca/a26.nb:0;
+    const d=delta(a26.ca,a25.ca);
+    catRows+=`<tr><td><strong>${c}</strong></td><td class="num">${fmtNum(a25.nb)}</td><td class="num">${fmtEUR(a25.ca)}</td><td class="num">${fmtEUR(p25)}</td><td class="num">${fmtNum(a26.nb)}</td><td class="num">${fmtEUR(a26.ca)}</td><td class="num">${fmtEUR(p26)}</td><td class="num"><span class="delta ${d.cls}">${d.txt}</span></td></tr>`;
+  });
+  if(!catRows)catRows='<tr><td colspan="8" style="text-align:center;padding:16px;color:#9ca3af">Aucune catégorie pour ce mois</td></tr>';
+
+  return`
+  <div class="section-band band-green"><span class="badge">2</span> CHIFFRES DU MOIS — ${MONTHS_FULL[m].toUpperCase()} — LOCATIONS DONT LA DATE DE DÉBUT EST DANS CE MOIS</div>
+  <div class="kpi-grid g5">
+    <div class="kpi accent-ca"><div class="lbl">CA TTC</div><div class="sub">2025 : ${fmtEUR(k25.ca)}</div><div class="val">${fmtEUR(k26.ca)}</div><span class="delta ${dCA.cls}">${dCA.txt}</span></div>
+    <div class="kpi accent-resa"><div class="lbl">Réservations</div><div class="sub">2025 : ${fmtNum(k25.nb)}</div><div class="val">${fmtNum(k26.nb)}</div><span class="delta ${dNb.cls}">${dNb.txt}</span></div>
+    <div class="kpi accent-panier"><div class="lbl">Panier moyen</div><div class="sub">2025 : ${fmtEUR(k25.panier)}</div><div class="val">${fmtEUR(k26.panier)}</div><span class="delta ${dP.cls}">${dP.txt}</span></div>
+    <div class="kpi accent-duree"><div class="lbl">Durée moyenne</div><div class="sub">2025 : ${fmtNum(k25.dureeH,1)} h</div><div class="val">${fmtNum(k26.dureeH,1)} h</div><span class="delta ${dD.cls}">${dD.txt}</span></div>
+    <div class="kpi accent-solde"><div class="lbl">Taux soldé</div><div class="sub">2025 : ${fmtNum(k25.tauxSolde,1)} %</div><div class="val">${fmtNum(k26.tauxSolde,1)} %</div><span class="delta ${dS.cls}">${dS.txt}</span></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card"><h3>Lead time — ${MONTHS_FULL[m]} 2025 vs 2026</h3><div class="sub">Délai création → début</div><div class="chart-wrap"><canvas id="chLeadM"></canvas></div></div>
+    <div class="card"><h3>CA par catégorie — 2025 vs 2026</h3><div class="sub">Mois ${MONTHS_FULL[m]}</div><div class="chart-wrap"><canvas id="chCatCA"></canvas></div></div>
+  </div>
+
+  <div class="card">
+    <h3>Catégories — tableau comparatif</h3>
+    <div class="sub">Mois ${MONTHS_FULL[m]} — 2025 réalisé vs 2026 même mois</div>
+    <table>
+      <thead><tr><th>Catégorie</th><th class="num">Nb 25</th><th class="num">CA 25</th><th class="num">Pan. 25</th><th class="num">Nb 26</th><th class="num">CA 26</th><th class="num">Pan. 26</th><th class="num">Δ CA</th></tr></thead>
+      <tbody>${catRows}</tbody>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div class="card"><h3>Jours loués par catégorie</h3><div class="sub">Somme (durée × nb produits) / 24 — mois ${MONTHS_FULL[m]}</div><div class="chart-wrap"><canvas id="chJours"></canvas></div></div>
+    <div class="card"><h3>Calendrier — ${MONTHS_FULL[m]} 2026</h3><div class="sub">Intensité : nb de résa démarrant chaque jour</div><div id="calBox"></div></div>
+  </div>
+  `;
+}
+
+function renderProdBlock(){
+  const m=SELECTED_MONTH;
+  const p26=DATA26.filter(r=>r.dateCrea&&r.dateCrea.getFullYear()===2026&&r.dateCrea.getMonth()===m);
+  const p25=DATA25.filter(r=>r.dateCrea&&r.dateCrea.getFullYear()===2025&&r.dateCrea.getMonth()===m);
+  const k26=computeKPIs(p26),k25=computeKPIs(p25);
+  const c26=canalAgg(p26),c25=canalAgg(p25);
+  const cTot26=Object.values(c26).reduce((a,b)=>a+b,0)||1;
+  const cTot25=Object.values(c25).reduce((a,b)=>a+b,0)||1;
+  const on26=(c26.Online/cTot26)*100,on25=(c25.Online/cTot25)*100;
+  const dNb=delta(k26.nb,k25.nb),dCA=delta(k26.ca,k25.ca),dP=delta(k26.panier,k25.panier);
+
+  return`
+  <div class="section-band band-orange"><span class="badge">3</span> PROD DU MOIS — ${MONTHS_FULL[m].toUpperCase()} — RÉSERVATIONS CRÉÉES CE MOIS (TOUTES DATES DE DÉBUT)</div>
+  <div class="kpi-grid g4">
+    <div class="kpi accent-resa"><div class="lbl">Résa créées</div><div class="sub">2025 : ${fmtNum(k25.nb)}</div><div class="val">${fmtNum(k26.nb)}</div><span class="delta ${dNb.cls}">${dNb.txt}</span></div>
+    <div class="kpi accent-ca"><div class="lbl">CA réservé</div><div class="sub">2025 : ${fmtEUR(k25.ca)}</div><div class="val">${fmtEUR(k26.ca)}</div><span class="delta ${dCA.cls}">${dCA.txt}</span></div>
+    <div class="kpi accent-panier"><div class="lbl">Panier moyen</div><div class="sub">2025 : ${fmtEUR(k25.panier)}</div><div class="val">${fmtEUR(k26.panier)}</div><span class="delta ${dP.cls}">${dP.txt}</span></div>
+    <div class="kpi accent-date"><div class="lbl">% Online</div><div class="sub">2025 : ${fmtNum(on25,0)} %</div><div class="val">${fmtNum(on26,0)} %</div><span class="delta ${deltaPts(on26,on25).cls}">${deltaPts(on26,on25).txt}</span></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card"><h3>Répartition par mois de début</h3><div class="sub">Où partent les résa créées en ${MONTHS_FULL[m].toLowerCase()} ?</div><div class="chart-wrap"><canvas id="chMoisDebut"></canvas></div></div>
+    <div class="card"><h3>Lead time des résa créées</h3><div class="sub">Anticipation des clients — 2025 vs 2026</div><div class="chart-wrap"><canvas id="chLeadProdM"></canvas></div></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card"><h3>Catégories réservées</h3><div class="sub">Résa créées en ${MONTHS_FULL[m].toLowerCase()}</div><div class="chart-wrap"><canvas id="chCatProd"></canvas></div></div>
+    <div class="card"><h3>Canal de réservation</h3><div class="sub">Online / Agence / Lokki — résa créées en ${MONTHS_FULL[m].toLowerCase()}</div><div class="chart-wrap"><canvas id="chCanalProd"></canvas></div></div>
+  </div>
+  `;
+}
+
+function drawMois(){
+  const m=SELECTED_MONTH;
+  const r26=filterMonth(DATA26,2026,m);
+  const r25=filterMonth(DATA25,2025,m);
+
+  const labels=['Même jour','J+1-3','J+4-7','1-2 sem.','1 mois+'];
+  const l25=leadDistrib(r25),l26=leadDistrib(r26);
+  CHARTS.push(new Chart(document.getElementById('chLeadM'),{
+    type:'bar',
+    data:{labels,datasets:[
+      {label:'2025',data:labels.map(l=>l25[l]),backgroundColor:'#9ca3af'},
+      {label:'2026',data:labels.map(l=>l26[l]),backgroundColor:'#10b981'}
+    ]},
+    options:{maintainAspectRatio:false,plugins:{legend:{position:'top',align:'start'}}}
+  }));
+
+  const cats25=categoriesAgg(r25),cats26=categoriesAgg(r26);
+  const allCats=Array.from(new Set([...Object.keys(cats25),...Object.keys(cats26)])).sort();
+  CHARTS.push(new Chart(document.getElementById('chCatCA'),{
+    type:'bar',
+    data:{labels:allCats,datasets:[
+      {label:'2025',data:allCats.map(c=>cats25[c]?.ca||0),backgroundColor:'#9ca3af'},
+      {label:'2026',data:allCats.map(c=>cats26[c]?.ca||0),backgroundColor:'#10b981'}
+    ]},
+    options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{position:'top',align:'start'}},scales:{x:{ticks:{callback:v=>fmtEUR(v)}}}}
+  }));
+
+  const j25=joursLouesCat(r25),j26=joursLouesCat(r26);
+  CHARTS.push(new Chart(document.getElementById('chJours'),{
+    type:'bar',
+    data:{labels:allCats,datasets:[
+      {label:'2025',data:allCats.map(c=>j25[c]||0),backgroundColor:'#9ca3af'},
+      {label:'2026',data:allCats.map(c=>j26[c]||0),backgroundColor:'#10b981'}
+    ]},
+    options:{maintainAspectRatio:false,plugins:{legend:{position:'top',align:'start'}}}
+  }));
+
+  // Calendrier
+  const daysInMonth=new Date(2026,m+1,0).getDate();
+  const intensity=calendarIntensity(DATA26,2026,m);
+  const maxI=Math.max(1,...Object.values(intensity));
+  const firstDay=(new Date(2026,m,1).getDay()||7)-1; // 0=lundi
+  let cal='<div class="calendar">';
+  ['L','M','M','J','V','S','D'].forEach(d=>cal+=`<div class="cal-header">${d}</div>`);
+  for(let i=0;i<firstDay;i++)cal+='<div class="cal-day"></div>';
+  for(let d=1;d<=daysInMonth;d++){
+    const v=intensity[d]||0;
+    const op=v/maxI;
+    const bg=v?`rgba(16,185,129,${0.2+op*0.8})`:'#f3f4f6';
+    cal+=`<div class="cal-day ${v?'has':''}" style="background:${bg}" title="${d}/${m+1}: ${v} résa">${d}</div>`;
+  }
+  cal+='</div>';
+  document.getElementById('calBox').innerHTML=cal;
+
+  // PROD du mois
+  const p26=DATA26.filter(r=>r.dateCrea&&r.dateCrea.getFullYear()===2026&&r.dateCrea.getMonth()===m);
+  const p25=DATA25.filter(r=>r.dateCrea&&r.dateCrea.getFullYear()===2025&&r.dateCrea.getMonth()===m);
+
+  // Répartition par mois de début
+  const md26=Array(12).fill(0),md25=Array(12).fill(0);
+  p26.forEach(r=>{if(r.dateDebut)md26[r.dateDebut.getMonth()]+=1;});
+  p25.forEach(r=>{if(r.dateDebut)md25[r.dateDebut.getMonth()]+=1;});
+  CHARTS.push(new Chart(document.getElementById('chMoisDebut'),{
+    type:'bar',
+    data:{labels:MONTHS,datasets:[
+      {label:'2025',data:md25,backgroundColor:'#9ca3af'},
+      {label:'2026',data:md26,backgroundColor:'#c2410c'}
+    ]},
+    options:{maintainAspectRatio:false,plugins:{legend:{position:'top',align:'start'}}}
+  }));
+
+  const lp25=leadDistrib(p25),lp26=leadDistrib(p26);
+  CHARTS.push(new Chart(document.getElementById('chLeadProdM'),{
+    type:'bar',
+    data:{labels,datasets:[
+      {label:'2025',data:labels.map(l=>lp25[l]),backgroundColor:'#9ca3af'},
+      {label:'2026',data:labels.map(l=>lp26[l]),backgroundColor:'#c2410c'}
+    ]},
+    options:{maintainAspectRatio:false,plugins:{legend:{position:'top',align:'start'}}}
+  }));
+
+  const cp25=categoriesAgg(p25),cp26=categoriesAgg(p26);
+  const allCp=Array.from(new Set([...Object.keys(cp25),...Object.keys(cp26)])).sort();
+  CHARTS.push(new Chart(document.getElementById('chCatProd'),{
+    type:'bar',
+    data:{labels:allCp,datasets:[
+      {label:'2025',data:allCp.map(c=>cp25[c]?.nb||0),backgroundColor:'#9ca3af'},
+      {label:'2026',data:allCp.map(c=>cp26[c]?.nb||0),backgroundColor:'#c2410c'}
+    ]},
+    options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{position:'top',align:'start'}}}
+  }));
+
+  const cn26=canalAgg(p26);
+  CHARTS.push(new Chart(document.getElementById('chCanalProd'),{
+    type:'doughnut',
+    data:{labels:['Online','Agence','Lokki','Autre'],datasets:[{data:['Online','Agence','Lokki','Autre'].map(k=>cn26[k]||0),backgroundColor:['#3b82f6','#10b981','#8b5cf6','#9ca3af']}]},
+    options:{maintainAspectRatio:false,plugins:{legend:{position:'right'}}}
+  }));
+}
+</script>
+</body>
+</html>
