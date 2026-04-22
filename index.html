@@ -239,19 +239,19 @@ document.addEventListener('DOMContentLoaded',function(){
       <div class="kl">R&eacute;servations</div>
       <div class="v25"><span id="kpi-nb25">&mdash; &agrave; date 2025</span></div>
       <div class="kpi-vals"><span class="v26" id="kpi-nb">82</span><span class="ev up" id="ev-nb">+165 %</span></div>
-      <div class="ks">&Agrave; R&eacute;alis&eacute; &agrave; date 2026 vs 2025 S15</div>
+      <div class="ks" id="kpi-nb-ks">&Agrave; R&eacute;alis&eacute; &agrave; date 2026 vs 2025 S15</div>
     </div>
     <div class="kpi k3">
       <div class="kl">Panier Moyen</div>
       <div class="v25">98,9 &#8364;</div>
       <div class="kpi-vals"><span class="v26" id="kpi-panier">185 &#8364;</span><span class="ev up" id="ev-panier">+87 %</span></div>
-      <div class="ks">Early-bookers budget &eacute;lev&eacute;</div>
+      <div class="ks" id="kpi-panier-ks">Panier r&eacute;alis&eacute; &agrave; date vs 2025</div>
     </div>
     <div class="kpi k4">
       <div class="kl">Dur&eacute;e Moyenne</div>
       <div class="v25">26,5 h</div>
       <div class="kpi-vals"><span class="v26" id="kpi-duree">54,3 h</span><span class="ev up" id="ev-duree">+105 %</span></div>
-      <div class="ks">S&eacute;jours plus longs</div>
+      <div class="ks" id="kpi-duree-ks">Dur&eacute;e moy. vs 26,5h (2025)</div>
     </div>
     <div class="kpi k5">
       <div class="kl">Taux Sold&eacute;</div>
@@ -1257,14 +1257,14 @@ function applyData(data){
   const _nwk=getISOWeek(new Date());
   const _nb25=Object.entries(W25).filter(([k])=>parseInt(k.split('-W')[1])<=_nwk).reduce((s,[,v])=>s+v.nb,0);
   const _ca25=Object.entries(W25).filter(([k])=>parseInt(k.split('-W')[1])<=_nwk).reduce((s,[,v])=>s+v.ca,0);
-  const _e25=document.getElementById('kpi-nb25');if(_e25)_e25.textContent=_nb25+' resa (\u00e0 S'+_nwk+')';
+  const _e25=document.getElementById('kpi-nb25');if(_e25)_e25.textContent=_nb25+' resa (\u00e0 S'+_nwk+')';const _eksKpi=document.getElementById('kpi-nb-ks');if(_eksKpi)_eksKpi.textContent='\u00c0 R\u00e9alis\u00e9 \u00e0 date 2026 vs 2025 S'+_nwk;
   const _eca=document.getElementById('kpi-ca-date');if(_eca)_eca.textContent=fmtE(data.ca_realise||0);
   const _eca25=document.getElementById('kpi-ca25-date');if(_eca25)_eca25.textContent=fmtE(Math.round(_ca25))+' (2025 S'+_nwk+')';
   ev('ev-ca-date',data.ca_realise||0,_ca25);
-  if(data.nb) ev('ev-nb',data.nb_realise!=null?data.nb_realise:data.nb,_nb25);
-  if(data.panier){if(data.nb_realise&&data.nb_realise>0){ev('ev-panier',Math.round(data.ca_realise/data.nb_realise),98.9);}else{ev('ev-panier',data.panier,98.9);}}
+  if(data.nb){if(data.nb_realise!=null){const el=document.getElementById('kpi-nb');if(el)el.textContent=fmt(data.nb_realise);}ev('ev-nb',data.nb_realise!=null?data.nb_realise:data.nb,_nb25);}
+  if(data.panier){const _p26=data.nb_realise&&data.nb_realise>0?Math.round(data.ca_realise/data.nb_realise):Math.round(data.panier);const _kpPan=document.getElementById('kpi-panier');if(_kpPan)_kpPan.textContent=_p26+'\u20AC';ev('ev-panier',_p26,98.9);}
   if(data.duree) ev('ev-duree',data.duree,26.5);
-  if(data.tauxSolde) ev('ev-solde',data.tauxSolde,99.1,true);
+  if(data.tauxSolde) ev('ev-solde',data.tauxSolde,99.1);
   // Mise \u00E0 jour graphique CA mensuel si donn\u00E9es monthly
   if(data.monthly && CHARTS['c-ca-overview']){
     const moisMap={3:0,4:1,5:2,6:3,7:4,8:5,9:6,10:7};
