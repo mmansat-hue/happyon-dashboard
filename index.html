@@ -1255,11 +1255,12 @@ function applyData(data){
     el.className='ev '+(Math.abs(p)<0.5?'fl':up?'up':'dn');
   };
   const _nwk=getISOWeek(new Date());
-  const _nb25=Object.entries(W25).filter(([k])=>parseInt(k.split('-W')[1])<=_nwk).reduce((s,[,v])=>s+v.nb,0);
-  const _ca25=Object.entries(W25).filter(([k])=>parseInt(k.split('-W')[1])<=_nwk).reduce((s,[,v])=>s+v.ca,0);
-  const _e25=document.getElementById('kpi-nb25');if(_e25)_e25.textContent=_nb25+' resa (\u00e0 S'+_nwk+')';const _eksKpi=document.getElementById('kpi-nb-ks');if(_eksKpi)_eksKpi.textContent='\u00c0 R\u00e9alis\u00e9 \u00e0 date 2026 vs 2025 S'+_nwk;
+  const _nwkCmp=_nwk-1; // comparer jusqu'à semaine précédente complète
+  const _nb25=Object.entries(W25).filter(([k])=>parseInt(k.split('-W')[1])<=_nwkCmp).reduce((s,[,v])=>s+v.nb,0);
+  const _ca25=Object.entries(W25).filter(([k])=>parseInt(k.split('-W')[1])<=_nwkCmp).reduce((s,[,v])=>s+v.ca,0);
+  const _e25=document.getElementById('kpi-nb25');if(_e25)_e25.textContent=_nb25+' resa (\u00e0 S'+_nwkCmp+')';const _eksKpi=document.getElementById('kpi-nb-ks');if(_eksKpi)_eksKpi.textContent='\u00c0 R\u00e9alis\u00e9 \u00e0 date 2026 vs 2025 S'+_nwkCmp;
   const _eca=document.getElementById('kpi-ca-date');if(_eca)_eca.textContent=fmtE(data.ca_realise||0);
-  const _eca25=document.getElementById('kpi-ca25-date');if(_eca25)_eca25.textContent=fmtE(Math.round(_ca25))+' (2025 S'+_nwk+')';
+  const _eca25=document.getElementById('kpi-ca25-date');if(_eca25)_eca25.textContent=fmtE(Math.round(_ca25))+' (2025 S'+_nwkCmp+')';
   ev('ev-ca-date',data.ca_realise||0,_ca25);
   if(data.nb){if(data.nb_realise!=null){const el=document.getElementById('kpi-nb');if(el)el.textContent=fmt(data.nb_realise);}ev('ev-nb',data.nb_realise!=null?data.nb_realise:data.nb,_nb25);}
   if(data.panier){const _p26=data.nb_realise&&data.nb_realise>0?Math.round(data.ca_realise/data.nb_realise):Math.round(data.panier);const _kpPan=document.getElementById('kpi-panier');if(_kpPan)_kpPan.textContent=_p26+'\u20AC';ev('ev-panier',_p26,98.9);}
