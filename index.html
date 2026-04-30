@@ -763,7 +763,7 @@ document.addEventListener('DOMContentLoaded',function(){
       <div class="card"><h3>Canal de r&eacute;servation</h3>
         <div class="sub">Online / Agence / Autre &mdash; r&eacute;serv. cr&eacute;&eacute;es en <span id="">mars</span></div>
         <div class="ch-wrap h200"><canvas id="c-m5-pr-canal"></canvas></div>
-        <div class="ibox"><p id="m5-pr-canal-insight">Mars 2025 : 51 % online (35 resa), 47 % agence (32 resa), 1 % Lokki &mdash; mix &eacute;quilibr&eacute;.</p></div></div>
+        <div class="ibox"><p id="m5-pr-canal-insight">&mdash;</p></div></div>
     </div>
   </div>
 
@@ -1837,6 +1837,7 @@ function updatePart3(mo){
   ];
   // Canal 2026 : utiliser PROD26_MO[mo] si dispo
   const canal26=[pr26?.canal?.Online||0,pr26?.canal?.Agence||0,pr26?.canal?.Autre||0];
+  const _c25i=pr25.canal||{};const _t25i=Object.values(_c25i).reduce((a,b)=>a+b,0)||pr25.nb||1;const _c26i=pr26?.canal||{};const _t26i=Object.values(_c26i).reduce((a,b)=>a+b,0)||pr26?.nb||1;const _p25i=Math.round((_c25i.Online||0)/_t25i*100);const _p26i=Math.round((_c26i.Online||0)/_t26i*100);const _insEl=document.getElementById('m5-pr-canal-insight');if(_insEl)_insEl.textContent=NOMS_MOIS[mo]+' 2025: '+_p25i+'% online / '+Math.round((_c25i.Agence||0)/_t25i*100)+'% agence. 2026: '+_p26i+'% online / '+Math.round((_c26i.Agence||0)/_t26i*100)+'% agence.';
   mkChart('c-m5-pr-canal','bar',{labels:['Online','Agence','Autre'],datasets:[
     {label:'2025',data:canal25,backgroundColor:'rgba(148,163,184,.65)',borderRadius:4},
     {label:'2026',data:canal26,backgroundColor:['#2563eb','#059669','#d97706'],borderRadius:4}
