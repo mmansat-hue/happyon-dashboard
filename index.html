@@ -1641,8 +1641,8 @@ function updatePart2(mo){
   mkChart('c-m5-canal','bar',{
     labels:['Online','Agence','Lokki.rent','Autre'],
     datasets:[
-      {label:'2025',data:[Math.round((canalMo25.Online||0)/canalTot25*100),Math.round((canalMo25.Agence||0)/canalTot25*100),Math.round(((canalMo25.Phone||0)+(canalMo25.Autre||0))/canalTot25*100)],backgroundColor:'rgba(148,163,184,.7)',borderRadius:4},
-      {label:'2026',data:[Math.round((canalMo26.Online||0)/canalTot26*100),Math.round((canalMo26.Agence||0)/canalTot26*100),Math.round(((canalMo26.Phone||0)+(canalMo26.Autre||0))/canalTot26*100)],backgroundColor:['rgba(37,99,235,.85)','rgba(34,197,94,.85)','rgba(148,163,184,.55)'],borderRadius:4}
+      {label:'2025',data:[Math.round((canalMo25.Online||0)/canalTot25*100),Math.round((canalMo25.Agence||0)/canalTot25*100),Math.round((canalMo25['Lokki.rent']||0)/canalTot25*100),Math.round((canalMo25.Autre||0)/canalTot25*100)],backgroundColor:'rgba(148,163,184,.7)',borderRadius:4},
+      {label:'2026',data:[Math.round((canalMo26.Online||0)/canalTot26*100),Math.round((canalMo26.Agence||0)/canalTot26*100),Math.round((canalMo26['Lokki.rent']||0)/canalTot26*100),Math.round(((canalMo26.Phone||0)+(canalMo26.Autre||0))/canalTot26*100)],backgroundColor:['rgba(37,99,235,.85)','rgba(34,197,94,.85)','rgba(168,85,247,.7)','rgba(148,163,184,.55)'],borderRadius:4}
     ]
   },{plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}});
   mkChart('c-m5-panier','bar',{labels:cN,datasets:[
