@@ -1633,7 +1633,18 @@ function updatePart2(mo){
     const nbR = (d && (d.nb_resa||d.nb)) ? (d.nb_resa||d.nb) : 0;
     return nbR ? Math.round(d.ca / nbR) : 0;
   });
-  const canalMo=MONTHLY26[mo]?.canal||PROD26_MO[mo]?.canal||{};const lbl26panier = Object.keys(allCats26mo).length ? '2026 '+NOMS_MOIS[mo] : '2026 saison';  mkChart('c-m5-canal','doughnut',{labels:['Online','Agence','Autre'],datasets:[{data:[canalMo.Online||0,canalMo.Agence||0,(canalMo.Phone||0)+(canalMo.Autre||0)],backgroundColor:['rgba(37,99,235,.85)','rgba(34,197,94,.85)','rgba(148,163,184,.7)'],borderWidth:2}]},{plugins:{legend:{display:true,position:'right',labels:{font:{size:10},boxWidth:12}}}});
+  const canalMo26=MONTHLY26[mo]?.canal||PROD26_MO[mo]?.canal||{};
+  const canalMo25=PROD25[mo]?.canal||{};
+  const canalTot26=Object.values(canalMo26).reduce((a,b)=>a+b,0)||1;
+  const canalTot25=Object.values(canalMo25).reduce((a,b)=>a+b,0)||1;
+  const lbl26panier = Object.keys(allCats26mo).length ? '2026 '+NOMS_MOIS[mo] : '2026 saison';
+  mkChart('c-m5-canal','bar',{
+    labels:['Online','Agence','Autre'],
+    datasets:[
+      {label:'2025',data:[Math.round((canalMo25.Online||0)/canalTot25*100),Math.round((canalMo25.Agence||0)/canalTot25*100),Math.round(((canalMo25.Phone||0)+(canalMo25.Autre||0))/canalTot25*100)],backgroundColor:'rgba(148,163,184,.7)',borderRadius:4},
+      {label:'2026',data:[Math.round((canalMo26.Online||0)/canalTot26*100),Math.round((canalMo26.Agence||0)/canalTot26*100),Math.round(((canalMo26.Phone||0)+(canalMo26.Autre||0))/canalTot26*100)],backgroundColor:['rgba(37,99,235,.85)','rgba(34,197,94,.85)','rgba(148,163,184,.55)'],borderRadius:4}
+    ]
+  },{plugins:{legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:10}}},scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}});
   mkChart('c-m5-panier','bar',{labels:cN,datasets:[
     {label:'2025',data:panier25byCat,backgroundColor:'rgba(148,163,184,.65)',borderRadius:4},
     {label:lbl26panier,data:panier26byCat,backgroundColor:COLS,borderRadius:4}
