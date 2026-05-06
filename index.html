@@ -939,8 +939,9 @@ function initTab1(){
       scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{display:false}}}}});
   }
   // Doughnut catégories 2026 (2 anneaux : CA extérieur, nb intérieur)
-  if(!CHARTS['c-cat-doughnut']){
-    const ctd = document.getElementById('c-cat-doughnut');
+  // Doughnut catégories : toujours recréer pour avoir les données live
+  if(CHARTS['c-cat-doughnut']){CHARTS['c-cat-doughnut'].destroy();delete CHARTS['c-cat-doughnut'];}
+  {const ctd = document.getElementById('c-cat-doughnut');
     if(ctd && window._lastSyncData?.cats){
       const cats = window._lastSyncData.cats;
       const CAT_ORDER = ['Vélos Élec.','Voitures','Vélos Musc.','Scoot.50','Scoot.125','Vélos Enf.','Accessoires','autre'];
@@ -1367,7 +1368,12 @@ function applyData(data){
   if(data.prod) PROD26=decodeProd(data.prod);
   if(data.prod_monthly) Object.entries(data.prod_monthly).forEach(([k,v])=>PROD26_MO[parseInt(k)]=decodeProd(v));
   // Rafra‚àö√â¬¨√Üchir Vue Mois si elle est active
-  if(document.getElementById('tab5')?.classList.contains('active')){
+  // Doughnut categories 2026 - mise a jour apres sync
+if(data.cats){
+  if(CHARTS['c-cat-doughnut']){CHARTS['c-cat-doughnut'].destroy();delete CHARTS['c-cat-doughnut'];}
+  initTab1();
+}
+if(document.getElementById('tab5')?.classList.contains('active')){
     const mo=parseInt(document.getElementById('m5-sel')?.value||3);const _tbm2=document.getElementById('tab-btn-mois');if(_tbm2)_tbm2.textContent='Vue Mois ('+(NOMS_MOIS[mo]||'Mars')+')';     updatePart1(); updatePart2(mo); updatePart3(mo);
     
   }
