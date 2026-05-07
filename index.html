@@ -628,14 +628,6 @@ document.addEventListener('DOMContentLoaded',function(){
       </div>
     </div>
 
-    <!-- Tableau cat‚àö√â¬¨¬©gories semaine -->
-    <h3 style="font-size:11px;font-weight:700;color:#1e293b;margin:0 0 8px 0">Panier moyen &amp; volume par cat&eacute;gorie &mdash; semaine en cours</h3>
-    <table class="tbl">
-      <thead><tr><th>Cat&eacute;gorie</th><th>Nb 25</th><th>CA 25</th><th>Panier 25</th><th>Nb 26</th><th>CA 26</th><th>Panier 26</th><th>&Delta; Panier</th></tr></thead>
-      <tbody id="m5-wk-cat-body">
-        <tr><td colspan="8" style="text-align:center;color:#94a3b8;font-style:italic;padding:10px">Synchroniser les donn&eacute;es 2026 pour afficher</td></tr>
-      </tbody>
-    </table>
   </div>
 
   <!-- ‚àö¬¢¬¨√Ø¬¨√™‚àö¬¢¬¨√Ø¬¨√™‚àö¬¢¬¨√Ø¬¨√™ PARTIE 2 : CHIFFRES DU MOIS ‚àö¬¢¬¨√Ø¬¨√™‚àö¬¢¬¨√Ø¬¨√™‚àö¬¢¬¨√Ø¬¨√™ -->
@@ -1617,26 +1609,7 @@ function updatePart1(){
     s('m5-wk-ca26','\u2014'); s('m5-wk-nb26','\u2014'); s('m5-wk-p26','\u2014');
     s('m5-wk-ev-ca','Synchro requise'); s('m5-wk-ev-nb','Synchro requise'); s('m5-wk-ev-p','Synchro requise');
   }
-
-  // Tableau cat\u00E9gories semaine
-  const tbody = document.getElementById('m5-wk-cat-body');
-  if(!tbody) return;
-  const cats25 = d25.cats||{};
-  const cats26 = d26.cats||{};
-  const allCats = [...new Set([...Object.keys(cats25),...Object.keys(cats26)])];
-  if(!allCats.length){
-    tbody.innerHTML='<tr><td colspan="8" style="text-align:center;color:#94a3b8;font-style:italic;padding:10px">Synchroniser pour afficher les donn\u00E9es 2026</td></tr>';
-    return;
-  }
-  tbody.innerHTML = allCats.filter(c=>/^[A-Z]/.test(c)||c==='autre').sort().map(cat=>{
-    const c25=cats25[cat]||{nb:0,ca:0};
-    const c26=cats26[cat]||{nb:0,ca:0};
-    const p25=c25.nb?Math.round(c25.ca/c25.nb):0;
-    const p26=c26.nb?Math.round(c26.ca/c26.nb):0;
-    const dP=p25&&p26?Math.round((p26-p25)/p25*100):null;
-    const dTag=dP!==null?`<span style="font-size:10px;font-weight:600;color:${dP>=0?'#166534':'#dc2626'}">${dP>=0?'\u25B2 +':'\u25BC '}${Math.abs(dP)} %</span>`:'<span style="color:#94a3b8">\u2014</span>';
-    return `<tr><td>${cat}</td><td>${c25.nb||'\u2014'}</td><td>${c25.ca?fmt(Math.round(c25.ca))+' \u20AC':'\u2014'}</td><td>${p25||'\u2014'} \u20AC</td><td class="n">${c26.nb||'\u2014'}</td><td class="n">${c26.ca?fmt(Math.round(c26.ca))+' \u20AC':'\u2014'}</td><td class="n">${p26||'\u2014'} \u20AC</td><td>${dTag}</td></tr>`;
-  }).join('');
+).join('');
 }
 
 function updatePart2(mo){
