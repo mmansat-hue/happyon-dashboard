@@ -965,13 +965,13 @@ function initTab1(){
           const pca = dataCA[i]; const pnb = dataNb[i];
           const ca = Math.round(cats[k]?.ca||0); const nb = cats[k]?.nb_resa||0;
           const pan = nb ? Math.round(ca/nb) : 0;
-          return \`<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
             <span style="width:12px;height:12px;border-radius:3px;background:\${colors[i]};flex-shrink:0"></span>
             <span style="font-weight:600;width:110px">\${k}</span>
             <span style="color:var(--text-muted);width:60px">CA:\${pca}%</span>
             <span style="color:var(--text-muted);width:60px">Nb:\${pnb}%</span>
             <span style="color:var(--text-muted)">\${pan}€/rés.</span>
-          </div>\`;
+          </div>`;
         }).join('');
       }
     }
@@ -1609,7 +1609,6 @@ function updatePart1(){
     s('m5-wk-ca26','\u2014'); s('m5-wk-nb26','\u2014'); s('m5-wk-p26','\u2014');
     s('m5-wk-ev-ca','Synchro requise'); s('m5-wk-ev-nb','Synchro requise'); s('m5-wk-ev-p','Synchro requise');
   }
-).join('');
 }
 
 function updatePart2(mo){
