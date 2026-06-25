@@ -935,7 +935,7 @@ function initTab1(){
   {const ctd = document.getElementById('c-cat-doughnut');
     if(ctd && window._lastSyncData?.cats){
       const cats = window._lastSyncData.cats;
-      const CAT_ORDER = ['VÃÂ©los ÃÂlec.','Voitures','VÃÂ©los Musc.','Scoot.50','Scoot.125','VÃÂ©los Enf.','Accessoires','autre'];
+      const CAT_ORDER = ['Velos Elec.','Voitures','Velos Musc.','Scoot.50','Scoot.125','Velos Enf.','Accessoires','autre'];
       const CAT_COLORS = ['rgba(37,99,235,.85)','rgba(234,88,12,.85)','rgba(34,197,94,.85)','rgba(168,85,247,.85)','rgba(239,68,68,.85)','rgba(14,165,233,.85)','rgba(148,163,184,.7)','rgba(203,213,225,.6)'];
       const labels = CAT_ORDER.filter(k => cats[k]);
       const colors = labels.map(k => CAT_COLORS[CAT_ORDER.indexOf(k)]);
@@ -1365,7 +1365,7 @@ if(data.cats){
   if(CHARTS['c-cat-doughnut']){CHARTS['c-cat-doughnut'].destroy();delete CHARTS['c-cat-doughnut'];}
   const _ctd=document.getElementById('c-cat-doughnut');
   if(_ctd){
-    const _co=['VÃÂ©los ÃÂlec.','Voitures','VÃÂ©los Musc.','Scoot.50','Scoot.125','VÃÂ©los Enf.','Accessoires','autre'];
+    const _co=['Velos Elec.','Voitures','Velos Musc.','Scoot.50','Scoot.125','Velos Enf.','Accessoires','autre'];
     const _cc=['#2563eb','#ea580c','#22c55e','#a855f7','#ef4444','#0ea5e9','#94a3b8','#cbd5e1'];
     const _lbl=_co.filter(k=>data.cats[k]);
     const _col=_lbl.map(k=>_cc[_co.indexOf(k)]);
@@ -1531,16 +1531,16 @@ const CATS25 = {
 
 // Donn\u00E9es 2025 PROD par mois cr\u00E9ation
 const PROD25 = {
-  2:{nb:5,ca:904.0,panier:181,dur:62.6,online_pct:100,agence_pct:0,canal:{'Online':5},lead:{same:0,j13:0,j47:0,sem:0,mois:5},cats:{'VÃÂ©los ÃÂlec.':{nb:2,ca:368.0,panier:184},'Voitures':{nb:1,ca:320.0,panier:320},'VÃÂ©los Musc.':{nb:2,ca:216.0,panier:108}}},
-  3:{nb:68,ca:9407.0,panier:138,dur:44.7,online_pct:51,agence_pct:47,canal:{'Online':35,'Agence':32,'Lokki.rent':1},lead:{same:25,j13:8,j47:1,sem:2,mois:32},cats:{'VÃÂ©los ÃÂlec.':{nb:46,ca:6459.0,panier:140},'Voitures':{nb:16,ca:1785.0,panier:112},'Accessoires':{nb:25,ca:869.01,panier:35},'VÃÂ©los Musc.':{nb:10,ca:609.94,panier:61},'VÃÂ©los Enf.':{nb:1,ca:18.0,panier:18}}},
-  4:{nb:381,ca:38557.55,panier:101,dur:27.1,online_pct:38,agence_pct:60,canal:{'Online':145,'Agence':228,'Lokki.rent':8},lead:{same:169,j13:72,j47:27,sem:27,mois:86},cats:{'VÃÂ©los ÃÂlec.':{nb:226,ca:24028.4,panier:106},'Voitures':{nb:119,ca:12238.5,panier:103},'VÃÂ©los Musc.':{nb:66,ca:4319.0,panier:65},'Accessoires':{nb:107,ca:2275.83,panier:21},'VÃÂ©los Enf.':{nb:16,ca:380.0,panier:24}}},
-  5:{nb:555,ca:50895.75,panier:92,dur:24.4,online_pct:32,agence_pct:67,canal:{'Online':179,'Agence':370,'Lokki.rent':6},lead:{same:314,j13:112,j47:37,sem:25,mois:67},cats:{'VÃÂ©los ÃÂlec.':{nb:345,ca:33800.0,panier:98},'Voitures':{nb:141,ca:12470.0,panier:88},'VÃÂ©los Musc.':{nb:107,ca:5209.0,panier:49},'Accessoires':{nb:164,ca:2482.5,panier:15},'VÃÂ©los Enf.':{nb:15,ca:708.0,panier:47}}},
-  6:{nb:571,ca:55764.76,panier:98,dur:31.8,online_pct:32,agence_pct:67,canal:{'Online':180,'Agence':381,'Lokki.rent':10},lead:{same:314,j13:120,j47:35,sem:17,mois:85},cats:{'VÃÂ©los ÃÂlec.':{nb:339,ca:34204.4,panier:101},'Voitures':{nb:153,ca:15691.5,panier:103},'VÃÂ©los Musc.':{nb:104,ca:5890.0,panier:57},'Accessoires':{nb:167,ca:2539.5,panier:15},'VÃÂ©los Enf.':{nb:7,ca:446.0,panier:64}}},
-  7:{nb:894,ca:99792.2,panier:112,dur:34.6,online_pct:43,agence_pct:55,canal:{'Online':380,'Agence':496,'Lokki.rent':18},lead:{same:429,j13:236,j47:69,sem:57,mois:103},cats:{'VÃÂ©los ÃÂlec.':{nb:494,ca:55152.1,panier:112},'Voitures':{nb:218,ca:26309.0,panier:121},'VÃÂ©los Musc.':{nb:235,ca:12838.0,panier:55},'Accessoires':{nb:287,ca:5354.5,panier:19},'VÃÂ©los Enf.':{nb:50,ca:1742.0,panier:35}}},
-  8:{nb:1254,ca:133842.51,panier:107,dur:25.5,online_pct:42,agence_pct:53,canal:{'Online':529,'Agence':662,'Lokki.rent':63},lead:{same:546,j13:464,j47:159,sem:45,mois:40},cats:{'VÃÂ©los ÃÂlec.':{nb:731,ca:76418.0,panier:105},'Voitures':{nb:251,ca:29516.0,panier:118},'VÃÂ©los Musc.':{nb:371,ca:16646.0,panier:45},'Accessoires':{nb:447,ca:7673.17,panier:17},'VÃÂ©los Enf.':{nb:85,ca:2380.0,panier:28}}},
-  9:{nb:504,ca:39344.18,panier:78,dur:21.9,online_pct:31,agence_pct:68,canal:{'Online':156,'Agence':342,'Lokki.rent':6},lead:{same:295,j13:131,j47:49,sem:19,mois:10},cats:{'VÃÂ©los ÃÂlec.':{nb:247,ca:19046.4,panier:77},'Voitures':{nb:216,ca:18985.0,panier:88},'VÃÂ©los Musc.':{nb:54,ca:2151.0,panier:40},'Accessoires':{nb:113,ca:1378.0,panier:12}}},
-  10:{nb:244,ca:20319.58,panier:83,dur:21.9,online_pct:29,agence_pct:70,canal:{'Online':70,'Agence':172,'Lokki.rent':2},lead:{same:146,j13:62,j47:20,sem:8,mois:8},cats:{'Voitures':{nb:114,ca:9738.25,panier:85},'VÃÂ©los ÃÂlec.':{nb:114,ca:8409.27,panier:74},'VÃÂ©los Musc.':{nb:26,ca:1308.69,panier:50},'Accessoires':{nb:56,ca:650.0,panier:12},'VÃÂ©los Enf.':{nb:7,ca:498.0,panier:71}}},
-  11:{nb:1,ca:83.0,panier:83,dur:6.0,online_pct:100,agence_pct:0,canal:{'Online':1},lead:{same:1,j13:0,j47:0,sem:0,mois:0},cats:{'VÃÂ©los ÃÂlec.':{nb:1,ca:69.0,panier:69},'Accessoires':{nb:1,ca:14.0,panier:14}}},
+  2:{nb:5,ca:904.0,panier:181,dur:62.6,online_pct:100,agence_pct:0,canal:{'Online':5},lead:{same:0,j13:0,j47:0,sem:0,mois:5},cats:{'Velos Elec.':{nb:2,ca:368.0,panier:184},'Voitures':{nb:1,ca:320.0,panier:320},'Velos Musc.':{nb:2,ca:216.0,panier:108}}},
+  3:{nb:68,ca:9407.0,panier:138,dur:44.7,online_pct:51,agence_pct:47,canal:{'Online':35,'Agence':32,'Lokki.rent':1},lead:{same:25,j13:8,j47:1,sem:2,mois:32},cats:{'Velos Elec.':{nb:46,ca:6459.0,panier:140},'Voitures':{nb:16,ca:1785.0,panier:112},'Accessoires':{nb:25,ca:869.01,panier:35},'Velos Musc.':{nb:10,ca:609.94,panier:61},'Velos Enf.':{nb:1,ca:18.0,panier:18}}},
+  4:{nb:381,ca:38557.55,panier:101,dur:27.1,online_pct:38,agence_pct:60,canal:{'Online':145,'Agence':228,'Lokki.rent':8},lead:{same:169,j13:72,j47:27,sem:27,mois:86},cats:{'Velos Elec.':{nb:226,ca:24028.4,panier:106},'Voitures':{nb:119,ca:12238.5,panier:103},'Velos Musc.':{nb:66,ca:4319.0,panier:65},'Accessoires':{nb:107,ca:2275.83,panier:21},'Velos Enf.':{nb:16,ca:380.0,panier:24}}},
+  5:{nb:555,ca:50895.75,panier:92,dur:24.4,online_pct:32,agence_pct:67,canal:{'Online':179,'Agence':370,'Lokki.rent':6},lead:{same:314,j13:112,j47:37,sem:25,mois:67},cats:{'Velos Elec.':{nb:345,ca:33800.0,panier:98},'Voitures':{nb:141,ca:12470.0,panier:88},'Velos Musc.':{nb:107,ca:5209.0,panier:49},'Accessoires':{nb:164,ca:2482.5,panier:15},'Velos Enf.':{nb:15,ca:708.0,panier:47}}},
+  6:{nb:571,ca:55764.76,panier:98,dur:31.8,online_pct:32,agence_pct:67,canal:{'Online':180,'Agence':381,'Lokki.rent':10},lead:{same:314,j13:120,j47:35,sem:17,mois:85},cats:{'Velos Elec.':{nb:339,ca:34204.4,panier:101},'Voitures':{nb:153,ca:15691.5,panier:103},'Velos Musc.':{nb:104,ca:5890.0,panier:57},'Accessoires':{nb:167,ca:2539.5,panier:15},'Velos Enf.':{nb:7,ca:446.0,panier:64}}},
+  7:{nb:894,ca:99792.2,panier:112,dur:34.6,online_pct:43,agence_pct:55,canal:{'Online':380,'Agence':496,'Lokki.rent':18},lead:{same:429,j13:236,j47:69,sem:57,mois:103},cats:{'Velos Elec.':{nb:494,ca:55152.1,panier:112},'Voitures':{nb:218,ca:26309.0,panier:121},'Velos Musc.':{nb:235,ca:12838.0,panier:55},'Accessoires':{nb:287,ca:5354.5,panier:19},'Velos Enf.':{nb:50,ca:1742.0,panier:35}}},
+  8:{nb:1254,ca:133842.51,panier:107,dur:25.5,online_pct:42,agence_pct:53,canal:{'Online':529,'Agence':662,'Lokki.rent':63},lead:{same:546,j13:464,j47:159,sem:45,mois:40},cats:{'Velos Elec.':{nb:731,ca:76418.0,panier:105},'Voitures':{nb:251,ca:29516.0,panier:118},'Velos Musc.':{nb:371,ca:16646.0,panier:45},'Accessoires':{nb:447,ca:7673.17,panier:17},'Velos Enf.':{nb:85,ca:2380.0,panier:28}}},
+  9:{nb:504,ca:39344.18,panier:78,dur:21.9,online_pct:31,agence_pct:68,canal:{'Online':156,'Agence':342,'Lokki.rent':6},lead:{same:295,j13:131,j47:49,sem:19,mois:10},cats:{'Velos Elec.':{nb:247,ca:19046.4,panier:77},'Voitures':{nb:216,ca:18985.0,panier:88},'Velos Musc.':{nb:54,ca:2151.0,panier:40},'Accessoires':{nb:113,ca:1378.0,panier:12}}},
+  10:{nb:244,ca:20319.58,panier:83,dur:21.9,online_pct:29,agence_pct:70,canal:{'Online':70,'Agence':172,'Lokki.rent':2},lead:{same:146,j13:62,j47:20,sem:8,mois:8},cats:{'Voitures':{nb:114,ca:9738.25,panier:85},'Velos Elec.':{nb:114,ca:8409.27,panier:74},'Velos Musc.':{nb:26,ca:1308.69,panier:50},'Accessoires':{nb:56,ca:650.0,panier:12},'Velos Enf.':{nb:7,ca:498.0,panier:71}}},
+  11:{nb:1,ca:83.0,panier:83,dur:6.0,online_pct:100,agence_pct:0,canal:{'Online':1},lead:{same:1,j13:0,j47:0,sem:0,mois:0},cats:{'Velos Elec.':{nb:1,ca:69.0,panier:69},'Accessoires':{nb:1,ca:14.0,panier:14}}},
 };
 
 
