@@ -34,6 +34,9 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#1a202c;fo
 .tab-btn.active{color:#2563eb;border-bottom-color:#2563eb}
 .tab-content{display:none;padding:18px 28px}
 .tab-content.active{display:block}
+</style>
+<script>!function(){var _orig=null;var _check=setInterval(function(){if(typeof applyData==='function'){clearInterval(_check);_orig=applyData;window.applyData=function(data){if(data&&data.cats&&data.cats['autre']){var _sumOther=Object.keys(data.cats).filter(function(k){return k!=='autre';}).reduce(function(s,k){return s+(data.cats[k].ca||0);},0);var _autreNb=data.cats['autre'].nb_resa||0;if(data.cats['autre'].ca>_sumOther*2){data.cats['autre'].ca=_autreNb*100;}}_orig(data);};}},100);}();</script>
+<style>
 /* SECTION TITLE */
 .s-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#64748b;display:flex;align-items:center;gap:8px;margin:18px 0 10px}
 .s-title::after{content:'';flex:1;height:1px;background:#e2e8f0}
