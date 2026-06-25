@@ -937,6 +937,7 @@ function initTab1(){
       const cats = window._lastSyncData.cats;
       const CAT_ORDER = ['Velos Elec.','Voitures','Velos Musc.','Scoot.50','Scoot.125','Velos Enf.','Accessoires','autre'];
       const CAT_COLORS = ['rgba(37,99,235,.85)','rgba(234,88,12,.85)','rgba(34,197,94,.85)','rgba(168,85,247,.85)','rgba(239,68,68,.85)','rgba(14,165,233,.85)','rgba(148,163,184,.7)','rgba(203,213,225,.6)'];
+      var _nm={'Vélos Élec.':'Velos Elec.','Vélos Musc.':'Velos Musc.','Vélos Enf.':'Velos Enf.'};if(cats){var _nc={};Object.keys(cats).forEach(function(k){_nc[_nm[k]||k]=cats[k];});cats=_nc;}
       const labels = CAT_ORDER.filter(k => cats[k]);
       const colors = labels.map(k => CAT_COLORS[CAT_ORDER.indexOf(k)]);
       const totalCA = labels.reduce((s,k)=>s+(cats[k]?.ca||0),0);
