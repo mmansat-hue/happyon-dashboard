@@ -937,7 +937,6 @@ function initTab1(){
       const cats = window._lastSyncData.cats;
       const CAT_ORDER = ['Velos Elec.','Voitures','Velos Musc.','Scoot.50','Scoot.125','Velos Enf.','Accessoires','autre'];
       const CAT_COLORS = ['rgba(37,99,235,.85)','rgba(234,88,12,.85)','rgba(34,197,94,.85)','rgba(168,85,247,.85)','rgba(239,68,68,.85)','rgba(14,165,233,.85)','rgba(148,163,184,.7)','rgba(203,213,225,.6)'];
-      var _nm={'Vélos Élec.':'Velos Elec.','Vélos Musc.':'Velos Musc.','Vélos Enf.':'Velos Enf.'};Object.keys(cats).slice().forEach(function(k){var nk=_nm[k];if(nk&&!cats[nk]){cats[nk]=cats[k];delete cats[k];}});
       const labels = CAT_ORDER.filter(k => cats[k]);
       const colors = labels.map(k => CAT_COLORS[CAT_ORDER.indexOf(k)]);
       const totalCA = labels.reduce((s,k)=>s+(cats[k]?.ca||0),0);
@@ -1363,6 +1362,7 @@ function applyData(data){
   // RafraÃ¢ÂÂÃÂ ÃÂ¶Ã¢ÂÂÃÂ¢ÃÂ¬ÃÂ¨Ã¢ÂÂÃÂchir Vue Mois si elle est active
   // Doughnut categories 2026 - mise a jour apres sync
 if(data.cats){
+  var _nm2={'Vélos Élec.':'Velos Elec.','Vélos Musc.':'Velos Musc.','Vélos Enf.':'Velos Enf.'};Object.keys(data.cats).slice().forEach(function(k){var nk=_nm2[k];if(nk&&!data.cats[nk]){data.cats[nk]=data.cats[k];delete data.cats[k];}});
   if(CHARTS['c-cat-doughnut']){CHARTS['c-cat-doughnut'].destroy();delete CHARTS['c-cat-doughnut'];}
   const _ctd=document.getElementById('c-cat-doughnut');
   if(_ctd){
