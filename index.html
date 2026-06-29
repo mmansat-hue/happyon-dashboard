@@ -1362,11 +1362,10 @@ function applyData(data){
   // RafraÃ¢ÂÂÃÂ ÃÂ¶Ã¢ÂÂÃÂ¢ÃÂ¬ÃÂ¨Ã¢ÂÂÃÂchir Vue Mois si elle est active
   // Doughnut categories 2026 - mise a jour apres sync
 if(data.cats){
-  var _nm2={'Vélos Élec.':'Velos Elec.','Vélos Musc.':'Velos Musc.','Vélos Enf.':'Velos Enf.'};Object.keys(data.cats).slice().forEach(function(k){var nk=_nm2[k];if(nk&&!data.cats[nk]){data.cats[nk]=data.cats[k];delete data.cats[k];}});
-  if(CHARTS['c-cat-doughnut']){CHARTS['c-cat-doughnut'].destroy();delete CHARTS['c-cat-doughnut'];}
+    if(CHARTS['c-cat-doughnut']){CHARTS['c-cat-doughnut'].destroy();delete CHARTS['c-cat-doughnut'];}
   const _ctd=document.getElementById('c-cat-doughnut');
   if(_ctd){
-    const _co=['Velos Elec.','Voitures','Velos Musc.','Scoot.50','Scoot.125','Velos Enf.','Accessoires','autre'];
+    const _co=['Vélos Élec.','Voitures','Vélos Musc.','Scoot.50','Scoot.125','Vélos Enf.','Accessoires','autre'];
     const _cc=['#2563eb','#ea580c','#22c55e','#a855f7','#ef4444','#0ea5e9','#94a3b8','#cbd5e1'];
     const _lbl=_co.filter(k=>data.cats[k]);
     const _col=_lbl.map(k=>_cc[_co.indexOf(k)]);
