@@ -1344,7 +1344,7 @@ function applyData(data){
   }
   // Lead time
   if(data.lead && CHARTS['c-lead-overview']){
-    const lKeys=['M\u00EAme jour','J+1-3','J+4-7','1-2sem','1mois+'];
+    const lKeys=['same','j13','j47','sem','mois'];
     CHARTS['c-lead-overview'].data.datasets[1].data=lKeys.map(k=>data.lead[k]||0);
     CHARTS['c-lead-overview'].update();
   }
