@@ -1349,11 +1349,17 @@ function applyData(data){
     CHARTS['c-lead-overview'].update();
   }
   // Paiement
-  if(data.paiement && CHARTS['c-paie-overview']){
-    const pKeys=Object.keys(D25.paie26);
-    CHARTS['c-paie-overview'].data.datasets[0].data=pKeys.map(k=>data.paiement[k]||0);
-    CHARTS['c-paie-overview'].update();
-    const _totalPaie=pKeys.reduce((a,k)=>a+(data.paiement[k]||0),0);
+  if(data.paiements && CHARTS['c-paie-overview']){
+    const _labelMap={CB:'CB',CBOnline:'CB en ligne',Especes:'Espèces',Cheque:'Chèque',ChequesVacances:'Chèq.Vac/ANCV',Virement:'Virement','Apple/G.Pay':'Apple/G.Pay','Non renseigné':'Non renseigné'};
+    const _colorMap={CB:'#2563eb',CBOnline:'#0ea5e9',Especes:'#059669',Cheque:'#a855f7',ChequesVacances:'#7c3aed',Virement:'#f59e0b'};
+    const _palette=['#2563eb','#059669','#7c3aed','#f59e0b','#dc2626','#0ea5e9','#94a3b8','#ec4899'];
+    const _entries=Object.entries(data.paiements).filter(([k,v])=>v>0);
+    const _ch=CHARTS['c-paie-overview'];
+    _ch.data.labels=_entries.map(([k])=>_labelMap[k]||k);
+    _ch.data.datasets[0].data=_entries.map(([,v])=>v);
+    _ch.data.datasets[0].backgroundColor=_entries.map(([k],i)=>_colorMap[k]||_palette[i%_palette.length]);
+    _ch.update();
+    const _totalPaie=_entries.reduce((a,[,v])=>a+v,0);
     const _subPaie=document.getElementById('subPaie');
     if(_subPaie) _subPaie.textContent=_totalPaie.toLocaleString('fr-FR')+' réservations à date';
   }
